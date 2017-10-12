@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{205C8856-EB84-4772-89E1-125F3A9A85D5}</ProjectGuid>
+    <ProjectGuid>{6DDF9409-E5B0-41C3-AB91-E5C8A7781CF5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ex02</RootNamespace>
-    <AssemblyName>ex02</AssemblyName>
+    <RootNamespace>VendingMachine</RootNamespace>
+    <AssemblyName>VendingMachine</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
