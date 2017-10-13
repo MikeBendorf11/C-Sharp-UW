@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using VendingMachine;
 
 namespace programmingInCS
 {
@@ -14,16 +15,17 @@ namespace programmingInCS
         {
             uint input = 0;
             string iptStr;
-            uint PurchasePrice = 35;
+            PurchasePrice Fanta = new PurchasePrice(50);
 
             Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
-            Console.WriteLine("Please insert 35c: ");
-                        
-            while (input < PurchasePrice)
+            Console.WriteLine("Please insert {0}: ", Fanta.Price);
+
+            //increment until there is enough money
+            while (input < Fanta.Price)
                 input += validateIpt(iptStr = (Console.ReadLine()));
 
             Console.WriteLine("\nYour change: {0} cents" +
-            "\nThanks!  Here is your soda", input - PurchasePrice);
+            "\nThanks!  Here is your soda", input - Fanta.Price);
             Console.ReadLine();
 
         }
