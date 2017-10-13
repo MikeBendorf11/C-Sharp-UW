@@ -3,45 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace programmingInCS
 {
     class Program
     {
-        
+
         static void Main(string[] args)
         {
-            uint input = 0 , change = 0, sodaPrice = 35;
-            bool isValid = true;
+            uint input = 0;
+            string iptStr;
+            uint sodaPrice = 35;
 
             Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
             Console.WriteLine("Please insert 35c: ");
 
-            try
+            while (input < 35)
             {
-                do
+                uint i;
+                while (!UInt32.TryParse(iptStr = (Console.ReadLine()), out i))
                 {
-                    input += MethodWithThrows.PetzoldParse(Console.ReadLine());
-
-                    if (input > sodaPrice)
-                        change = input - sodaPrice;
-
-                    if (input < sodaPrice)
-                        Console.WriteLine("You need another {0} cents", sodaPrice - input);
-                    
-                } while (input < sodaPrice);
-                
-                Console.WriteLine("You have inserted {0} cents", input);
+                    int j;
+                    //can add here more validation conditionals for j values
+                    if (Int32.TryParse(iptStr, out j))
+                        Debug.WriteLine("No negative input allowed");
+                    else
+                        Debug.WriteLine("{0} is not a number!", iptStr, 0);
+                }
+                input += i;
             }
 
-            catch (Exception exc)
-            {    
-                Console.WriteLine("Tampering detected! You get no soda");
-                isValid = false;
-            }
-
-            Console.WriteLine(isValid? "\nYour change: {0} cents" +
-                "\nThanks!  Here is your soda" : "", change);
+            Console.WriteLine("\nYour change: {0} cents" +
+            "\nThanks!  Here is your soda", input - sodaPrice);
             Console.ReadLine();
 
         }
