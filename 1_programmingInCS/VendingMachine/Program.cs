@@ -14,30 +14,26 @@ namespace programmingInCS
         {
             uint input = 0;
             string iptStr;
-            uint sodaPrice = 35;
+            uint PurchasePrice = 35;
 
             Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
             Console.WriteLine("Please insert 35c: ");
-
-            while (input < 35)
-            {
-                uint i;
-                while (!UInt32.TryParse(iptStr = (Console.ReadLine()), out i))
-                {
-                    int j;
-                    //can add here more validation conditionals for j values
-                    if (Int32.TryParse(iptStr, out j))
-                        Debug.WriteLine("No negative input allowed");
-                    else
-                        Debug.WriteLine("{0} is not a number!", iptStr, 0);
-                }
-                input += i;
-            }
+                        
+            while (input < PurchasePrice)
+                input += validateIpt(iptStr = (Console.ReadLine()));
 
             Console.WriteLine("\nYour change: {0} cents" +
-            "\nThanks!  Here is your soda", input - sodaPrice);
+            "\nThanks!  Here is your soda", input - PurchasePrice);
             Console.ReadLine();
 
+        }
+        static uint validateIpt(string iptStr)
+        {
+            uint i;
+            if (!UInt32.TryParse(iptStr, out i))
+                //can add here more validation conditionals for j values
+                Debug.WriteLine("{0} is not a UInt32!", iptStr, 0);
+            return i;
         }
     }
 }
