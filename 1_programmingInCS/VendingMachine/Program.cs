@@ -16,6 +16,7 @@ namespace programmingInCS
             uint input = 0;
             string iptStr;
             PurchasePrice Fanta = new PurchasePrice(50);
+            CanRack one = new CanRack();
 
             Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
             Console.WriteLine("Please insert {0}: ", Fanta.Price);
