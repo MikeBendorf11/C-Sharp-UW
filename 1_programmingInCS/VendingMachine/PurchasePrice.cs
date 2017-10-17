@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    //Sets the Price of
+    //Sets the Price of a Flavor
     class PurchasePrice
     {
+        int price;
+
         public PurchasePrice() {
             Price = 0;
         }
@@ -17,6 +19,18 @@ namespace VendingMachine
             Price = initialPrice;
         }
 
-        public int Price;
+        //Property: A 'price' controlled field 
+        public int Price
+        {
+            set
+            {
+                if (value > 0)
+                price = value;
+            }
+            get
+            {
+                return price;
+            }
+        }
     }
 }
