@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using VendingMachine;
 
-namespace programmingInCS
+namespace MyVendingMachine
 {
     class Program
     {
@@ -15,38 +14,39 @@ namespace programmingInCS
         {
             uint input = 0;
             string iptStr;
-            PurchasePrice Fanta = new PurchasePrice(50);
+            PurchasePrice OrangePrice = new PurchasePrice(50);
             CanRack RackOne = new CanRack();
 
             Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
             Console.WriteLine("Press enter to start or enter Promo-Code:");
 
             //test of CanRack class
-            if ((iptStr = Console.ReadLine()).Equals("Coca-Cola"))
+            if ((iptStr = Console.ReadLine()).Equals("Orange"))
             {
-                RackOne.EmptyCanRackOf("Coca-Cola");
-                Console.WriteLine("You get 3 free cans of Coca-Cola");
+                RackOne.EmptyCanRackOf("Orange");
+                Console.WriteLine("You get 3 free cans of Orange");
             }
 
             iptStr = null;
-            Console.WriteLine("Please insert {0} to buy Fanta: ", Fanta.Price);
+            Console.WriteLine("Please insert {0} to buy Fanta: ", OrangePrice.Price);
 
             //increment until there is enough money
-            while (input < Fanta.Price)
+            while (input < OrangePrice.Price)
             {
                 input += validateIpt(iptStr = Console.ReadLine());
-                if (input < Fanta.Price)
-                    Console.WriteLine("Missing {0} cents", Fanta.Price - input);
+                if (input < OrangePrice.Price)
+                    Console.WriteLine("Missing {0} cents", OrangePrice.Price - input);
             }
 
             //test of CanRack class
-            RackOne.RemoveACanOf("Fanta");
+            RackOne.RemoveACanOf("Orange");
             Debug.WriteLine("End of Remove Test");
             RackOne.FillTheCanRack();
-            RackOne.AddACanOf("Sprite");
+            if(!RackOne.IsFull("Lemon"))
+            RackOne.AddACanOf("Lemon");
 
             Console.WriteLine("\nYour change: {0} cents" +
-             "\nThanks!  Here is your soda", input - Fanta.Price);
+             "\nThanks!  Here is your soda", input - OrangePrice.Price);
             Console.ReadLine();
 
         }

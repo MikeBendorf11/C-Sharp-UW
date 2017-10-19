@@ -1,121 +1,99 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using VendingMachine;
-using System.Diagnostics;
 
-namespace VendingMachine
+namespace MyVendingMachine
 {
+    //  This class will represent a can storage rack of the vending machine.  
     class CanRack
     {
-        const int binsPerRack = 3;
-        static string[] flavors = { "Fanta", "Sprite", "Coca-Cola" };
-        bin[] rackBin = new bin[binsPerRack];
+        private const int EMPTYBIN = 0;
+        private const int BINSIZE = 3;
 
-        // Constructor for a can rack. The rack starts out full 
+        private int regular = EMPTYBIN;
+        private int orange = EMPTYBIN;
+        private int lemon = EMPTYBIN;
+
+        private const int DUMMYARGUMENT = 0;
+
+        // Constructor 
         public CanRack()
         {
-            for (int i = 0; i < binsPerRack; i++)
-            {
-                rackBin[i] = new bin(flavors[i]);
-                Debug.WriteLine("Added a bin of {0} cans of {1}"
-                    , rackBin[i].cans, rackBin[i].flavor, 0);
-            }
+            FillTheCanRack();
         }
 
-        //  This method adds a can of the specified flavor to the rack.   
+        //adds a can of the specified flavor to the rack.  
         public void AddACanOf(string FlavorOfCanToBeAdded)
         {
-            if (!IsFull(FlavorOfCanToBeAdded))
-                for (int i = 0; i < binsPerRack; i++)
-                {
-                    if ((rackBin[i].flavor).Equals(FlavorOfCanToBeAdded))
-                    {
-                        rackBin[i].cans++;
-                        Debug.WriteLine("Add: The {0} bin has {1} cans", rackBin[i].flavor,
-                            rackBin[i].cans, 0);
-                    }
-                }
-            else
-                Debug.WriteLine("Bin is full already");
+            FlavorOfCanToBeAdded = FlavorOfCanToBeAdded.ToUpper();
+            Debug.WriteLine("adding a can of {0} flavored soda to the rack", FlavorOfCanToBeAdded, DUMMYARGUMENT);
+            if (FlavorOfCanToBeAdded == "REGULAR") regular++;
+            else if (FlavorOfCanToBeAdded == "ORANGE") orange++;
+            else if (FlavorOfCanToBeAdded == "LEMON") lemon++;
+            else Debug.WriteLine("Error: attempt to add an unknown flavor {0} to the rack", FlavorOfCanToBeAdded, DUMMYARGUMENT);
         }
 
-        //  This method will remove a can of the specified flavor from the rack. 
+        //  This method will remove a can of the specified flavor from the rack.
         public void RemoveACanOf(string FlavorOfCanToBeRemoved)
         {
-            if (!IsEmpty(FlavorOfCanToBeRemoved))
-                for (int i = 0; i < binsPerRack; i++)
-                {
-                    if ((rackBin[i].flavor).Equals(FlavorOfCanToBeRemoved))
-                    {
-                        rackBin[i].cans--;
-                        Debug.WriteLine("Remove: The {0} bin has {1} cans", rackBin[i].flavor,
-                            rackBin[i].cans, 0);
-                    }
-                }
-            else
-                Debug.WriteLine("Bin is empty already");
+            FlavorOfCanToBeRemoved = FlavorOfCanToBeRemoved.ToUpper();
+            Debug.WriteLine("removing a can of {0} flavored soda from the rack", FlavorOfCanToBeRemoved, DUMMYARGUMENT);
+            if (FlavorOfCanToBeRemoved == "REGULAR") regular--;
+            else if (FlavorOfCanToBeRemoved == "ORANGE") orange--;
+            else if (FlavorOfCanToBeRemoved == "LEMON") lemon--;
+            else Debug.WriteLine("Error: attempt to remove an unknown flavor {0} from the rack", FlavorOfCanToBeRemoved, DUMMYARGUMENT);
+
         }
 
-        //  This method will fill the can rack. 
+        //  This method will fill the can rack.
         public void FillTheCanRack()
         {
-            foreach (string flv in flavors)
-                while (!IsFull(flv))
-                    AddACanOf(flv);
-            Debug.WriteLine("Rack filled");
+            Debug.WriteLine("Filling the can rack");
+            regular = BINSIZE;
+            orange = BINSIZE;
+            lemon = BINSIZE;
         }
 
-        //  This public void will empty the rack of a given flavor. 
+        //  This public void will empty the rack of a given flavor.
         public void EmptyCanRackOf(string FlavorOfBinToBeEmptied)
         {
-            for (int i = 0; i < binsPerRack; i++)
-                if ((rackBin[i].flavor).Equals(FlavorOfBinToBeEmptied))
-                    while (!IsEmpty(FlavorOfBinToBeEmptied))
-                        RemoveACanOf(FlavorOfBinToBeEmptied);
+            FlavorOfBinToBeEmptied = FlavorOfBinToBeEmptied.ToUpper();
+            Debug.WriteLine("Emptying can rack of flavor {0}", FlavorOfBinToBeEmptied, DUMMYARGUMENT);
+            if (FlavorOfBinToBeEmptied == "REGULAR") regular = EMPTYBIN;
+            else if (FlavorOfBinToBeEmptied == "ORANGE") orange = EMPTYBIN;
+            else if (FlavorOfBinToBeEmptied == "LEMON") lemon = EMPTYBIN;
+            else Debug.WriteLine("Error: attempt to empty rack of unknown flavor {0}", FlavorOfBinToBeEmptied, DUMMYARGUMENT);
         }
 
-        // OPTIONAL – returns true if the rack is full of a specified flavor 
-        // false otherwise 
+        //returns true if the rack is full of a specified 
         public Boolean IsFull(string FlavorOfBinToCheck)
         {
-            for (int i = 0; i < binsPerRack; i++)
-            {
-                if ((rackBin[i].flavor).Equals(FlavorOfBinToCheck))
-                {
-                    Debug.WriteLine("IsFull?: The {0} bin has {1} cans", rackBin[i].flavor,
-                              rackBin[i].cans, 0);
-                    if (rackBin[i].cans < bin.cansPerBin)
-                        return false;
-                    else if (rackBin[i].cans == bin.cansPerBin)
-                        return true;
-                }
-            }
-            Debug.WriteLine("IsFull? Error: This rack has no bins, or can overload");
-            return false;
+            FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
+            Boolean result = false;
+            Debug.WriteLine("Checking if can rack is full of flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
+            if (FlavorOfBinToCheck == "REGULAR") result = regular == BINSIZE;
+            else if (FlavorOfBinToCheck == "ORANGE") result = orange == BINSIZE;
+            else if (FlavorOfBinToCheck == "LEMON") result = lemon == BINSIZE;
+            else Debug.WriteLine("Error: attempt to check status of unknown flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
+            return result;
+
         }
 
-        // OPTIONAL – return true if the rack is empty of a specified flavor 
-        // false otherwise  
+        //return true if the rack is empty of a specified flavor
         public Boolean IsEmpty(string FlavorOfBinToCheck)
         {
-            for (int i = 0; i < binsPerRack; i++)
-            {
-                if ((rackBin[i].flavor).Equals(FlavorOfBinToCheck))
-                {
-                    Debug.WriteLine("IsEmpty?: The {0} bin has {1} cans", rackBin[i].flavor,
-                              rackBin[i].cans, 0);
-                    if (rackBin[i].cans == 0)
-                        return true;
-                    else
-                        return false;
-                }
-            }
-            Debug.WriteLine("IsEmpty? Error: This rack has no bins, or can underload");
-            return false;
+            FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
+            Boolean result = false;
+            Console.WriteLine("Checking if can rack is empty of flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
+            if (FlavorOfBinToCheck == "REGULAR") result = regular == EMPTYBIN;
+            else if (FlavorOfBinToCheck == "ORANGE") result = orange == EMPTYBIN;
+            else if (FlavorOfBinToCheck == "LEMON") result = lemon == EMPTYBIN;
+            else Debug.WriteLine("Error: attempt to check rack status of unknown flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
+            return result;
         }
 
-    } //end Can_Rack 
+    } //end Can_Rack
+
 }
