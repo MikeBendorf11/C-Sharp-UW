@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VendingMachine
+namespace MyVendingMachine
 {
-    public enum Flavor { REGULAR, ORANGE, LEMON }
+    // public enum Flavor { REGULAR, ORANGE, LEMON }
     class Can
     {
-        public readonly Flavor TheFlavor = Flavor.REGULAR;
+       
+        public readonly Flavor TheFlavor;
 
         public Can()
         {
+            TheFlavor = Flavor.REGULAR;
         }
 
         public Can(Flavor AFlavor)

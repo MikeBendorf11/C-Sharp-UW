@@ -12,18 +12,12 @@ namespace MyVendingMachine
         private int _price;
         private decimal _dprice;
 
+        //constructors
         public PurchasePrice() { }
 
-        
-        //constructors
         public PurchasePrice(int initialPrice)
         {
             Price = initialPrice;
-        }
-
-        public PurchasePrice(decimal initialPrice)
-        {
-            PriceD = initialPrice;
         }
 
         //properties
@@ -40,9 +34,8 @@ namespace MyVendingMachine
         public decimal PriceD
         {
             set
-            {
-                if (value > 0)
-                    _dprice = value;
+            { 
+              _dprice = _price/100;
             }
             get { return _dprice; }
         }

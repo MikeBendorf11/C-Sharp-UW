@@ -17,13 +17,41 @@ namespace MyVendingMachine
         private int lemon = EMPTYBIN;
 
         private const int DUMMYARGUMENT = 0;
-
+       
         // Constructor 
         public CanRack()
         {
             FillTheCanRack();
         }
+        
+        //USING ENUMS
+        //add can
+        public void AddACanOf(Flavor FlavorOfCanToAdd)
+        {          
+            AddACanOf(FlavorOfCanToAdd.ToString());
+        }
+        //remove can
+        public void RemoveACanOf(Flavor FlavorOfCanToBeRemoved)
+        {
+            RemoveACanOf(FlavorOfCanToBeRemoved.ToString());
+        }
+        //empty bin
+        public void EmptyCanRackOf(Flavor FlavorOfBinToBeEmptied)
+        {
+            EmptyCanRackOf(FlavorOfBinToBeEmptied.ToString());
+        }
+        //Is bin Full
+        public Boolean IsFull(Flavor FlavorOfBinToCheck)
+        {
+            return IsFull(FlavorOfBinToCheck.ToString());
+        }
+        //is bin empty
+        public Boolean IsEmpty(Flavor FlavorOfBinToCheck)
+        {
+            return IsEmpty(FlavorOfBinToCheck.ToString());
+        }
 
+        // USING CONST AND INT
         //adds a can of the specified flavor to the rack.  
         public void AddACanOf(string FlavorOfCanToBeAdded)
         {
