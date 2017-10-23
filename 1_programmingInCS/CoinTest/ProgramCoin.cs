@@ -16,7 +16,6 @@ namespace CoinTest
             Coin DecCoin = new Coin(1/3m);
             Debug.WriteLine("2");
 
-
             Console.WriteLine("Wrong Dec: {0}", DecCoin);
             Debug.WriteLine("3");
             Console.WriteLine("Denom ctor: {0}", new Coin(Denomination.NICKEL));
@@ -30,9 +29,18 @@ namespace CoinTest
             Debug.WriteLine("7");
             Console.WriteLine((new Coin()).CoinEnumeral);
             Debug.WriteLine("8");
-            Console.WriteLine((new Coin(0.1m)).ToString());
+            Console.WriteLine((new Coin(Denomination.QUARTER)).ToString());
             Debug.WriteLine("9");
             Console.ReadLine();
         }
     }
 }
+/*
+Wrong Dec: slug
+Denom ctor: nickel
+Str ctor: dime
+Dec ctor: slug
+0.5
+SLUG
+quarter
+*/

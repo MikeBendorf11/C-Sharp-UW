@@ -14,23 +14,23 @@ namespace CoinTest
         private const int DUMMYARGUMENT = 0;
 
         private Denomination _theDenomination;
-        private string CoinName;
+
         // parameterless constructor – coin will be a slug 
-        public Coin()
+        public Coin() 
         {
             Debug.WriteLine("This is a {0} coin", Denomination.SLUG);
            _theDenomination = Denomination.SLUG;
         }
 
         // parametered constructor – coin will be of appropriate value    
-        public Coin(Denomination CoinEnumeral) : this()
+        public Coin(Denomination CoinEnumeral) 
         {
             Debug.WriteLine("This is a {0} coin", CoinEnumeral);
             _theDenomination = CoinEnumeral;
         }
 
         // takes a string and returns the appropriate enumeral 
-        public Coin(string CoinName) : this()
+        public Coin(string CoinName) 
         {
             Debug.WriteLine("Obtaining vale from String");
 
@@ -44,11 +44,11 @@ namespace CoinTest
         }
 
         // parametered constructor – coin will be of appropriate value 
-        public Coin(decimal CoinValue) 
+        public Coin(decimal CoinValue)
         {
             Debug.WriteLine("Obtaining value from Decimal");
             int coinInt;
-            coinInt = (int)CoinValue * 100;
+            coinInt = (int)(CoinValue * 100);
             if (Enum.IsDefined(typeof(Denomination), coinInt))
                 _theDenomination = (Denomination)coinInt;
             else
