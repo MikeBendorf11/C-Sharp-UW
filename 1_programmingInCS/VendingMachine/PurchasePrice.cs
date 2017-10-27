@@ -9,8 +9,7 @@ namespace MyVendingMachine
     //Sets the Price of a Flavor
     class PurchasePrice
     {
-        private int _price;
-        private decimal _dprice;
+        private decimal _price;
 
         //constructors
         public PurchasePrice() { }
@@ -23,21 +22,15 @@ namespace MyVendingMachine
         //properties
         public int Price
         {
-            set
-            {
-                if (value > 0)
-                    _price = value;
-            }
-            get { return _price; }
+            set { _price = value / 100m; }
+            get { return (int)_price * 100; }
         }
 
-        public decimal PriceD
+        public decimal PriceDecimal
         {
             set
-            { 
-              _dprice = _price/100;
-            }
-            get { return _dprice; }
+            { _price = value; }
+            get { return _price; }
         }
     }
 }
