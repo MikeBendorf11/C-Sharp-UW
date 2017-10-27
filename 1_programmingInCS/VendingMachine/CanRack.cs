@@ -11,24 +11,22 @@ namespace MyVendingMachine
     {
         private const int EMPTYBIN = 0;
         private const int BINSIZE = 3;
-
-        private int regular = EMPTYBIN;
-        private int orange = EMPTYBIN;
-        private int lemon = EMPTYBIN;
-
         private const int DUMMYARGUMENT = 0;
-       
+        private int[] rack = new int[Enum.GetValues(typeof(Flavor)).Length];
+        private string[] theflavors = Enum.GetNames(typeof(Flavor));
+        
         // Constructor 
         public CanRack()
         {
             FillTheCanRack();
         }
-        
+
         //USING ENUMS
         //add can
         public void AddACanOf(Flavor FlavorOfCanToAdd)
-        {          
-            AddACanOf(FlavorOfCanToAdd.ToString());
+        {
+            Debug.WriteLine("adding a can of {0} flavored soda to the rack", FlavorOfCanToAdd, DUMMYARGUMENT);
+            rack[(int)FlavorOfCanToAdd]++;
         }
         //remove can
         public void RemoveACanOf(Flavor FlavorOfCanToBeRemoved)
@@ -53,35 +51,60 @@ namespace MyVendingMachine
 
         // USING CONST AND INT
         //adds a can of the specified flavor to the rack.  
+        /*###
+         RemoveCan(String) method is ready to be used by RemoveCan(enum)
+         I wanted to try the reverse AddCan(enum) to support 
+         * the AddCam(String) and see which turns out to be simpler
+         */
         public void AddACanOf(string FlavorOfCanToBeAdded)
         {
             FlavorOfCanToBeAdded = FlavorOfCanToBeAdded.ToUpper();
-            Debug.WriteLine("adding a can of {0} flavored soda to the rack", FlavorOfCanToBeAdded, DUMMYARGUMENT);
-            if (FlavorOfCanToBeAdded == "REGULAR") regular++;
-            else if (FlavorOfCanToBeAdded == "ORANGE") orange++;
-            else if (FlavorOfCanToBeAdded == "LEMON") lemon++;
-            else Debug.WriteLine("Error: attempt to add an unknown flavor {0} to the rack", FlavorOfCanToBeAdded, DUMMYARGUMENT);
+            foreach (string flavorName in Enum.GetNames(typeof(Flavor)))
+            {
+                if(flavorName.Equals(FlavorOfCanToBeAdded))
+                    
+                    AddACanOf((Flavor)Enum.Parse(typeof(Flavor), flavorName));
+            }
+            //missing testing this method and a prove for bellow
+            Debug.WriteLine("Error: attempt to add an unknown flavor {0} to the rack", FlavorOfCanToBeAdded, DUMMYARGUMENT);
         }
 
         //  This method will remove a can of the specified flavor from the rack.
         public void RemoveACanOf(string FlavorOfCanToBeRemoved)
         {
             FlavorOfCanToBeRemoved = FlavorOfCanToBeRemoved.ToUpper();
-            Debug.WriteLine("removing a can of {0} flavored soda from the rack", FlavorOfCanToBeRemoved, DUMMYARGUMENT);
-            if (FlavorOfCanToBeRemoved == "REGULAR") regular--;
-            else if (FlavorOfCanToBeRemoved == "ORANGE") orange--;
-            else if (FlavorOfCanToBeRemoved == "LEMON") lemon--;
-            else Debug.WriteLine("Error: attempt to remove an unknown flavor {0} from the rack", FlavorOfCanToBeRemoved, DUMMYARGUMENT);
+            int flavorCount = 0;
 
+            Debug.WriteLine("removing a can of {0} flavored soda from the rack", FlavorOfCanToBeRemoved, DUMMYARGUMENT);
+            
+            while (flavorCount < theflavors.Length) 
+            {
+                if (theflavors[flavorCount].Equals(FlavorOfCanToBeRemoved))
+                {
+                    rack[flavorCount]--;
+                    break;
+                }
+                flavorCount++;
+            }
+            
+            if (flavorCount == theflavors.Length)
+                Debug.WriteLine("Error: attempt to remove an unknown flavor {0} from the rack", FlavorOfCanToBeRemoved, DUMMYARGUMENT);
+
+        }
+
+        public void DisplayCanRack()
+        {
+            Debug.WriteLine("Displaying the can rack");
+            for (int i = 0; i < theflavors.Length; i++)
+                Console.WriteLine(theflavors[i] + ": " + rack[i]);
         }
 
         //  This method will fill the can rack.
         public void FillTheCanRack()
         {
             Debug.WriteLine("Filling the can rack");
-            regular = BINSIZE;
-            orange = BINSIZE;
-            lemon = BINSIZE;
+            foreach (int flavorValue in Enum.GetValues(typeof(Flavor)))
+                rack[flavorValue] = BINSIZE;
         }
 
         //  This public void will empty the rack of a given flavor.
@@ -89,10 +112,7 @@ namespace MyVendingMachine
         {
             FlavorOfBinToBeEmptied = FlavorOfBinToBeEmptied.ToUpper();
             Debug.WriteLine("Emptying can rack of flavor {0}", FlavorOfBinToBeEmptied, DUMMYARGUMENT);
-            if (FlavorOfBinToBeEmptied == "REGULAR") regular = EMPTYBIN;
-            else if (FlavorOfBinToBeEmptied == "ORANGE") orange = EMPTYBIN;
-            else if (FlavorOfBinToBeEmptied == "LEMON") lemon = EMPTYBIN;
-            else Debug.WriteLine("Error: attempt to empty rack of unknown flavor {0}", FlavorOfBinToBeEmptied, DUMMYARGUMENT);
+            Debug.WriteLine("Error: attempt to empty rack of unknown flavor {0}", FlavorOfBinToBeEmptied, DUMMYARGUMENT);
         }
 
         //returns true if the rack is full of a specified 
@@ -101,10 +121,7 @@ namespace MyVendingMachine
             FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
             Boolean result = false;
             Debug.WriteLine("Checking if can rack is full of flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
-            if (FlavorOfBinToCheck == "REGULAR") result = regular == BINSIZE;
-            else if (FlavorOfBinToCheck == "ORANGE") result = orange == BINSIZE;
-            else if (FlavorOfBinToCheck == "LEMON") result = lemon == BINSIZE;
-            else Debug.WriteLine("Error: attempt to check status of unknown flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
+            Debug.WriteLine("Error: attempt to check status of unknown flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
             return result;
 
         }
@@ -115,10 +132,7 @@ namespace MyVendingMachine
             FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
             Boolean result = false;
             Console.WriteLine("Checking if can rack is empty of flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
-            if (FlavorOfBinToCheck == "REGULAR") result = regular == EMPTYBIN;
-            else if (FlavorOfBinToCheck == "ORANGE") result = orange == EMPTYBIN;
-            else if (FlavorOfBinToCheck == "LEMON") result = lemon == EMPTYBIN;
-            else Debug.WriteLine("Error: attempt to check rack status of unknown flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
+            Debug.WriteLine("Error: attempt to check rack status of unknown flavor {0}", FlavorOfBinToCheck, DUMMYARGUMENT);
             return result;
         }
 
