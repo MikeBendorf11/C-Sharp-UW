@@ -24,7 +24,7 @@ namespace MyVendingMachine
         //add can
         public void AddACanOf(Flavor FlavorOfCanToAdd)
         {
-            Debug.WriteLine("adding a can of {0} flavored soda to the rack"
+            Debug.WriteLine("adding a can of {0} soda to the rack"
                 , FlavorOfCanToAdd, DUMMYARGUMENT);
             rack[(int)FlavorOfCanToAdd]++;
         }
@@ -32,7 +32,7 @@ namespace MyVendingMachine
         //remove can
         public void RemoveACanOf(Flavor FlavorOfCanToBeRemoved)
         {
-            Debug.WriteLine("removing a can of {0} flavored soda to the rack"
+            Debug.WriteLine("removing a can of {0} soda from the rack"
                , FlavorOfCanToBeRemoved, DUMMYARGUMENT);
             rack[(int)FlavorOfCanToBeRemoved]--;
         }
@@ -58,7 +58,7 @@ namespace MyVendingMachine
         //is bin empty
         public Boolean IsEmpty(Flavor FlavorOfBinToCheck)
         {
-            Console.WriteLine("Checking if can rack is empty of flavor {0}"
+            Debug.WriteLine("Checking if can rack is empty of flavor {0}"
            , FlavorOfBinToCheck, DUMMYARGUMENT);
             if (rack[(int)FlavorOfBinToCheck] == EMPTYBIN)
                 return true;
@@ -69,28 +69,22 @@ namespace MyVendingMachine
         //adds a can of the specified flavor to the rack.  
         public void AddACanOf(string FlavorOfCanToBeAdded)
         {
-            Debug.WriteLine("adding a can of {0} flavored soda to the rack"
-                 , FlavorOfCanToBeAdded, DUMMYARGUMENT);
             FlavorOfCanToBeAdded = FlavorOfCanToBeAdded.ToUpper();
-            if (validStr(FlavorOfCanToBeAdded))
+            if (validStr(ref FlavorOfCanToBeAdded))
                 AddACanOf((Flavor)Enum.Parse(typeof(Flavor), FlavorOfCanToBeAdded));
         }
 
         //  This method will remove a can of the specified flavor from the rack.
         public void RemoveACanOf(string FlavorOfCanToBeRemoved)
         {
-            Debug.WriteLine("Removing a can of {0} flavored soda to the rack"
-                 , FlavorOfCanToBeRemoved, DUMMYARGUMENT);
-            FlavorOfCanToBeRemoved = FlavorOfCanToBeRemoved.ToUpper();
-            if (validStr(FlavorOfCanToBeRemoved))
+            if (validStr(ref FlavorOfCanToBeRemoved))
                 RemoveACanOf((Flavor)Enum.Parse(typeof(Flavor), FlavorOfCanToBeRemoved));
         }
 
         public void DisplayCanRack()
         {
-            Debug.WriteLine("Displaying the can rack");
             for (int i = 0; i < theflavors.Length; i++)
-                Console.WriteLine(theflavors[i] + ": " + rack[i]);
+                Debug.WriteLine(theflavors[i] + ": " + rack[i]);
         }
 
         //  This method will fill the can rack.
@@ -105,9 +99,7 @@ namespace MyVendingMachine
         public void EmptyCanRackOf(string FlavorOfBinToBeEmptied)
         {
             FlavorOfBinToBeEmptied = FlavorOfBinToBeEmptied.ToUpper();
-            Debug.WriteLine("Emptying can rack of flavor {0}"
-                , FlavorOfBinToBeEmptied, DUMMYARGUMENT);
-            if(validStr(FlavorOfBinToBeEmptied))
+            if(validStr(ref FlavorOfBinToBeEmptied))
                 EmptyCanRackOf((Flavor)Enum.Parse(typeof(Flavor), FlavorOfBinToBeEmptied));
         }
 
@@ -115,7 +107,7 @@ namespace MyVendingMachine
         public Boolean IsFull(string FlavorOfBinToCheck)
         {
             FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
-            if(validStr(FlavorOfBinToCheck))
+            if(validStr(ref FlavorOfBinToCheck))
                 return IsFull((Flavor)Enum.Parse(typeof(Flavor), FlavorOfBinToCheck));
             else
                 return false;
@@ -125,14 +117,15 @@ namespace MyVendingMachine
         public Boolean IsEmpty(string FlavorOfBinToCheck)
         {
             FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
-            if (validStr(FlavorOfBinToCheck))
+            if (validStr(ref FlavorOfBinToCheck))
                 return IsEmpty((Flavor)Enum.Parse(typeof(Flavor), FlavorOfBinToCheck));
             else
                 return false;
         }
 
-        public static Boolean validStr(string input)
+        public static Boolean validStr(ref string input)
         {
+            input = input.ToUpper();
             Boolean output = false;
             foreach (string flavorName in theflavors)
             {

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Can.cs" />
     <Compile Include="CanRack.cs" />
+    <Compile Include="Coin.cs" />
     <Compile Include="flavorEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

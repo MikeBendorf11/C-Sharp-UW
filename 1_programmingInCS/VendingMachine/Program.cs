@@ -12,58 +12,57 @@ namespace MyVendingMachine
 
         static void Main(string[] args)
         {
-            CanRack testRack = new CanRack();
+            CanRack RackOne = new CanRack();
             decimal price = 1.50m;
-            uint input = 0;
+            decimal input;
             string iptPrice = null;
             string iptSoda = null;
 
-
+            Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
             while (true)
             {
-                Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
-                Console.WriteLine("Type exit or pick your flavor "+
+                input = 0;
+                Console.WriteLine("\nType exit or pick your flavor " +
                     "(Regular, Orange, Lemon): ");
-                //testRack.RemoveACanOf("orange");
-                //## test above is valid but bellow is probably not sending a 
-                //reference and never considering "orange" a valid input
-                //soda validation
-                while (!CanRack.validStr(iptSoda = Console.ReadLine()))
+
+                do
                 {
+                    iptSoda = Console.ReadLine();
                     if (iptSoda == "exit")
                     {
                         Console.WriteLine("Bye...");
+                        Console.ReadLine();
                         Environment.Exit(0);
-                    }    
-                    Console.WriteLine("Invalid Flavor");
+                    }
                 }
-                 
+                while (!CanRack.validStr(ref(iptSoda)));
+
                 Console.WriteLine("Type exit or insert {0} to buy a {1}: "
-                    , price, iptSoda);
+                    , price, iptSoda.ToUpper());
+
                 //price validation
                 while (input < price)
                 {
-                    if (iptPrice == "exit" )
+                    if (iptPrice == "exit")
                     {
-                        Console.WriteLine("Have your money, Bye...");
+                        input = 0;
+                        Console.WriteLine("Have your money, bye...");
+                        Console.ReadLine();
                         Environment.Exit(0);
-                    }    
+                    }
                     input += validateInputPrice(iptPrice = Console.ReadLine());
-                    if (input < price)
+                    if (input < price && input != 0)
                         Console.WriteLine("Missing {0} cents", price - input);
                 }
 
-                if (testRack.IsEmpty(iptSoda))
-                    testRack.FillTheCanRack();
-                else
-                {
-                    testRack.RemoveACanOf(iptSoda);
-                    Console.WriteLine("Have your {0} soda", iptSoda); 
-                }
-                 
+                if (RackOne.IsEmpty(iptSoda))
+                    RackOne.FillTheCanRack();
+
+                RackOne.RemoveACanOf(iptSoda);
+                Console.WriteLine("Have your {0} soda", iptSoda);
+                Console.WriteLine("Your change is {0}", input - price);
+                RackOne.DisplayCanRack();
             }
-
-
 
             /*testRack.DisplayCanRack();
             testRack.RemoveACanOf("orange");
@@ -74,18 +73,18 @@ namespace MyVendingMachine
             testRack.DisplayCanRack();
 
             testRack.AddACanOf("RATa");
+            testRack.DisplayCanRack();
+            testRack.RemoveACanOf("nofoundflavor");
             testRack.DisplayCanRack();*/
-            //testRack.RemoveACanOf("nofoundflavor");
-            //testRack.DisplayCanRack();
-            Console.ReadLine();
+
 
         }
-        static uint validateInputPrice(string iptStr)
+        static decimal validateInputPrice(string iptStr)
         {
-            uint i;
-            if (!UInt32.TryParse(iptStr, out i))
+            decimal i;
+            if (!decimal.TryParse(iptStr, out i))
             {
-                Debug.WriteLine("{0} is not a UInt32!", iptStr, 0);
+                Debug.WriteLine("{0} is not a decimal!", iptStr, 0);
                 return 0;
             }
             return i;

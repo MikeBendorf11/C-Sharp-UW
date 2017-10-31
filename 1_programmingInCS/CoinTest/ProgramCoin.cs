@@ -29,7 +29,7 @@ namespace CoinTest
             Debug.WriteLine("7");
             Console.WriteLine((new Coin()).CoinEnumeral);
             Debug.WriteLine("8");
-            Console.WriteLine((new Coin(Denomination.QUARTER)).ToString());
+            Console.WriteLine((new Coin(Denomination.QUARTER)));
             Debug.WriteLine("9");
             Console.ReadLine();
         }
