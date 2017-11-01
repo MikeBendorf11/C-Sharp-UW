@@ -70,19 +70,21 @@ namespace MyVendingMachine
         public void AddACanOf(string FlavorOfCanToBeAdded)
         {
             FlavorOfCanToBeAdded = FlavorOfCanToBeAdded.ToUpper();
-            if (validStr(ref FlavorOfCanToBeAdded))
+            if (validStr(FlavorOfCanToBeAdded))
                 AddACanOf((Flavor)Enum.Parse(typeof(Flavor), FlavorOfCanToBeAdded));
         }
 
         //  This method will remove a can of the specified flavor from the rack.
         public void RemoveACanOf(string FlavorOfCanToBeRemoved)
         {
-            if (validStr(ref FlavorOfCanToBeRemoved))
+            FlavorOfCanToBeRemoved = FlavorOfCanToBeRemoved.ToUpper();
+            if (validStr(FlavorOfCanToBeRemoved))
                 RemoveACanOf((Flavor)Enum.Parse(typeof(Flavor), FlavorOfCanToBeRemoved));
         }
 
         public void DisplayCanRack()
         {
+            Debug.WriteLine("Displaying the can rack");
             for (int i = 0; i < theflavors.Length; i++)
                 Debug.WriteLine(theflavors[i] + ": " + rack[i]);
         }
@@ -99,7 +101,7 @@ namespace MyVendingMachine
         public void EmptyCanRackOf(string FlavorOfBinToBeEmptied)
         {
             FlavorOfBinToBeEmptied = FlavorOfBinToBeEmptied.ToUpper();
-            if(validStr(ref FlavorOfBinToBeEmptied))
+            if(validStr(FlavorOfBinToBeEmptied))
                 EmptyCanRackOf((Flavor)Enum.Parse(typeof(Flavor), FlavorOfBinToBeEmptied));
         }
 
@@ -107,7 +109,7 @@ namespace MyVendingMachine
         public Boolean IsFull(string FlavorOfBinToCheck)
         {
             FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
-            if(validStr(ref FlavorOfBinToCheck))
+            if(validStr(FlavorOfBinToCheck))
                 return IsFull((Flavor)Enum.Parse(typeof(Flavor), FlavorOfBinToCheck));
             else
                 return false;
@@ -117,24 +119,18 @@ namespace MyVendingMachine
         public Boolean IsEmpty(string FlavorOfBinToCheck)
         {
             FlavorOfBinToCheck = FlavorOfBinToCheck.ToUpper();
-            if (validStr(ref FlavorOfBinToCheck))
+            if (validStr(FlavorOfBinToCheck))
                 return IsEmpty((Flavor)Enum.Parse(typeof(Flavor), FlavorOfBinToCheck));
             else
                 return false;
         }
 
-        public static Boolean validStr(ref string input)
-        {
-            input = input.ToUpper();
-            Boolean output = false;
-            foreach (string flavorName in theflavors)
-            {
-                if (flavorName == input)
-                    output = true;
-            }
-            if (!output)
-                Debug.WriteLine("Unknown Flavor: {0}", input, DUMMYARGUMENT);
-            return output;
+        public static Boolean validStr(string input)
+        {            
+            Boolean isValid = Enum.IsDefined(typeof(Flavor), input);
+            if (!isValid)
+                Debug.WriteLine("Flavor not found");
+            return isValid;
         }
 
     } //end Can_Rack

@@ -9,85 +9,83 @@ namespace MyVendingMachine
 {
     class Program
     {
-
         static void Main(string[] args)
         {
+            //one price for every flavor
+            PurchasePrice[] FlavorPrice = new PurchasePrice[
+                Enum.GetValues(typeof(Flavor)).Length]; 
+            FlavorPrice[(int)Flavor.REGULAR] = new PurchasePrice(1.60m);
+            FlavorPrice[(int)Flavor.ORANGE] = new PurchasePrice(155); // using int
+            FlavorPrice[(int)Flavor.LEMON] = new PurchasePrice(1.80m);
+            
+            decimal canPrice, iptMoney;
             CanRack RackOne = new CanRack();
-            decimal price = 1.50m;
-            decimal input;
-            string iptPrice = null;
-            string iptSoda = null;
+            const string EXITCODE = "EXIT";
 
             Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");
+
             while (true)
             {
-                input = 0;
-                Console.WriteLine("\nType exit or pick your flavor " +
+                iptMoney = 0;
+                string iptSoda;
+                            
+                Console.WriteLine("\n* Exit or pick your flavor? " +
                     "(Regular, Orange, Lemon): ");
-
+                
+                //flavor ipt validation
                 do
                 {
-                    iptSoda = Console.ReadLine();
-                    if (iptSoda == "exit")
+                    iptSoda = Console.ReadLine().ToUpper();
+                    if (iptSoda == EXITCODE)
                     {
                         Console.WriteLine("Bye...");
                         Console.ReadLine();
                         Environment.Exit(0);
                     }
-                }
-                while (!CanRack.validStr(ref(iptSoda)));
+                } while (!CanRack.validStr(iptSoda));
+                
+                //find price for this enum
+                canPrice = FlavorPrice[
+                    (int)Enum.Parse(typeof(Flavor), iptSoda)].PriceDecimal;
 
-                Console.WriteLine("Type exit or insert {0} to buy a {1}: "
-                    , price, iptSoda.ToUpper());
+                Console.WriteLine("\n* Exit or insert your coins");
+                Console.WriteLine("(Nickel, Dime, Quarter, HalfDollar or their Decimal value)");
+                Console.WriteLine("{0}: {1:c}", iptSoda, canPrice);
 
-                //price validation
-                while (input < price)
+                //price ipt validation
+                while (iptMoney < canPrice)
                 {
-                    if (iptPrice == "exit")
+                    Coin aCoin;
+                    decimal decVal;
+                    string iptStr = Console.ReadLine().ToUpper();
+                    
+                    if (iptStr == EXITCODE)
                     {
-                        input = 0;
-                        Console.WriteLine("Have your money, bye...");
+                        Console.WriteLine("Bye, your change: {0:c}", iptMoney);
                         Console.ReadLine();
                         Environment.Exit(0);
                     }
-                    input += validateInputPrice(iptPrice = Console.ReadLine());
-                    if (input < price && input != 0)
-                        Console.WriteLine("Missing {0} cents", price - input);
+
+                    if (Decimal.TryParse(iptStr, out decVal)) //is ipt decimal?
+                        aCoin = new Coin(decVal);
+                    else
+                        aCoin = new Coin(iptStr); //then string
+
+                    iptMoney += aCoin.ValueOf;
+                    if (iptMoney < canPrice)
+                        Console.WriteLine("Pending: {0:c}", canPrice - iptMoney);
                 }
 
+                //Deliver soda
                 if (RackOne.IsEmpty(iptSoda))
                     RackOne.FillTheCanRack();
 
                 RackOne.RemoveACanOf(iptSoda);
-                Console.WriteLine("Have your {0} soda", iptSoda);
-                Console.WriteLine("Your change is {0}", input - price);
+                Console.WriteLine("**** Have your {0} soda ****", iptSoda);
+                Console.WriteLine("**** Your change is {0:c} ****"
+                    , iptMoney - canPrice);
                 RackOne.DisplayCanRack();
             }
-
-            /*testRack.DisplayCanRack();
-            testRack.RemoveACanOf("orange");
-            testRack.DisplayCanRack();
-            
-            if(!testRack.IsFull(Flavor.ORANGE))
-                testRack.AddACanOf("orange");
-            testRack.DisplayCanRack();
-
-            testRack.AddACanOf("RATa");
-            testRack.DisplayCanRack();
-            testRack.RemoveACanOf("nofoundflavor");
-            testRack.DisplayCanRack();*/
-
-
-        }
-        static decimal validateInputPrice(string iptStr)
-        {
-            decimal i;
-            if (!decimal.TryParse(iptStr, out i))
-            {
-                Debug.WriteLine("{0} is not a decimal!", iptStr, 0);
-                return 0;
-            }
-            return i;
         }
     }
 }

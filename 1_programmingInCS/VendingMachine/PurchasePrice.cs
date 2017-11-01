@@ -12,11 +12,14 @@ namespace MyVendingMachine
         private decimal _price;
 
         //constructors
-        public PurchasePrice() { }
-
         public PurchasePrice(int initialPrice)
         {
             Price = initialPrice;
+        }
+
+        public PurchasePrice(decimal initialPrice)
+        {
+            PriceDecimal = initialPrice;
         }
 
         //properties
