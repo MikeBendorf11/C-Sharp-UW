@@ -1,0 +1,6 @@
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\VendingMachine\bin\Debug\VendingMachine.exe.config
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\VendingMachine\obj\Debug\VendingMachine.csprojResolveAssemblyReference.cache
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\VendingMachine\bin\Debug\VendingMachine.exe
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\VendingMachine\bin\Debug\VendingMachine.pdb
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\VendingMachine\obj\Debug\VendingMachine.exe
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\VendingMachine\obj\Debug\VendingMachine.pdb

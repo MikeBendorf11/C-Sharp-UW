@@ -47,6 +47,7 @@
     <Compile Include="CanRack.cs" />
     <Compile Include="Coin.cs" />
     <Compile Include="flavorEnum.cs" />
+    <Compile Include="FlavorOps.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchasePrice.cs" />
