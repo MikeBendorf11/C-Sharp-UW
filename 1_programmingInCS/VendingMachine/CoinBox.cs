@@ -89,17 +89,17 @@ namespace MyVendingMachine
             get
             {
                 decimal amount = 0;
-                foreach (Coin theCoin in box)
-                    amount += theCoin.ValueOf;
+                foreach (Coin theCoin in box) amount += theCoin.ValueOf;
                 return amount;
             }
         }
         public void debugShowBox()
         {
-            Debug.WriteLine("Nickels: {0}", NickelCount, 0);
-            Debug.WriteLine("Dimes:   {0}", DimeCount, 0);
-            Debug.WriteLine("Quarters:{0}", QuarterCount, 0);
-            Debug.WriteLine("Halfs:   {0}", HalfDollarCount, 0);
+            Debug.Write(String.Format($"Slugs: {SlugCount}, "));
+            Debug.Write(String.Format($"Nickels: {NickelCount}, "));
+            Debug.Write(String.Format($"Dimes: {DimeCount}, "));
+            Debug.Write(String.Format($"Quarters: {QuarterCount}, " ));
+            Debug.Write(String.Format($"Halfs: {HalfDollarCount}\n"));
         }
     }
 }

@@ -67,7 +67,7 @@ namespace MyVendingMachine
         //Is bin Full
         public Boolean IsFull(Flavor FlavorOfBinToCheck)
         {
-            Debug.WriteLine("Checking if can rack is full of flavor {0}"
+            Debug.WriteLine("?? Checking if the {0} bin is full"
                  , FlavorOfBinToCheck, DUMMYARGUMENT);
             if (rack[FlavorOfBinToCheck] == BINSIZE)
                 return true;
@@ -77,7 +77,7 @@ namespace MyVendingMachine
         //is bin empty
         public Boolean IsEmpty(Flavor FlavorOfBinToCheck)
         {
-            Debug.WriteLine("Checking if can rack is empty of flavor {0}"
+            Debug.WriteLine("?? Checking if there is a {0} can"
                  , FlavorOfBinToCheck, DUMMYARGUMENT);
             if (rack[FlavorOfBinToCheck] == EMPTYBIN)
                 return true;
@@ -105,7 +105,8 @@ namespace MyVendingMachine
         {
             Debug.WriteLine("Displaying the can rack");
             foreach (Flavor flv in FlavorOps.AllFlavors)
-                Debug.WriteLine(flv + ": " + rack[flv]);
+                Debug.Write(flv + ": " + rack[flv] + " /");
+            Debug.WriteLine("");
         }
 
         //  This method will fill the can rack.

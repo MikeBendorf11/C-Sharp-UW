@@ -16,19 +16,16 @@ namespace MyVendingMachine
         {
             Price = initialPrice;
         }
-
         public PurchasePrice(decimal initialPrice)
         {
             PriceDecimal = initialPrice;
         }
-
         //properties
         public int Price
         {
             set { _price = value / 100m; }
             get { return (int)_price * 100; }
         }
-
         public decimal PriceDecimal
         {
             set

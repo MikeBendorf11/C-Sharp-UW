@@ -10,17 +10,15 @@ namespace MyVendingMachine
     class Program
     {
         private const int SEEDCOINS = 20;
+        static Coin sl = new Coin(Denomination.SLUG);
+        static Coin nk = new Coin(Denomination.NICKEL);
+        static Coin dm = new Coin(Denomination.DIME);
+        static Coin qt = new Coin(Denomination.QUARTER);
+        static Coin hd = new Coin(Denomination.HALFDOLLAR);
 
         static void Main(string[] args)
         {
-            CoinBox changeBox, myBox;
             List<Coin> seedList = new List<Coin>();
-            
-            Coin sl = new Coin(Denomination.SLUG);
-            Coin nk = new Coin(Denomination.NICKEL);
-            Coin dm = new Coin(Denomination.DIME);
-            Coin qt = new Coin(Denomination.QUARTER);
-            Coin hd = new Coin(Denomination.HALFDOLLAR);
 
             for (int i = 0; i < SEEDCOINS; i++)
                 {
@@ -29,14 +27,14 @@ namespace MyVendingMachine
                     seedList.Add(qt);
                     seedList.Add(hd);
                 }               
-            changeBox = new CoinBox(seedList);
+            CoinBox myBox = new CoinBox(seedList);
 
             //one price for every flavor
             PurchasePrice rglP = new PurchasePrice(1.60m);
             PurchasePrice orgP = new PurchasePrice(155); // using int
             PurchasePrice lmnP = new PurchasePrice(1.80m);
             
-            decimal canPrice, myBoxValueOf;
+            decimal canPrice, iptMoney;
             CanRack RackOne = new CanRack();
             const string EXITCODE = "EXIT";
 
@@ -44,9 +42,8 @@ namespace MyVendingMachine
 
             while (true)
             {
-                myBoxValueOf = 0;
+                iptMoney = 0;
                 string iptSoda;
-                myBox = new CoinBox();
                             
                 Console.WriteLine("\n* Exit or pick your flavor? " +
                     "(Regular, Orange, Lemon): ");
@@ -75,9 +72,12 @@ namespace MyVendingMachine
                 Console.WriteLine("\n* Exit or insert your coins");
                 Console.WriteLine("(Nickel, Dime, Quarter, HalfDollar or their Decimal value)");
                 Console.WriteLine("{0}: {1:c}", iptSoda, canPrice);
-                //##test bellow. Haven't tried value of yet??
-                //price ipt validation
-                while (myBox.ValueOf < canPrice)
+
+                //Keeps track of coins inserted
+                List<Coin> inpMnyLst = new List<Coin>();
+
+                //price ipt validation1
+                while (iptMoney < canPrice)
                 {
                     Coin aCoin;
                     decimal decVal;
@@ -85,32 +85,58 @@ namespace MyVendingMachine
                     
                     if (iptStr == EXITCODE)
                     {
-                        Console.WriteLine("Bye, your change: {0:c}", myBox.ValueOf);
+                        foreach (Coin c in inpMnyLst) myBox.Withdraw(c);
+                        Console.WriteLine("Bye, your change: {0:c}", iptMoney);
                         Console.ReadLine();
                         Environment.Exit(0);
                     }
+                    if (Decimal.TryParse(iptStr, out decVal)) //for decimal
+                        aCoin = calcCoin(decVal, false);  
+                    else aCoin = calcCoin(new Coin(iptStr).ValueOf, false); //for string
 
-                    if (Decimal.TryParse(iptStr, out decVal)) //is ipt decimal?
-                        aCoin = new Coin(decVal);
-                    else
-                        aCoin = new Coin(iptStr); //then string
-
-                    changeBox.Deposit(aCoin);
-                    
-                    if (myBox.ValueOf < canPrice)
-                        Console.WriteLine("Pending: {0:c}", canPrice - myBox.ValueOf);
+                    inpMnyLst.Add(aCoin);
+                    myBox.Deposit(aCoin);
+                    iptMoney += aCoin.ValueOf;
+                    if (iptMoney < canPrice)
+                        Console.WriteLine("Pending: {0:c}", canPrice - iptMoney);
                 }
 
                 //Deliver soda
-                if (RackOne.IsEmpty(iptSoda))
-                    RackOne.FillTheCanRack();
-
                 RackOne.RemoveACanOf(iptSoda);
+
+                //Deliver change
+                for(decimal i = iptMoney; i>canPrice;)
+                {
+                    Coin c = calcCoin(i-canPrice, true);
+                    myBox.Withdraw(c);
+                    i -= c.ValueOf;
+                }
+
                 Console.WriteLine("**** Have your {0} soda ****", iptSoda);
-                Console.WriteLine("**** Your change is {0:c} ****"
-                    , myBoxValueOf - canPrice);
+                Console.WriteLine("**** Your change is {0:c} ****", iptMoney - canPrice);
                 RackOne.DisplayCanRack();
             }
+        }
+        //finds a coin match for the user input
+        static Coin calcCoin(decimal input, Boolean isChange)
+        {
+            if (isChange)
+            {
+                if (input >= 0.5m) return hd;
+                else if (input >= 0.25m) return qt;
+                else if (input >= 0.10m) return dm;
+                else if (input >= 0.05m) return nk;
+                else return sl;
+            }
+            else
+            {
+                if (input == 0.5m) return hd;
+                else if (input == 0.25m) return qt;
+                else if (input == 0.10m) return dm;
+                else if (input == 0.05m) return nk;
+                else return sl;
+            }
+            
         }
     }
 }
