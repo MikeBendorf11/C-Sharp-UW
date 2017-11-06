@@ -1,0 +1,6 @@
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\CoinTest\bin\Debug\CoinTest.exe.config
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\CoinTest\bin\Debug\CoinTest.exe
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\CoinTest\bin\Debug\CoinTest.pdb
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\CoinTest\obj\Debug\CoinTest.csprojResolveAssemblyReference.cache
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\CoinTest\obj\Debug\CoinTest.exe
+C:\CSharp\C-Sharp-UW-projects\1_programmingInCS\CoinTest\obj\Debug\CoinTest.pdb

@@ -18,14 +18,12 @@ namespace MyVendingMachine
         // parameterless constructor – coin will be a slug 
         public Coin() 
         {
-            Debug.WriteLine("This is a {0} coin", Denomination.SLUG);
            _theDenomination = Denomination.SLUG;
         }
 
         // parametered constructor – coin will be of appropriate value    
         public Coin(Denomination CoinEnumeral) 
         {
-            Debug.WriteLine("This is a {0} coin", CoinEnumeral);
             _theDenomination = CoinEnumeral;
         }
 
