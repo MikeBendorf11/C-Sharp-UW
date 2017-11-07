@@ -18,6 +18,13 @@ namespace MyVendingMachine
 
         static void Main(string[] args)
         {
+            //one price for every flavor
+            Dictionary<Flavor, PurchasePrice> FlavorPrice = new Dictionary<
+                Flavor, PurchasePrice>();
+            FlavorPrice.Add(Flavor.REGULAR, new PurchasePrice(1.6m));
+            FlavorPrice.Add(Flavor.ORANGE, new PurchasePrice(155));
+            FlavorPrice.Add(Flavor.LEMON, new PurchasePrice(1.8m));
+
             List<Coin> seedList = new List<Coin>();
 
             for (int i = 0; i < SEEDCOINS; i++)
@@ -28,11 +35,7 @@ namespace MyVendingMachine
                     seedList.Add(hd);
                 }               
             CoinBox myBox = new CoinBox(seedList);
-
-            //one price for every flavor
-            PurchasePrice rglP = new PurchasePrice(1.60m);
-            PurchasePrice orgP = new PurchasePrice(155); // using int
-            PurchasePrice lmnP = new PurchasePrice(1.80m);
+    
             
             decimal canPrice, iptMoney;
             CanRack RackOne = new CanRack();
@@ -47,28 +50,32 @@ namespace MyVendingMachine
                             
                 Console.WriteLine("\n* Exit or pick your flavor? " +
                     "(Regular, Orange, Lemon): ");
-                
-                //flavor ipt validation
-                do
-                {
-                    iptSoda = Console.ReadLine().ToUpper();
-                    if (iptSoda == EXITCODE)
-                    {
-                        Console.WriteLine("Bye...");
-                        Console.ReadLine();
-                        Environment.Exit(0);
-                    }
-                } while (!CanRack.validStr(iptSoda));
 
-                //find price for this enum
-                switch (iptSoda)
+                //flavor ipt validation
+                Flavor flv;
+                while(true)
                 {
-                    case "LEMON": canPrice = lmnP.PriceDecimal; break;
-                    case "ORANGE": canPrice = orgP.PriceDecimal; break;
-                    case "REGULAR": canPrice = rglP.PriceDecimal; break;
-                    default: canPrice = 0; break;
+                    try
+                    {
+                        iptSoda = Console.ReadLine().ToUpper();
+                        if (iptSoda == EXITCODE)
+                        {
+                            Console.WriteLine("Bye...");
+                            Console.ReadLine();
+                            Environment.Exit(0);
+                        }
+                        flv = (Flavor)Enum.Parse(typeof(Flavor), iptSoda);
+                        break;
+                    }
+                    catch (System.ArgumentException e)
+                    {
+                        Console.Write("Flavors available: ");
+                        foreach (Flavor f in FlavorOps.AllFlavors) Console.Write(f + " ");
+                        Console.WriteLine("\n" + e.Message);
+                    }
                 }
-                    
+                canPrice = FlavorPrice[flv].PriceDecimal;
+
                 Console.WriteLine("\n* Exit or insert your coins");
                 Console.WriteLine("(Nickel, Dime, Quarter, HalfDollar or their Decimal value)");
                 Console.WriteLine("{0}: {1:c}", iptSoda, canPrice);
@@ -90,9 +97,17 @@ namespace MyVendingMachine
                         Console.ReadLine();
                         Environment.Exit(0);
                     }
-                    if (Decimal.TryParse(iptStr, out decVal)) //for decimal
-                        aCoin = calcCoin(decVal, false);  
-                    else aCoin = calcCoin(new Coin(iptStr).ValueOf, false); //for string
+                    try
+                    {
+                        //if not a decimal
+                        decVal = Decimal.Parse(iptStr);
+                        aCoin = calcCoin(decVal, false); 
+                    }
+                    catch
+                    {
+                        //Create a coin using the string
+                        aCoin = calcCoin(new Coin(iptStr).ValueOf, false); 
+                    }
 
                     inpMnyLst.Add(aCoin);
                     myBox.Deposit(aCoin);

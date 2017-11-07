@@ -39,6 +39,8 @@ namespace MyVendingMachine
             Debug.WriteLine("Added a {0} coin", ACoin.CoinEnumeral, 0);
             debugShowBox();       
         }
+       
+        
         // take a coin of the specified denomination out of the box
         public Boolean Withdraw(Coin ACoin)
         {
@@ -55,9 +57,9 @@ namespace MyVendingMachine
                 Debug.WriteLine("This box doesn't contain any {0}s",
                     ACoin.CoinEnumeral, 0);
                 return false;
-            }
-                
+            }                
         }
+
         // number of half dollars in the coin box
         public int HalfDollarCount
         {
