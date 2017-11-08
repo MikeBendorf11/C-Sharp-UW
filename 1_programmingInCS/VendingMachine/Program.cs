@@ -39,6 +39,10 @@ namespace MyVendingMachine
             
             decimal canPrice, iptMoney;
             CanRack RackOne = new CanRack();
+
+            RackOne.RemoveACanOf("JHS(Jsa");
+            
+
             const string EXITCODE = "EXIT";
 
             Console.WriteLine("Welcome to the .NET C# Soda Vending Machine");

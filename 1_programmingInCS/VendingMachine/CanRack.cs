@@ -12,6 +12,7 @@ namespace MyVendingMachine
         private const int EMPTYBIN = 0;
         private const int BINSIZE = 3;
         private const int DUMMYARGUMENT = 0;
+        
 
         //##
         private Dictionary<Flavor, int> rack = new Dictionary
@@ -150,8 +151,11 @@ namespace MyVendingMachine
             foreach (Flavor flv in FlavorOps.AllFlavors)
                 if (flv.ToString() == input)
                     return true;
-            Debug.WriteLine("Flavor not found");
-            return false;
+            /*## Change to 'debug' and 'return false'
+             to stop forcing exception hadling on every
+             string method*/
+            throw new VendBadFlavorException(string.Format(
+                "{0} Flavor not found", input));    
         }
 
     } //end Can_Rack
