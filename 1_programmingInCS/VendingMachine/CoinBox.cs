@@ -40,23 +40,18 @@ namespace MyVendingMachine
             debugShowBox();       
         }
         // take a coin of the specified denomination out of the box
-        public Boolean Withdraw(Coin ACoin)
+        public Boolean Withdraw(Denomination ADenomination)
         {
-            if (coinCount(ACoin.CoinEnumeral) > 0)
+            IEnumerable<Coin> IECoinList = box.Where(
+                c => c.CoinEnumeral == ADenomination);
+            Boolean foundAnyC = false;
+            if (IECoinList.Count() > 0)
             {
-                box.Remove(ACoin);
-                Debug.WriteLine("Removed a {0} coin"
-                    , ACoin.CoinEnumeral, 0);
+                foundAnyC = box.Remove(IECoinList.First());
+                Debug.WriteLine("Removing a {0}", ADenomination.ToString(), 0);
                 debugShowBox();
-                return true;
-            }
-            else
-            {
-                Debug.WriteLine("This box doesn't contain any {0}s",
-                    ACoin.CoinEnumeral, 0);
-                return false;
-            }
-                
+            }   
+            return foundAnyC;
         }
         // number of half dollars in the coin box
         public int HalfDollarCount

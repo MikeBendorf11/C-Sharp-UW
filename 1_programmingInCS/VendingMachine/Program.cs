@@ -9,24 +9,15 @@ namespace MyVendingMachine
 {
     class Program
     {
-        private const int SEEDCOINS = 20;
-        static Coin sl = new Coin(Denomination.SLUG);
-        static Coin nk = new Coin(Denomination.NICKEL);
-        static Coin dm = new Coin(Denomination.DIME);
-        static Coin qt = new Coin(Denomination.QUARTER);
-        static Coin hd = new Coin(Denomination.HALFDOLLAR);
+        private const int SEEDCOINS = 10;
 
         static void Main(string[] args)
         {
             List<Coin> seedList = new List<Coin>();
+            foreach (Denomination dnm in Enum.GetValues(typeof(Denomination)))
+                for(int i = 0; i < SEEDCOINS; i++)
+                    seedList.Add(new Coin(dnm));
 
-            for (int i = 0; i < SEEDCOINS; i++)
-                {
-                    seedList.Add(nk);
-                    seedList.Add(dm);
-                    seedList.Add(qt);
-                    seedList.Add(hd);
-                }               
             CoinBox myBox = new CoinBox(seedList);
 
             //one price for every flavor
@@ -85,14 +76,14 @@ namespace MyVendingMachine
                     
                     if (iptStr == EXITCODE)
                     {
-                        foreach (Coin c in inpMnyLst) myBox.Withdraw(c);
+                        foreach (Coin c in inpMnyLst) myBox.Withdraw(c.CoinEnumeral);
                         Console.WriteLine("Bye, your change: {0:c}", iptMoney);
                         Console.ReadLine();
                         Environment.Exit(0);
                     }
                     if (Decimal.TryParse(iptStr, out decVal)) //for decimal
-                        aCoin = calcCoin(decVal, false);  
-                    else aCoin = calcCoin(new Coin(iptStr).ValueOf, false); //for string
+                        aCoin = new Coin(decVal);  
+                    else aCoin = new Coin(iptStr); //for string
 
                     inpMnyLst.Add(aCoin);
                     myBox.Deposit(aCoin);
@@ -107,8 +98,8 @@ namespace MyVendingMachine
                 //Deliver change
                 for(decimal i = iptMoney; i>canPrice;)
                 {
-                    Coin c = calcCoin(i-canPrice, true);
-                    myBox.Withdraw(c);
+                    Coin c = calcCoin(i-canPrice);
+                    myBox.Withdraw(c.CoinEnumeral);
                     i -= c.ValueOf;
                 }
 
@@ -118,25 +109,14 @@ namespace MyVendingMachine
             }
         }
         //finds a coin match for the user input
-        static Coin calcCoin(decimal input, Boolean isChange)
-        {
-            if (isChange)
-            {
-                if (input >= 0.5m) return hd;
-                else if (input >= 0.25m) return qt;
-                else if (input >= 0.10m) return dm;
-                else if (input >= 0.05m) return nk;
-                else return sl;
-            }
-            else
-            {
-                if (input == 0.5m) return hd;
-                else if (input == 0.25m) return qt;
-                else if (input == 0.10m) return dm;
-                else if (input == 0.05m) return nk;
-                else return sl;
-            }
-            
+        static Coin calcCoin(decimal input)
+        { 
+            if (input >= 0.5m) return new Coin(Denomination.HALFDOLLAR);
+            else if (input >= 0.25m) return new Coin(Denomination.QUARTER);
+            else if (input >= 0.10m) return new Coin(Denomination.DIME);
+            else if (input >= 0.05m) return new Coin(Denomination.NICKEL);
+            else return new Coin(Denomination.SLUG);
+
         }
     }
 }
