@@ -7,7 +7,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
-
+/*A page that allows you to create a consistent layout and use standard behavior for pages in your application*/
 namespace WingtipToys
 {
     public partial class SiteMaster : MasterPage
