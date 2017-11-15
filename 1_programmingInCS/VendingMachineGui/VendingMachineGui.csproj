@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -81,12 +82,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Exercise 05 Solution\Exercise 05\06.0 Console As Library\VendingConsoleLibrary.csproj">
-      <Project>{0bd4fd20-05cf-41b6-991c-cb1dd6dfbbba}</Project>
-      <Name>VendingConsoleLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\lemon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\regular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VendingConsoleLibrary\VendingConsoleLibrary.csproj">
+      <Project>{0bd4fd20-05cf-41b6-991c-cb1dd6dfbbba}</Project>
+      <Name>VendingConsoleLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
