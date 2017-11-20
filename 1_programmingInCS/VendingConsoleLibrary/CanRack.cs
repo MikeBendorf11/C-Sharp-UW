@@ -118,7 +118,7 @@ namespace VendingConsoleLibrary
             Flavor flavorEnumeral = FlavorOps.ToFlavor(FlavorOfBinToBeChecked);
             return rack[flavorEnumeral] == EMPTYBIN;
         }
-
+        //Indexer property?
         public Boolean IsEmpty(Flavor FlavorOfBinToBeChecked)
         {
             return IsEmpty(FlavorOfBinToBeChecked.ToString());

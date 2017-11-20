@@ -10,35 +10,43 @@ using System.Windows.Forms;
 using VendingConsoleLibrary;
 using System.Diagnostics;
 
+
 namespace VendingMachineGui
 {
     public partial class Form1 : Form
     {
         PurchasePrice thePrice = new PurchasePrice(0.35M);
         decimal inputMoney = 0;
-        CanRack theRack = new CanRack();
-        CoinBox myBox = new CoinBox();
-        CoinBox VendingBox = new CoinBox(new List<Coin> {
+        static CanRack theRack = new CanRack();
+        static CoinBox myBox = new CoinBox();
+        static CoinBox VendingBox = new CoinBox(new List<Coin> {
                 new Coin(Coin.Denomination.QUARTER), new Coin(Coin.Denomination.DIME),
                 new Coin(Coin.Denomination.NICKEL), new Coin(Coin.Denomination.QUARTER),
                 new Coin(Coin.Denomination.QUARTER), new Coin(Coin.Denomination.DIME) });
-
+        string regAmount = theRack[Flavor.REGULAR].ToString();
         public Form1()
         {
             InitializeComponent();
+  
         }
 
+        //VEND TAB CONTROLS
         //Adding Coins
-        private void InsNickel_Click(object sender, EventArgs e)
-        { checkInputMoney(Coin.Denomination.NICKEL); }
-        private void InsDime_Click(object sender, EventArgs e)
-        { checkInputMoney(Coin.Denomination.DIME); }
-        private void InsQuarter_Click(object sender, EventArgs e)
-        { checkInputMoney(Coin.Denomination.QUARTER); }
-        private void InsHalfdollar_Click(object sender, EventArgs e)
-        { checkInputMoney(Coin.Denomination.HALFDOLLAR); }
+        private void CoinBttns_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            if (b == InsNickel)
+                incrementBalance(Coin.Denomination.NICKEL);
+            else if (b == InsDime)
+                incrementBalance(Coin.Denomination.DIME);
+            else if (b == InsQuarter)
+                incrementBalance(Coin.Denomination.QUARTER);
+            else if (b == InsHalfdollar)
+                incrementBalance(Coin.Denomination.HALFDOLLAR);
+            else Debug.WriteLine("Sender is not a Coin button");
+        }
 
-        void checkInputMoney(Coin.Denomination Adenom)
+        void incrementBalance(Coin.Denomination Adenom)
         {
             if (inputMoney < thePrice.PriceDecimal)
             {
@@ -57,15 +65,19 @@ namespace VendingMachineGui
         }
 
         //Removing a can and give change
-        private void ejectReg_Click(object sender, EventArgs e)
-        { attemptRemove(Flavor.REGULAR); }
+        private void ejectCans_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            if (b == ejectReg)
+                attemptRemove(Flavor.REGULAR);
+            else if (b == ejectOrg)
+                attemptRemove(Flavor.ORANGE);
+            else if (b == ejectLmn)
+                attemptRemove(Flavor.LEMON);
+            else Debug.WriteLine("Sender is not a ejectCan button");
 
-        private void ejectOrg_Click(object sender, EventArgs e)
-        { attemptRemove(Flavor.ORANGE); }
-
-        private void ejectLmn_Click(object sender, EventArgs e)
-        { attemptRemove(Flavor.LEMON); }
-
+        }
+     
         void attemptRemove(Flavor flv)
         {
             decimal yourChange = inputMoney - thePrice.PriceDecimal;
@@ -86,16 +98,13 @@ namespace VendingMachineGui
                 else
                 {
                     MessageBox.Show($"Sorry, we are out of {flv}");
-                }
-                
+                } 
             }
             else
             {
                 Debug.WriteLine("Not enough seed coins");
                 MessageBox.Show($"Sorry, something went wrong. Please call support.");
             }
-                
-
         }
 
         void toggleInsBttn()
@@ -126,5 +135,8 @@ namespace VendingMachineGui
             PriceLabel.Text = "Please insert:   $0.35";
             InsertLabel.Text = string.Format($"Inserted so far: {inputMoney:c}");
         }
+
+     
+
     }
 }
