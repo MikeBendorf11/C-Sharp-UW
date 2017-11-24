@@ -16,6 +16,12 @@ namespace VendingMachineGui
     //EVENTS FOR THE VENDTAB
     public partial class Form1 : Form
     {
+        private void buttonNotes_Click(object sender, EventArgs e)
+        {
+            FormNotes formNotesObj = new FormNotes();
+            formNotesObj.ShowDialog();
+        }
+
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             groupBoxCansInfo.Visible = false;

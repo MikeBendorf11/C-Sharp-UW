@@ -32,45 +32,45 @@ namespace VendingMachineGui
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Nickel",
             "1",
             "$0.05",
             "$0.05"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Dime",
             "2",
             "$0.10",
             "$0.20"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Quarter",
             "3",
             "$0.25",
             "$0.75"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "HalfDollar",
             "0",
             "$0.50",
             "$0.00"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "Regular",
             "03"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "Orange",
             "03"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "Lemon",
             "03"}, -1);
             this.Title = new System.Windows.Forms.Label();
             this.PriceLabel = new System.Windows.Forms.Label();
             this.InsertLabel = new System.Windows.Forms.Label();
-            this.lmnImgBox = new System.Windows.Forms.PictureBox();
-            this.orgImgBox = new System.Windows.Forms.PictureBox();
-            this.regImgBox = new System.Windows.Forms.PictureBox();
             this.ejectReg = new System.Windows.Forms.Button();
             this.ejectOrg = new System.Windows.Forms.Button();
             this.ejectLmn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.regImgBox = new System.Windows.Forms.PictureBox();
+            this.orgImgBox = new System.Windows.Forms.PictureBox();
+            this.lmnImgBox = new System.Windows.Forms.PictureBox();
             this.DenomGroupBox = new System.Windows.Forms.GroupBox();
             this.InsHalfdollar = new System.Windows.Forms.Button();
             this.InsQuarter = new System.Windows.Forms.Button();
@@ -85,6 +85,7 @@ namespace VendingMachineGui
             this.textBoxAccessPass = new System.Windows.Forms.TextBox();
             this.buttonAccessService = new System.Windows.Forms.Button();
             this.groupBoxCoinInfo = new System.Windows.Forms.GroupBox();
+            this.buttonNotes = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.listViewCoins = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -97,10 +98,11 @@ namespace VendingMachineGui
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ButtonRefillCans = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.lmnImgBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orgImgBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.regImgBox)).BeginInit();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.regImgBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orgImgBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lmnImgBox)).BeginInit();
             this.DenomGroupBox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.TabControlMain.SuspendLayout();
@@ -109,6 +111,7 @@ namespace VendingMachineGui
             this.groupBoxAccessService.SuspendLayout();
             this.groupBoxCoinInfo.SuspendLayout();
             this.groupBoxCansInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // Title
@@ -142,36 +145,6 @@ namespace VendingMachineGui
             this.InsertLabel.Size = new System.Drawing.Size(107, 13);
             this.InsertLabel.TabIndex = 2;
             this.InsertLabel.Text = "Inserted so far: $0.00";
-            // 
-            // lmnImgBox
-            // 
-            this.lmnImgBox.Image = global::VendingMachineGui.Properties.Resources.lemon;
-            this.lmnImgBox.Location = new System.Drawing.Point(234, 53);
-            this.lmnImgBox.Name = "lmnImgBox";
-            this.lmnImgBox.Size = new System.Drawing.Size(46, 68);
-            this.lmnImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.lmnImgBox.TabIndex = 5;
-            this.lmnImgBox.TabStop = false;
-            // 
-            // orgImgBox
-            // 
-            this.orgImgBox.Image = global::VendingMachineGui.Properties.Resources.orange;
-            this.orgImgBox.Location = new System.Drawing.Point(130, 53);
-            this.orgImgBox.Name = "orgImgBox";
-            this.orgImgBox.Size = new System.Drawing.Size(46, 68);
-            this.orgImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.orgImgBox.TabIndex = 4;
-            this.orgImgBox.TabStop = false;
-            // 
-            // regImgBox
-            // 
-            this.regImgBox.Image = global::VendingMachineGui.Properties.Resources.regular;
-            this.regImgBox.Location = new System.Drawing.Point(26, 54);
-            this.regImgBox.Name = "regImgBox";
-            this.regImgBox.Size = new System.Drawing.Size(46, 68);
-            this.regImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.regImgBox.TabIndex = 3;
-            this.regImgBox.TabStop = false;
             // 
             // ejectReg
             // 
@@ -219,6 +192,36 @@ namespace VendingMachineGui
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(311, 164);
             this.panel1.TabIndex = 9;
+            // 
+            // regImgBox
+            // 
+            this.regImgBox.Image = global::VendingMachineGui.Properties.Resources.regular;
+            this.regImgBox.Location = new System.Drawing.Point(26, 54);
+            this.regImgBox.Name = "regImgBox";
+            this.regImgBox.Size = new System.Drawing.Size(46, 68);
+            this.regImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.regImgBox.TabIndex = 3;
+            this.regImgBox.TabStop = false;
+            // 
+            // orgImgBox
+            // 
+            this.orgImgBox.Image = global::VendingMachineGui.Properties.Resources.orange;
+            this.orgImgBox.Location = new System.Drawing.Point(130, 53);
+            this.orgImgBox.Name = "orgImgBox";
+            this.orgImgBox.Size = new System.Drawing.Size(46, 68);
+            this.orgImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.orgImgBox.TabIndex = 4;
+            this.orgImgBox.TabStop = false;
+            // 
+            // lmnImgBox
+            // 
+            this.lmnImgBox.Image = global::VendingMachineGui.Properties.Resources.lemon;
+            this.lmnImgBox.Location = new System.Drawing.Point(234, 53);
+            this.lmnImgBox.Name = "lmnImgBox";
+            this.lmnImgBox.Size = new System.Drawing.Size(46, 68);
+            this.lmnImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lmnImgBox.TabIndex = 5;
+            this.lmnImgBox.TabStop = false;
             // 
             // DenomGroupBox
             // 
@@ -356,7 +359,7 @@ namespace VendingMachineGui
             this.buttonAccessService.Location = new System.Drawing.Point(59, 65);
             this.buttonAccessService.Name = "buttonAccessService";
             this.buttonAccessService.Size = new System.Drawing.Size(75, 23);
-            this.buttonAccessService.TabIndex = 0;
+            this.buttonAccessService.TabIndex = 2;
             this.buttonAccessService.Text = "Validate";
             this.buttonAccessService.UseVisualStyleBackColor = true;
             this.buttonAccessService.Click += new System.EventHandler(this.buttonAccessService_Click);
@@ -364,6 +367,7 @@ namespace VendingMachineGui
             // groupBoxCoinInfo
             // 
             this.groupBoxCoinInfo.BackColor = System.Drawing.Color.DarkGray;
+            this.groupBoxCoinInfo.Controls.Add(this.buttonNotes);
             this.groupBoxCoinInfo.Controls.Add(this.buttonLogout);
             this.groupBoxCoinInfo.Controls.Add(this.listViewCoins);
             this.groupBoxCoinInfo.Controls.Add(this.ButtonEmptyCoins);
@@ -377,12 +381,23 @@ namespace VendingMachineGui
             this.groupBoxCoinInfo.Text = "Coins Info";
             this.groupBoxCoinInfo.Visible = false;
             // 
+            // buttonNotes
+            // 
+            this.buttonNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNotes.Location = new System.Drawing.Point(182, 136);
+            this.buttonNotes.Name = "buttonNotes";
+            this.buttonNotes.Size = new System.Drawing.Size(57, 23);
+            this.buttonNotes.TabIndex = 4;
+            this.buttonNotes.Text = "Notes";
+            this.buttonNotes.UseVisualStyleBackColor = true;
+            this.buttonNotes.Click += new System.EventHandler(this.buttonNotes_Click);
+            // 
             // buttonLogout
             // 
             this.buttonLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonLogout.Location = new System.Drawing.Point(137, 135);
+            this.buttonLogout.Location = new System.Drawing.Point(100, 136);
             this.buttonLogout.Name = "buttonLogout";
-            this.buttonLogout.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogout.Size = new System.Drawing.Size(63, 23);
             this.buttonLogout.TabIndex = 3;
             this.buttonLogout.Text = "Logout";
             this.buttonLogout.UseVisualStyleBackColor = true;
@@ -397,10 +412,10 @@ namespace VendingMachineGui
             this.columnHeader6});
             this.listViewCoins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCoins.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem8,
-            listViewItem9,
-            listViewItem10,
-            listViewItem11});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
             this.listViewCoins.Location = new System.Drawing.Point(16, 21);
             this.listViewCoins.Name = "listViewCoins";
             this.listViewCoins.Size = new System.Drawing.Size(222, 109);
@@ -430,9 +445,9 @@ namespace VendingMachineGui
             // ButtonEmptyCoins
             // 
             this.ButtonEmptyCoins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonEmptyCoins.Location = new System.Drawing.Point(35, 136);
+            this.ButtonEmptyCoins.Location = new System.Drawing.Point(16, 136);
             this.ButtonEmptyCoins.Name = "ButtonEmptyCoins";
-            this.ButtonEmptyCoins.Size = new System.Drawing.Size(75, 23);
+            this.ButtonEmptyCoins.Size = new System.Drawing.Size(65, 23);
             this.ButtonEmptyCoins.TabIndex = 1;
             this.ButtonEmptyCoins.Text = "Empty Box";
             this.ButtonEmptyCoins.UseVisualStyleBackColor = true;
@@ -460,9 +475,9 @@ namespace VendingMachineGui
             this.columnHeader2});
             this.listViewCans.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCans.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem12,
-            listViewItem13,
-            listViewItem14});
+            listViewItem5,
+            listViewItem6,
+            listViewItem7});
             this.listViewCans.Location = new System.Drawing.Point(20, 19);
             this.listViewCans.Name = "listViewCans";
             this.listViewCans.Size = new System.Drawing.Size(129, 85);
@@ -489,6 +504,11 @@ namespace VendingMachineGui
             this.ButtonRefillCans.UseVisualStyleBackColor = true;
             this.ButtonRefillCans.Click += new System.EventHandler(this.VendTabEvents);
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -499,11 +519,11 @@ namespace VendingMachineGui
             this.MinimumSize = new System.Drawing.Size(351, 384);
             this.Name = "Form1";
             this.Text = "Soda 2.0";
-            ((System.ComponentModel.ISupportInitialize)(this.lmnImgBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orgImgBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.regImgBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.regImgBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orgImgBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lmnImgBox)).EndInit();
             this.DenomGroupBox.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -514,6 +534,7 @@ namespace VendingMachineGui
             this.groupBoxAccessService.PerformLayout();
             this.groupBoxCoinInfo.ResumeLayout(false);
             this.groupBoxCansInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -556,6 +577,8 @@ namespace VendingMachineGui
         private TextBox textBoxAccessPass;
         private Button buttonAccessService;
         private Button buttonLogout;
+        private Button buttonNotes;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 
