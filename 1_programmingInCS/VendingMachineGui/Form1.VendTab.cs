@@ -16,25 +16,45 @@ namespace VendingMachineGui
     //EVENTS FOR THE VENDTAB
     public partial class Form1 : Form
     {
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            groupBoxCansInfo.Visible = false;
+            groupBoxCoinInfo.Visible = false;
+            groupBoxAccessService.Visible = true;
+        }
+
+        private void buttonAccessService_Click(object sender, EventArgs e)
+        {
+            if (textBoxAccessPass.Text == "p")
+            {
+                groupBoxCansInfo.Visible = true;
+                groupBoxCoinInfo.Visible = true;
+                groupBoxAccessService.Visible = false;
+            }
+            textBoxAccessPass.Text = "";
+        }
+
+        private void TabControlMain_Click(object sender, EventArgs e)
+        {
+            updateVendPage();
+        }
 
         private void VendTabEvents(object sender, EventArgs e)
         {
-            if (sender as TabControl == tabVend)
-                updateVendTab();
-            else if (sender as Button == ButtonRefillCans)
+            if (sender as Button == ButtonRefillCans)
             {
                 theRack.FillTheCanRack();
-                updateVendTab();
+                updateVendPage();
             }
             else if (sender as Button == ButtonEmptyCoins)
             {
                 VendingBox.Withdraw(VendingBox.ValueOf);
-                updateVendTab();
+                updateVendPage();
             }
             else Debug.WriteLine("Event at VendTab not implemented");
         }
 
-        void updateVendTab()
+        void updateVendPage()
         {
 
             int flvCount = 0, columnCount = 1, coinCount = 0;
