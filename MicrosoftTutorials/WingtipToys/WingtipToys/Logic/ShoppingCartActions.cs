@@ -16,9 +16,8 @@ namespace WingtipToys.Logic
 
         public void AddToCart(int id)
         {
-            // Retrieve the product from the database.           
             ShoppingCartId = GetCartId();
-
+            //if there is at least one cartItem of this ProductID in this cart
             var cartItem = _db.ShoppingCartItems.SingleOrDefault(
                 c => c.CartId == ShoppingCartId
                 && c.ProductId == id);
@@ -56,6 +55,7 @@ namespace WingtipToys.Logic
             }
         }
 
+        //get info from http context, either random or username
         public string GetCartId()
         {
             if (HttpContext.Current.Session[CartSessionKey] == null)
@@ -74,6 +74,7 @@ namespace WingtipToys.Logic
             return HttpContext.Current.Session[CartSessionKey].ToString();
         }
 
+        //used by ShoppingCart.aspx.cs
         public List<CartItem> GetCartItems()
         {
             ShoppingCartId = GetCartId();
@@ -81,6 +82,7 @@ namespace WingtipToys.Logic
             return _db.ShoppingCartItems.Where(
                 c => c.CartId == ShoppingCartId).ToList();
         }
+
         public decimal GetTotal()
         {
             ShoppingCartId = GetCartId();
@@ -96,8 +98,10 @@ namespace WingtipToys.Logic
             return total ?? decimal.Zero;
         }
 
+        //not used in the program for now
         public ShoppingCartActions GetCart(HttpContext context)
         {
+            //can use it because is IDisposable?
             using (var cart = new ShoppingCartActions())
             {
                 cart.ShoppingCartId = cart.GetCartId();
@@ -117,9 +121,10 @@ namespace WingtipToys.Logic
                     {
                         // Iterate through all rows within shopping cart list
                         for (int i = 0; i < CartItemCount; i++)
-                        {
+                        {   
                             if (cartItem.Product.ProductID == CartItemUpdates[i].ProductId)
                             {
+                                //<1? because user can type quantity 0
                                 if (CartItemUpdates[i].PurchaseQuantity < 1 || CartItemUpdates[i].RemoveItem == true)
                                 {
                                     RemoveItem(cartId, cartItem.ProductId);
@@ -207,6 +212,7 @@ namespace WingtipToys.Logic
             return count ?? 0;
         }
 
+        //values get populated through ShoppingCart.aspx.cs
         public struct ShoppingCartUpdates
         {
             public int ProductId;

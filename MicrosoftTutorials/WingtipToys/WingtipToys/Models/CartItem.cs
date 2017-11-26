@@ -7,8 +7,13 @@ namespace WingtipToys.Models
         //Since we have other properties with the id keyword 
         //    then we use the [Key] attribute
         [Key]
+        //Groups instances of same ProductID
+        //A key is necessary for every table, so no other?
+        //Option: each Product has a serial and Quantity is calculated separately
+        //by the instances of the same ProductID in a cart
         public string ItemId { get; set; }
 
+        //Cart tied to which guid user or registered user
         public string CartId { get; set; }
 
         public int Quantity { get; set; }
@@ -17,9 +22,7 @@ namespace WingtipToys.Models
 
         public int ProductId { get; set; }
 
-        //does this mean that a CartItem obj can have a list 
-        //of specific products?? and the virtual means the list
-        //of product will be defined overriden by another method
+        //a CartItem is a product
         public virtual Product Product { get; set; }
 
     }

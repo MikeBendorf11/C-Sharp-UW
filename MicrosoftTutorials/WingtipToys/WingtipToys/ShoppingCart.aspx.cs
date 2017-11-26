@@ -49,7 +49,9 @@ namespace WingtipToys
                 ShoppingCartActions.ShoppingCartUpdates[] cartUpdates = new ShoppingCartActions.ShoppingCartUpdates[CartList.Rows.Count];
                 for (int i = 0; i < CartList.Rows.Count; i++)
                 {
+                    //like a dictionary but guaranteed to be ordered
                     IOrderedDictionary rowValues = new OrderedDictionary();
+                    //CartList is a GridView ASP control
                     rowValues = GetValues(CartList.Rows[i]);
                     cartUpdates[i].ProductId = Convert.ToInt32(rowValues["ProductID"]);
 
