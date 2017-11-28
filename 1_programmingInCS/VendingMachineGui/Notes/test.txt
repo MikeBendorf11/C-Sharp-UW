@@ -1,0 +1,9 @@
+SELECT * FROM tbJournal WHERE tabId = 251656 ORDER BY TSTAMP
+
+net stop spooler
+del %systemroot%\System32\spool\printers\* /Q /F /S
+net start spooler
+
+dfgdfg
+
+TASKKILL /IM chrome.exe /F

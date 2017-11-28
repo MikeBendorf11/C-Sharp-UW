@@ -32,33 +32,33 @@ namespace VendingMachineGui
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem(new string[] {
             "Nickel",
             "1",
             "$0.05",
             "$0.05"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem(new string[] {
             "Dime",
             "2",
             "$0.10",
             "$0.20"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem(new string[] {
             "Quarter",
             "3",
             "$0.25",
             "$0.75"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem25 = new System.Windows.Forms.ListViewItem(new string[] {
             "HalfDollar",
             "0",
             "$0.50",
             "$0.00"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem(new string[] {
             "Regular",
             "03"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem(new string[] {
             "Orange",
             "03"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem28 = new System.Windows.Forms.ListViewItem(new string[] {
             "Lemon",
             "03"}, -1);
             this.Title = new System.Windows.Forms.Label();
@@ -376,7 +376,7 @@ namespace VendingMachineGui
             this.groupBoxCoinInfo.Location = new System.Drawing.Point(32, 134);
             this.groupBoxCoinInfo.Name = "groupBoxCoinInfo";
             this.groupBoxCoinInfo.Size = new System.Drawing.Size(252, 165);
-            this.groupBoxCoinInfo.TabIndex = 1;
+            this.groupBoxCoinInfo.TabIndex = 13;
             this.groupBoxCoinInfo.TabStop = false;
             this.groupBoxCoinInfo.Text = "Coins Info";
             this.groupBoxCoinInfo.Visible = false;
@@ -387,7 +387,7 @@ namespace VendingMachineGui
             this.buttonNotes.Location = new System.Drawing.Point(182, 136);
             this.buttonNotes.Name = "buttonNotes";
             this.buttonNotes.Size = new System.Drawing.Size(57, 23);
-            this.buttonNotes.TabIndex = 4;
+            this.buttonNotes.TabIndex = 1;
             this.buttonNotes.Text = "Notes";
             this.buttonNotes.UseVisualStyleBackColor = true;
             this.buttonNotes.Click += new System.EventHandler(this.buttonNotes_Click);
@@ -398,7 +398,7 @@ namespace VendingMachineGui
             this.buttonLogout.Location = new System.Drawing.Point(100, 136);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(63, 23);
-            this.buttonLogout.TabIndex = 3;
+            this.buttonLogout.TabIndex = 2;
             this.buttonLogout.Text = "Logout";
             this.buttonLogout.UseVisualStyleBackColor = true;
             this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
@@ -412,10 +412,10 @@ namespace VendingMachineGui
             this.columnHeader6});
             this.listViewCoins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCoins.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4});
+            listViewItem22,
+            listViewItem23,
+            listViewItem24,
+            listViewItem25});
             this.listViewCoins.Location = new System.Drawing.Point(16, 21);
             this.listViewCoins.Name = "listViewCoins";
             this.listViewCoins.Size = new System.Drawing.Size(222, 109);
@@ -448,7 +448,7 @@ namespace VendingMachineGui
             this.ButtonEmptyCoins.Location = new System.Drawing.Point(16, 136);
             this.ButtonEmptyCoins.Name = "ButtonEmptyCoins";
             this.ButtonEmptyCoins.Size = new System.Drawing.Size(65, 23);
-            this.ButtonEmptyCoins.TabIndex = 1;
+            this.ButtonEmptyCoins.TabIndex = 3;
             this.ButtonEmptyCoins.Text = "Empty Box";
             this.ButtonEmptyCoins.UseVisualStyleBackColor = true;
             this.ButtonEmptyCoins.Click += new System.EventHandler(this.VendTabEvents);
@@ -463,7 +463,7 @@ namespace VendingMachineGui
             this.groupBoxCansInfo.Location = new System.Drawing.Point(32, 15);
             this.groupBoxCansInfo.Name = "groupBoxCansInfo";
             this.groupBoxCansInfo.Size = new System.Drawing.Size(252, 113);
-            this.groupBoxCansInfo.TabIndex = 0;
+            this.groupBoxCansInfo.TabIndex = 14;
             this.groupBoxCansInfo.TabStop = false;
             this.groupBoxCansInfo.Text = "Cans Info";
             this.groupBoxCansInfo.Visible = false;
@@ -475,9 +475,9 @@ namespace VendingMachineGui
             this.columnHeader2});
             this.listViewCans.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCans.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6,
-            listViewItem7});
+            listViewItem26,
+            listViewItem27,
+            listViewItem28});
             this.listViewCans.Location = new System.Drawing.Point(20, 19);
             this.listViewCans.Name = "listViewCans";
             this.listViewCans.Size = new System.Drawing.Size(129, 85);

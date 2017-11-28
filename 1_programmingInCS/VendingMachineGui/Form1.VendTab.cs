@@ -18,7 +18,7 @@ namespace VendingMachineGui
     {
         private void buttonNotes_Click(object sender, EventArgs e)
         {
-            FormNotes formNotesObj = new FormNotes();
+            FormNotesParent formNotesObj = new FormNotesParent();
             formNotesObj.ShowDialog();
         }
 
@@ -31,7 +31,7 @@ namespace VendingMachineGui
 
         private void buttonAccessService_Click(object sender, EventArgs e)
         {
-            if (textBoxAccessPass.Text == "p")
+            if (textBoxAccessPass.Text == "a")
             {
                 groupBoxCansInfo.Visible = true;
                 groupBoxCoinInfo.Visible = true;
