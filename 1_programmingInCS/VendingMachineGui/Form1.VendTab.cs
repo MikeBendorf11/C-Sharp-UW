@@ -60,7 +60,7 @@ namespace VendingMachineGui
             else Debug.WriteLine("Event at VendTab not implemented");
         }
 
-        void updateVendPage()
+        private void updateVendPage()
         {
 
             int flvCount = 0, columnCount = 1, coinCount = 0;

@@ -68,7 +68,7 @@ namespace VendingMachineGui
         
         public String Notes
         {
-            set { this.textBoxChild.Text = value; }
+            set { textBoxChild.Text = value; }
             get { return textBoxChild.Text; }
         }
     }

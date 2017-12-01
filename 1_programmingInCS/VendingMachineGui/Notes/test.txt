@@ -1,9 +1,7 @@
-SELECT * FROM tbJournal WHERE tabId = 251656 ORDER BY TSTAMP
-
-net stop spooler
-del %systemroot%\System32\spool\printers\* /Q /F /S
-net start spooler
-
-dfgdfg
-
-TASKKILL /IM chrome.exe /F
+<?xml version="1.0" encoding="UTF-8"?>
+<ScannedPaths>
+  <PathEntry name="C:\ProgramData\Microsoft\Windows\Start Menu" />
+  <PathEntry name="C:\Users\Public\Desktop" />
+  <PathEntry name="C:\Program Files">
+    <File Name="7z.exe" BinaryType="PE64_AMD64" Created="07/06/2017 23:23:08" Modified="10/04/2016 14:51:30" BinFileVersion="16.4.0.0" Size="0x000000000006D200" LowerCaseLongPath="c:\program files\7-zip\7z.exe" LongPathHash="000045cabbdf328f98a10cf21e436497694856d0b54f" />
+    <File Name="7zFM.exe" BinaryType="PE64_AMD64" Created="07/06/2017 23:23:08" Modified="10/04/2016 14:54:28" BinFileVersion="16.4.0.0" Size="0x00000000000CCE00" LowerCaseLongPath="c:\program files\7-zip\7zfm.exe" LongPathHash="000040c5133c22925bf611129f46bcef893f9bcf4aca" />

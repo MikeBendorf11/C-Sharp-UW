@@ -9,12 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace VendingMachineGui
 {
     public partial class FormNotesParent : Form
     {
         int newNoteCount = 0;
+        string pattern = @"\d{3}-\d{3}-\d{3}";
+        string found = null;
+
         public FormNotesParent()
         {
             InitializeComponent();
@@ -36,18 +40,16 @@ namespace VendingMachineGui
 
         private void tsmiOptionsFileOpen_Click(object sender, EventArgs e)
         {
+            
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = System.IO.Path.GetFullPath(@"..\..\Notes\");
+            openFileDialog1.InitialDirectory = Path.GetFullPath(@"..\..\Notes\");
             openFileDialog1.Title = "Browse Text Files";
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.CheckPathExists = true;
             openFileDialog1.DefaultExt = "txt";
             openFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.ReadOnlyChecked = false;
-            openFileDialog1.ShowReadOnly = false;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -56,19 +58,20 @@ namespace VendingMachineGui
 
                 try
                 {
-                    using (StreamReader reader 
-                        = File.OpenText(openFileDialog1.FileName))
-                    {
-                        string s = "";
-                        while ((s = reader.ReadLine()) != null)
-                            theChildForm.Notes += s + "\r\n";            
-                    }
+                    theChildForm.Notes = File.ReadAllText(openFileDialog1.FileName);
+                    tsmiOptionsFindFilenames.Enabled = true;
+                    theChildForm.Text = Path.GetFileName(openFileDialog1.FileName);
                     theChildForm.Show();
                     tsmiOptionsFileSave.Enabled = true;
-                    theChildForm.Text = openFileDialog1.FileName;
+                    Regex rgx = new Regex(pattern, RegexOptions.IgnoreCase);
+                    MatchCollection matches = rgx.Matches(theChildForm.Notes);
+                    foreach (Match match in matches)
+                        if(!String.IsNullOrEmpty(match.Value))
+                            found += match.Value + "\n";
+
                 }
                 catch (Exception Ex)
-                { MessageBox.Show(Ex.ToString()); }   
+                { MessageBox.Show(Ex.ToString()); }
             }
         }
 
@@ -76,7 +79,7 @@ namespace VendingMachineGui
         {
             FormNotesChild theChildForm = (FormNotesChild)this.ActiveMdiChild;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = System.IO.Path.GetFullPath(@"..\..\Notes\");
+            saveFileDialog1.InitialDirectory = Path.GetFullPath(@"..\..\Notes\");
             saveFileDialog1.Title = "Save text Files";
             saveFileDialog1.CheckPathExists = true;
             saveFileDialog1.DefaultExt = "txt";
@@ -86,8 +89,17 @@ namespace VendingMachineGui
             saveFileDialog1.FileName = theChildForm.Text + ".txt";
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                File.WriteAllText(saveFileDialog1.FileName, theChildForm.Notes);
+            {
+                try
+                { File.WriteAllText(saveFileDialog1.FileName, theChildForm.Notes); }
+                catch (Exception Ex)
+                { MessageBox.Show(Ex.ToString()); }
+            }
+        }
 
+        private void tsmiOptionsFindFilenames_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Matches Found: \n" + found);
         }
     }
 }

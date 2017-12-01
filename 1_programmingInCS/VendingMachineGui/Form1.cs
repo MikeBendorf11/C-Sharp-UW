@@ -46,7 +46,7 @@ namespace VendingMachineGui
             else Debug.WriteLine("Sender is not a Coin button");
         }
 
-        void incrementBalance(Coin.Denomination Adenom)
+        private void incrementBalance(Coin.Denomination Adenom)
         {
             if (inputMoney < thePrice.PriceDecimal)
             {
@@ -78,7 +78,7 @@ namespace VendingMachineGui
 
         }
      
-        void attemptRemove(Flavor flv)
+        private void attemptRemove(Flavor flv)
         {
             decimal yourChange = inputMoney - thePrice.PriceDecimal;
             if (VendingBox.Withdraw(yourChange))
@@ -107,7 +107,7 @@ namespace VendingMachineGui
             }
         }
 
-        void toggleInsBttn()
+        private void toggleInsBttn()
         {
             if (InsNickel.Enabled)
                 InsNickel.Enabled = InsDime.Enabled =
@@ -116,7 +116,7 @@ namespace VendingMachineGui
                 InsNickel.Enabled = InsDime.Enabled =
                     InsQuarter.Enabled = InsHalfdollar.Enabled = true;
         }
-        void toggleEjectBttn()
+        private void toggleEjectBttn()
         {
             if (ejectLmn.Enabled)
                 ejectLmn.Enabled = ejectOrg.Enabled = ejectReg.Enabled = false;

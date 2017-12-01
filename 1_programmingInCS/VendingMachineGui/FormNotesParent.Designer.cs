@@ -126,6 +126,7 @@
             this.tsmiOptionsFindFilenames.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.tsmiOptionsFindFilenames.Size = new System.Drawing.Size(167, 22);
             this.tsmiOptionsFindFilenames.Text = "File&names";
+            this.tsmiOptionsFindFilenames.Click += new System.EventHandler(this.tsmiOptionsFindFilenames_Click);
             // 
             // FormNotesParent
             // 
