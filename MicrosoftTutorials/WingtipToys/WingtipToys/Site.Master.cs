@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using WingtipToys.Models;
+using WingtipToys.Logic;
 
 /*A page that allows you to create a consistent layout and use standard behavior for pages in your application*/
 namespace WingtipToys
@@ -74,6 +75,16 @@ namespace WingtipToys
         {
 
         }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            using (ShoppingCartActions usersShoppingCart = new ShoppingCartActions())
+            {
+                string cartStr = string.Format("Cart ({0})", usersShoppingCart.GetCount());
+                cartCount.InnerText = cartStr;
+            }
+        }
+
 
         public IQueryable<Category> GetCategories()
         {
