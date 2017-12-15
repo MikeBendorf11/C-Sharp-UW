@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachineGui", "Vendin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingConsoleLibrary", "VendingConsoleLibrary\VendingConsoleLibrary.csproj", "{0BD4FD20-05CF-41B6-991C-CB1DD6DFBBBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnackConsoleTest", "SnackConsoleTest\SnackConsoleTest.csproj", "{2134DD8A-B5F4-4428-AB86-90EE427EE269}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,14 @@ Global
 		{0BD4FD20-05CF-41B6-991C-CB1DD6DFBBBA}.Release|Any CPU.ActiveCfg = Release|x86
 		{0BD4FD20-05CF-41B6-991C-CB1DD6DFBBBA}.Release|x86.ActiveCfg = Release|x86
 		{0BD4FD20-05CF-41B6-991C-CB1DD6DFBBBA}.Release|x86.Build.0 = Release|x86
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Debug|x86.Build.0 = Debug|Any CPU
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Release|x86.ActiveCfg = Release|Any CPU
+		{2134DD8A-B5F4-4428-AB86-90EE427EE269}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

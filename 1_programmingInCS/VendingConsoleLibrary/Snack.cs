@@ -32,7 +32,9 @@ namespace VendingConsoleLibrary
     {
         private int caloriesFromFat;
         public JunkFood(string name, decimal price, int calories) :
-            base(name, price) { }
+            base(name, price)
+        { CaloriesFromFat = calories; }
+
         public override string ToString()
         {
             return base.ToString() + "Calories: " + CaloriesFromFat + ", ";
@@ -48,44 +50,55 @@ namespace VendingConsoleLibrary
 
     public abstract class HealthFood: Snack
     {
-        private DateTime FreshUntil;
-        public HealthFood() { }
+        private DateTime freshUntil;
+        public HealthFood(string name, decimal price, DateTime expires) :
+            base(name, price)
+        { FreshUntil = expires; }
         public override string ToString()
         {
-            return "";
+            return  base.ToString() + "Expires: " + FreshUntil.ToShortDateString() + ", ";
+        }
+        public DateTime FreshUntil
+        {
+            set { freshUntil = value;  }
+            get { return freshUntil; }
         }
     }
 
     public class CandyBar : JunkFood
     {
-        public CandyBar() { }
+        public CandyBar(string name, decimal price, int calories) :
+            base(name, price, calories){ }
         public override string ToString()
         {
-            return "";
+            return base.ToString() + "makes you hyper";
         }
     }
     public class PotatoChips : JunkFood
     {
-        public PotatoChips() { }
+        public PotatoChips(string name, decimal price, int calories) :
+            base(name, price, calories){ }
         public override string ToString()
         {
-            return "";
+            return base.ToString() + "fills you up";
         }
     }
     public class Apple : HealthFood
     {
-        public Apple() { }
+        public Apple(string name, decimal price, DateTime expires) :
+            base(name, price, expires){ }
         public override string ToString()
         {
-            return "";
+            return base.ToString() + "crunchy and juicy";
         }
     }
     public class Banana : HealthFood
     {
-        public Banana() { }
+        public Banana(string name, decimal price, DateTime expires) :
+            base(name, price, expires){ }
         public override string ToString()
         {
-            return "";
+            return base.ToString() + "sweet and tasty";
         }
     }
 }
