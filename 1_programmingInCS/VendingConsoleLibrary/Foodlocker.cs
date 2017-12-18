@@ -21,15 +21,7 @@ namespace VendingConsoleLibrary
         public List<Snack> Store;
         public void Stock()
         {
-            Banana theBanana = new Banana(
-                "Chiquita", 1.10m, DateTime.Today.AddDays(5)
-                );
-            Apple theApple = new Apple(
-                "Fuji", 2.00m, DateTime.Today.AddDays(10)
-                );
-            CandyBar theCandyBar = new CandyBar("Buster", 2.25m, 2000);
-            PotatoChips thePotatoChips = new PotatoChips("Lays", 1.90m, 1500);
-            Random rd = new Random(2);
+            Random rd = new Random(3);
             List<Snack> allSnacks = new List<Snack>
             {
                 new Banana("Chiquita", 1.10m, DateTime.Today.AddDays(5)),
@@ -37,6 +29,11 @@ namespace VendingConsoleLibrary
                 new CandyBar("Buster", 2.25m, 2000),
                 new PotatoChips("Lays", 1.90m, 1500)
             };
+            for (int i = 0; i < Size; i++)
+            {
+                int r = rd.Next(0, allSnacks.Count());
+                Store.Add(allSnacks[r]);
+            }         
         }
     }
 }

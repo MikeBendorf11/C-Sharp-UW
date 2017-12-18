@@ -53,6 +53,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form1.SnacksTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormNotesChild.cs">
       <SubType>Form</SubType>
     </Compile>
