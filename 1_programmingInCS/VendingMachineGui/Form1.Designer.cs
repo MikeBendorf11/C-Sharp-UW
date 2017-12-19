@@ -32,33 +32,33 @@ namespace VendingMachineGui
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Nickel",
             "1",
             "$0.05",
             "$0.05"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Dime",
             "2",
             "$0.10",
             "$0.20"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Quarter",
             "3",
             "$0.25",
             "$0.75"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "HalfDollar",
             "0",
             "$0.50",
             "$0.00"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "Regular",
             "03"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "Orange",
             "03"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "Lemon",
             "03"}, -1);
             this.Title = new System.Windows.Forms.Label();
@@ -98,11 +98,11 @@ namespace VendingMachineGui
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ButtonRefillCans = new System.Windows.Forms.Button();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.tabPageSnacks = new System.Windows.Forms.TabPage();
-            this.listBoxSnacks = new System.Windows.Forms.ListBox();
-            this.textBoxSnackDesc = new System.Windows.Forms.TextBox();
             this.buttonStock = new System.Windows.Forms.Button();
+            this.textBoxSnackDesc = new System.Windows.Forms.TextBox();
+            this.listBoxSnacks = new System.Windows.Forms.ListBox();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.regImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orgImgBox)).BeginInit();
@@ -115,8 +115,8 @@ namespace VendingMachineGui
             this.groupBoxAccessService.SuspendLayout();
             this.groupBoxCoinInfo.SuspendLayout();
             this.groupBoxCansInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.tabPageSnacks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // Title
@@ -418,10 +418,10 @@ namespace VendingMachineGui
             this.columnHeader6});
             this.listViewCoins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCoins.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem8,
-            listViewItem9,
-            listViewItem10,
-            listViewItem11});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
             this.listViewCoins.Location = new System.Drawing.Point(16, 21);
             this.listViewCoins.Name = "listViewCoins";
             this.listViewCoins.Size = new System.Drawing.Size(222, 109);
@@ -481,9 +481,9 @@ namespace VendingMachineGui
             this.columnHeader2});
             this.listViewCans.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewCans.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem12,
-            listViewItem13,
-            listViewItem14});
+            listViewItem5,
+            listViewItem6,
+            listViewItem7});
             this.listViewCans.Location = new System.Drawing.Point(20, 19);
             this.listViewCans.Name = "listViewCans";
             this.listViewCans.Size = new System.Drawing.Size(129, 85);
@@ -510,11 +510,6 @@ namespace VendingMachineGui
             this.ButtonRefillCans.UseVisualStyleBackColor = true;
             this.ButtonRefillCans.Click += new System.EventHandler(this.VendTabEvents);
             // 
-            // fileSystemWatcher1
-            // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
-            // 
             // tabPageSnacks
             // 
             this.tabPageSnacks.Controls.Add(this.buttonStock);
@@ -528,15 +523,15 @@ namespace VendingMachineGui
             this.tabPageSnacks.Text = "Snacks";
             this.tabPageSnacks.UseVisualStyleBackColor = true;
             // 
-            // listBoxSnacks
+            // buttonStock
             // 
-            this.listBoxSnacks.FormattingEnabled = true;
-            this.listBoxSnacks.Items.AddRange(new object[] {
-            " "});
-            this.listBoxSnacks.Location = new System.Drawing.Point(34, 45);
-            this.listBoxSnacks.Name = "listBoxSnacks";
-            this.listBoxSnacks.Size = new System.Drawing.Size(120, 199);
-            this.listBoxSnacks.TabIndex = 0;
+            this.buttonStock.Location = new System.Drawing.Point(34, 253);
+            this.buttonStock.Name = "buttonStock";
+            this.buttonStock.Size = new System.Drawing.Size(120, 23);
+            this.buttonStock.TabIndex = 2;
+            this.buttonStock.Text = "Stock Machine";
+            this.buttonStock.UseVisualStyleBackColor = true;
+            this.buttonStock.Click += new System.EventHandler(this.buttonStock_Click);
             // 
             // textBoxSnackDesc
             // 
@@ -546,14 +541,19 @@ namespace VendingMachineGui
             this.textBoxSnackDesc.Size = new System.Drawing.Size(120, 98);
             this.textBoxSnackDesc.TabIndex = 1;
             // 
-            // buttonStock
+            // listBoxSnacks
             // 
-            this.buttonStock.Location = new System.Drawing.Point(34, 253);
-            this.buttonStock.Name = "buttonStock";
-            this.buttonStock.Size = new System.Drawing.Size(120, 23);
-            this.buttonStock.TabIndex = 2;
-            this.buttonStock.Text = "Stock Machine";
-            this.buttonStock.UseVisualStyleBackColor = true;
+            this.listBoxSnacks.FormattingEnabled = true;
+            this.listBoxSnacks.Location = new System.Drawing.Point(34, 45);
+            this.listBoxSnacks.Name = "listBoxSnacks";
+            this.listBoxSnacks.Size = new System.Drawing.Size(120, 199);
+            this.listBoxSnacks.TabIndex = 0;
+            this.listBoxSnacks.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndex);
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
             // 
             // Form1
             // 
@@ -580,9 +580,9 @@ namespace VendingMachineGui
             this.groupBoxAccessService.PerformLayout();
             this.groupBoxCoinInfo.ResumeLayout(false);
             this.groupBoxCansInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.tabPageSnacks.ResumeLayout(false);
             this.tabPageSnacks.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }

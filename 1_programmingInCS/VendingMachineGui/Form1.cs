@@ -136,6 +136,6 @@ namespace VendingMachineGui
             InsertLabel.Text = string.Format($"Inserted so far: {inputMoney:c}");
         }
 
-       
+        
     }
 }
