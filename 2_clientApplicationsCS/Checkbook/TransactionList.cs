@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Checkbook
 {
-    class TransactionList : List<Transaction>
+    public class TransactionList : List<Transaction>
     {
         const int ID = 1;
         const int DATE = 2;

@@ -5,12 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Checkbook"
         mc:Ignorable="d"
-        Title="Checkbook" Height="350" Width="525" Loaded="Window_Loaded">
+        Title="Checkbook" Height="500" Width="650" Loaded="Window_Loaded">
     <Grid Background="#FFCFC7C7">
-        <Label x:Name="labelTransactions" Content="Transactions" HorizontalAlignment="Left" Margin="102,10,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbTransactions" HorizontalAlignment="Left" Height="184" Margin="102,41,0,0" VerticalAlignment="Top" Width="208"/>
-        <Label x:Name="lblBalance" Content="Label" HorizontalAlignment="Left" Margin="273,228,0,0" VerticalAlignment="Top" Width="71"/>
-        <Label x:Name="label" Content="Balance: " HorizontalAlignment="Left" Margin="224,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.171,-0.577"/>
+        <Label x:Name="labelTransactions" Content="Transactions: " HorizontalAlignment="Left" Margin="42,14,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="lbTransactions" HorizontalAlignment="Left" Height="184" Margin="42,45,0,0" VerticalAlignment="Top" Width="304" SelectionChanged="lbTransactions_SelectionChanged"/>
+        <Label x:Name="lblBalance" Content="" HorizontalAlignment="Left" Margin="278,239,0,0" VerticalAlignment="Top" Width="68" BorderThickness="10,0,0,0" Background="#FFA29292"/>
+        <Label x:Name="label" Content="Balance: " HorizontalAlignment="Left" Margin="224,238,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.171,-0.577"/>
+        <ListBox x:Name="lbCategories" HorizontalAlignment="Left" Height="184" Margin="390,45,0,0" VerticalAlignment="Top" Width="206"/>
+        <Label x:Name="label1" Content="Categories: " HorizontalAlignment="Left" Margin="394,16,0,0" VerticalAlignment="Top"/>
+        <GroupBox x:Name="groupBox" Header="Transaction Details:" HorizontalAlignment="Left" Margin="42,277,0,0" VerticalAlignment="Top" Height="177" Width="554">
+            <Grid HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="544" Margin="-2,0,0,-12">
+                <Label x:Name="label2" Content="ID" HorizontalAlignment="Left" Margin="89,12,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2_Copy" Content="Type" HorizontalAlignment="Left" Margin="76,45,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2_Copy1" Content="Check Num" HorizontalAlignment="Left" Margin="263,14,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2_Copy2" Content="Description" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.529,0.5"/>
+                <Label x:Name="label2_Copy3" Content="Date" HorizontalAlignment="Left" Margin="75,81,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.314,0.577"/>
+                <Label x:Name="label2_Copy4" Content="Amount" HorizontalAlignment="Left" Margin="281,78,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2_Copy5" Content="Category" HorizontalAlignment="Left" Margin="276,47,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="24" Margin="116,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                <TextBox x:Name="tbCheckNum" HorizontalAlignment="Left" Height="24" Margin="343,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                <TextBox x:Name="tbDate" HorizontalAlignment="Left" Height="24" Margin="116,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                <TextBox x:Name="tbType" HorizontalAlignment="Left" Height="24" Margin="116,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                <TextBox x:Name="tbCategory" HorizontalAlignment="Left" Height="24" Margin="343,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Height="24" Margin="343,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Height="24" Margin="116,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="347" IsReadOnly="True"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Window>
