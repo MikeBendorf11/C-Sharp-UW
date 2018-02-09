@@ -31,6 +31,7 @@ namespace Checkbook
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lbTransactions.ItemsSource = transactionList;
+            //lbTransactions.SelectedIndex = 0;
             lblBalance.Content = transactionList.Balance.ToString("C");
 
             categoryList = new CategoryList(transactionList);
@@ -39,17 +40,39 @@ namespace Checkbook
 
         private void lbTransactions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(lbTransactions.ItemsSource != null)
+            {
+                if (lbTransactions.SelectedIndex < 0) lbTransactions.SelectedIndex = 0;
+                int index = lbTransactions.SelectedIndex;
+                Transaction tr = transactionList[index];
+                tbId.Text = tr.Id.ToString();
+                tbType.Text = tr.Type.ToString();
+                tbDescription.Text = tr.Description;
+                tbDate.Text = tr.Date.ToShortDateString();
+                lblAmountString.Content = tr.AmountString;
+                tbAmount.Text = tr.Amount.ToString("C");
+                tbCategory.Text = tr.Category;
+                tbCheckNum.Text = tr.Checknum;
+            }
+        }
+
+        private void bttnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            //show EditTransaction
             if (lbTransactions.SelectedIndex < 0) lbTransactions.SelectedIndex = 0;
             int index = lbTransactions.SelectedIndex;
-            Transaction tr = transactionList[index];
-            tbId.Text = tr.Id.ToString();
-            tbType.Text = tr.Type.ToString();
-            tbDescription.Text = tr.Description;
-            tbDate.Text = tr.Date.ToShortDateString();
-            //lblAmountString.Content = tr.AmountString;
-            tbAmount.Text = tr.Amount.ToString("C");
-            tbCategory.Text = tr.Category;
-            tbCheckNum.Text = tr.Checknum;
+
+            EditTransaction editTransac = new EditTransaction(transactionList[index], categoryList);
+
+            if (editTransac.ShowDialog() == true )
+            {
+                lbTransactions.ItemsSource = null;
+                lbCategories.ItemsSource = null;
+                lbTransactions.ItemsSource = transactionList;
+                lbCategories.ItemsSource = categoryList;
+                lbTransactions.SelectedIndex = 0;
+            }
+
         }
     }
 }

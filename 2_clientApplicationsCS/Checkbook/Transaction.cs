@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace Checkbook
 {
     public enum TransactionType { Check, Debit, Deposit }
-    abstract public class Transaction
+    abstract public class Transaction: INotifyPropertyChanged
     {
         private int id;         // Transaction ID
         private TransactionType type;   // Type of transaction
@@ -21,40 +22,48 @@ namespace Checkbook
         public int Id
         {
             get { return id; }
-            private set { id = value; }
+            private set { id = value; NotifyChanged("Id"); }
         }
         public TransactionType Type
         {
             get { return type; }
-            set { type = value; }
+            set { type = value; NotifyChanged("Type");  }
         }
         public string Category
         {
             get { return category; }
-            set { category = value; }
+            set { category = value; NotifyChanged("Category"); }
         }
         public DateTime Date
         {
             get { return date; }
-            set { date = value; }
+            set { date = value; NotifyChanged("Date"); }
         }
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set { description = value; NotifyChanged("Description"); }
         }
         public decimal Amount
         {
             get { return amount; }
-            set { amount = value; }
+            set { amount = value; NotifyChanged("Amount"); }
         }
         public string Checknum
         {
             get { return checknum; }
-            set { checknum = value; }
+            set { checknum = value; NotifyChanged("Checknum"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyChanged(String property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         private static int lastId = 0;
+
         int nextId() { return ++lastId; }
 
         public override string ToString()
