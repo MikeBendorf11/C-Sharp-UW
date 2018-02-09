@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Checkbook
 {
-    public class TransactionList : List<Transaction>
+    public class TransactionList : ObservableCollection<Transaction>
     {
         const int ID = 1;
         const int DATE = 2;

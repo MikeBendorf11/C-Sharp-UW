@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 
 namespace Checkbook
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         TransactionList transactionList = new TransactionList();
         CategoryList categoryList;
+
+        //used for binding with MainWindowXaml.lbtransactions
+        public TransactionList Transactions
+        {
+            get { return transactionList; }
+            set { transactionList = value; }
+        }
+
 
         public MainWindow()
         {
@@ -30,8 +35,7 @@ namespace Checkbook
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lbTransactions.ItemsSource = transactionList;
-            //lbTransactions.SelectedIndex = 0;
+            //lbTransactions.ItemsSource = transactionList; //xaml will do it
             lblBalance.Content = transactionList.Balance.ToString("C");
 
             categoryList = new CategoryList(transactionList);
@@ -40,7 +44,7 @@ namespace Checkbook
 
         private void lbTransactions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(lbTransactions.ItemsSource != null)
+            if (lbTransactions.ItemsSource != null)
             {
                 if (lbTransactions.SelectedIndex < 0) lbTransactions.SelectedIndex = 0;
                 int index = lbTransactions.SelectedIndex;
@@ -64,15 +68,17 @@ namespace Checkbook
 
             EditTransaction editTransac = new EditTransaction(transactionList[index], categoryList);
 
+            //Manually update display after changes: Toggle source
             if (editTransac.ShowDialog() == true )
             {
-                lbTransactions.ItemsSource = null;
-                lbCategories.ItemsSource = null;
+                lbTransactions.ItemsSource = null;   
                 lbTransactions.ItemsSource = transactionList;
-                lbCategories.ItemsSource = categoryList;
                 lbTransactions.SelectedIndex = 0;
-            }
 
+                categoryList.Refresh();
+                lbCategories.ItemsSource = null;
+                lbCategories.ItemsSource = categoryList;
+            }
         }
     }
 }

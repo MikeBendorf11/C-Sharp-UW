@@ -56,6 +56,7 @@ namespace Checkbook
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         private void NotifyChanged(String property)
         {
             if (PropertyChanged != null)
@@ -158,7 +159,7 @@ namespace Checkbook
             sb.Append(s);                           // Append the text to the stringBuilder
         }
 
-
+        //why do we need this ???
         public String TransactionSummary { get { return ToString(); } }
 
         public Transaction(DateTime dateTime, TransactionType type, string

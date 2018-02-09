@@ -28,6 +28,14 @@ namespace Checkbook
             InitializeComponent();
             this.transaction = transaction;
             this.categoryList = categoryList;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //load categories to cbCategory
+            foreach(Category c in categoryList)
+                cbCategory.Items.Add(c.Title);
+
             tbId.Text = transaction.Id.ToString();
             tbType.Text = transaction.Type.ToString();
             tbDescription.Text = transaction.Description;
@@ -37,14 +45,6 @@ namespace Checkbook
             //Set a combo box to an specific string value
             cbCategory.SelectedItem = transaction.Category;
             tbCheckNum.Text = transaction.Checknum;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //load categories to cbCategory
-            foreach(Category c in categoryList)
-                cbCategory.Items.Add(c.Title);
-
         }
 
         private void bttnOk_Click(object sender, RoutedEventArgs e)
