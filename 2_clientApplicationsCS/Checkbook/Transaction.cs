@@ -57,9 +57,9 @@ namespace Checkbook
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyChanged(String property)
+        public void NotifyChanged(String property) //was private
         {
-            if (PropertyChanged != null)
+            if (PropertyChanged != null) //if anybody is listening
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
@@ -71,7 +71,7 @@ namespace Checkbook
         {
             return Date.ToShortDateString() + "\t" + Type.ToString() + "\t" + Amount.ToString("C");
         }
-        // Property creates and returns the amount string using the functions below
+        // Property creates and returns the amount string 
         public string AmountString
         {
             get
@@ -88,50 +88,44 @@ namespace Checkbook
         // Return dollars in text ("Three hundred seventy two"), or if useDigits, return "372" 
         private string amtToString(int amt, bool useDigits = false)
         {
-            if (amt == 0) return (useDigits ? "00" : "zero");     // If amount is zero, no need to go further
-            if (useDigits) return amt.ToString();                 // If using digits return just the digits
+            if (amt == 0) return (useDigits ? "00" : "zero");     
+            if (useDigits) return amt.ToString();                
 
-            StringBuilder strAmt = new StringBuilder();           // The full string goes in here
-            int[] groups = { 1000000000, 1000000, 1000, 1 };       // Our words repeat in 3s (thousand, million)
+            StringBuilder strAmt = new StringBuilder();          
+            int[] groups = { 1000000000, 1000000, 1000, 1 };      
 
-            foreach (int grp in groups)                            // For each sub-group of 3
+            foreach (int grp in groups)                           
             {
-                if (amt < grp) continue;                            // If nothing in this sub-group, skip it
-                int v = amt / grp;                                  // Separate the 0-999 portion of grouping
-                hundredsToString(v, strAmt, grp);                   // Append the current grouping
-                amt = amt % grp;                                    // Remove value we're printing from left to do
+                if (amt < grp) continue;                           
+                int v = amt / grp;                                  
+                hundredsToString(v, strAmt, grp);                  
+                amt = amt % grp;                                    
             }
-            return strAmt.ToString();                             // Return the stringified amount
+            return strAmt.ToString();                             
         }
 
         // Covert a "hundreds" group into text
         // Our number system repeats every 3 digits (thousands, millions, billions, etc)
-        // This processes one of those 3 digit groups.
-        // params: amt = The amount to print. Must be 0-999
-        //         strAmt = The StringBuilder object in which to write the text
-        //         group = The grouping (1,1000,1000000,1000000000)
         private void hundredsToString(int amt, StringBuilder strAmt, int grouping)
         {
-            String[] label = { "", "thousand", "million", "billion" };  // The grouping labels
-            int group = 0;                        // Determine which group to use...
+            String[] label = { "", "thousand", "million", "billion" }; 
+            int group = 0;                       
             if (grouping >= 1000) group++;
             if (grouping >= 1000000) group++;
             if (grouping >= 1000000000) group++;
 
-            if (amt >= 100)                       // Do we need a "hundreds" value for this number
+            if (amt >= 100)                      
             {
-                int h = amt / 100;                  // Yes. Strip out the hundreds from the rest of the nbr
-                numberToString(h, strAmt);           // Add the hundreds value
+                int h = amt / 100;                 
+                numberToString(h, strAmt);           
                 appendWithSpace(strAmt, "hundred");
-                amt = amt % 100;                    // Remove what we've already printed
+                amt = amt % 100;                   
             }
-            numberToString(amt, strAmt);          // Print the remaining value along with the grouping
+            numberToString(amt, strAmt);          
             appendWithSpace(strAmt, label[group]);
             return;
         }
         // Convert a number (0-999) to a string.
-        // Params: amt = The number to convert
-        //         strAmt = The StringBuilder where the string value should be added
         private void numberToString(int amt, StringBuilder strAmt)
         {
             String[] nums = { "", "one", "two", "three", "four", "five", "six", "seven", "eight",
@@ -140,23 +134,23 @@ namespace Checkbook
             String[] tens = { "", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
     "eighty", "ninety" };
 
-            if (amt < 20)       // We have special cases for numbers under twenty
+            if (amt < 20)       
             {
                 appendWithSpace(strAmt, nums[amt]);
             }
-            else          // Otherwise use the tens grouping and the remaining number (like sixty five)
+            else          
             {
                 appendWithSpace(strAmt, tens[amt / 10]);
                 appendWithSpace(strAmt, nums[amt % 10]);
             }
         }
 
-        // Append a string to the StringBuilder, adding a space first if there's any existing text
+        // Append a string to the StringBuilder
         private void appendWithSpace(StringBuilder sb, String s)
         {
-            if (s.Length == 0) return;              // If no text to append, return
-            if (sb.Length > 0) sb.Append(" ");      // If there's any existing text, add a space
-            sb.Append(s);                           // Append the text to the stringBuilder
+            if (s.Length == 0) return;             
+            if (sb.Length > 0) sb.Append(" ");     
+            sb.Append(s);                          
         }
 
         //why do we need this ???
@@ -179,7 +173,7 @@ namespace Checkbook
 
     }
 
-
+    //These children are the only way to create a Transaction obj
     public class Check : Transaction
     {
         protected const decimal checkCharge = .10M;

@@ -38,7 +38,7 @@ namespace Checkbook
 
     public class CategoryList : List<Category>
     {
-        TransactionList transactionList = new TransactionList();
+        TransactionList transactionList;
         public CategoryList(TransactionList transactionList)
         {
             this.transactionList = transactionList;

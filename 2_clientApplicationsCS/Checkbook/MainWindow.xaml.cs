@@ -15,8 +15,9 @@ using System.Windows.Shapes;
 
 namespace Checkbook
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window 
     {
+        Transaction selectedTransac;
         TransactionList transactionList = new TransactionList();
         CategoryList categoryList;
 
@@ -26,6 +27,22 @@ namespace Checkbook
             get { return transactionList; }
             set { transactionList = value; }
         }
+
+       public Transaction SelectedTransaction
+        {
+            get
+            {
+                return selectedTransac;
+            }
+            set
+            {
+                if (lbTransactions.SelectedIndex < 0) return;
+                selectedTransac = transactionList[lbTransactions.SelectedIndex];
+                lblAmountString.Content = selectedTransac.AmountString;
+                selectedTransac.NotifyChanged("AmountString");
+            }
+        }
+
 
 
         public MainWindow()
@@ -53,7 +70,7 @@ namespace Checkbook
                 tbType.Text = tr.Type.ToString();
                 tbDescription.Text = tr.Description;
                 tbDate.Text = tr.Date.ToShortDateString();
-                lblAmountString.Content = tr.AmountString;
+                //lblAmountString.Content = tr.AmountString; //done by xaml binding
                 tbAmount.Text = tr.Amount.ToString("C");
                 tbCategory.Text = tr.Category;
                 tbCheckNum.Text = tr.Checknum;
@@ -74,7 +91,7 @@ namespace Checkbook
                 lbTransactions.ItemsSource = null;   
                 lbTransactions.ItemsSource = transactionList;
                 lbTransactions.SelectedIndex = 0;
-
+                
                 categoryList.Refresh();
                 lbCategories.ItemsSource = null;
                 lbCategories.ItemsSource = categoryList;
