@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PhotoGallery
 {
-    public class PhotographList : List<Photograph>
+    public class PhotographList : ObservableCollection<Photograph>
     {
         
         /// <summary>
@@ -29,12 +30,12 @@ namespace PhotoGallery
             for (int count = 0; count < fileCount; count++)
             {
                 string keyComb = ""; //the keywords to be added
-                int randomNumber1 = rnd.Next(1, 5);
+                int rndNum = rnd.Next(1, 5);
                 rdnKey.Shuffle();
 
                 //keyComb becomes a random number and selection rdnKey
-                for (int i = 0; i < randomNumber1; i++)
-                    keyComb += rdnKey[i] + (i == (randomNumber1-1) ? "": ", ");
+                for (int i = 0; i < rndNum; i++)
+                    keyComb += rdnKey[i] + (i == (rndNum - 1) ? "": ", ");
 
                 Add(
                         new Photograph(
@@ -54,6 +55,8 @@ namespace PhotoGallery
                 Debug.WriteLine(this[count].Author);
                 Debug.WriteLine(this[count].Keywords);
                 Debug.WriteLine(this[count].Location);
+                Debug.WriteLine("");
+                
             }
         }
 

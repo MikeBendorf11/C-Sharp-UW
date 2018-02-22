@@ -5,12 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhotoGallery"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="332*"/>
-            <ColumnDefinition Width="185*"/>
-        </Grid.ColumnDefinitions>
+        x:Name="PhotoGallery"
+        Title="Picture Organizer" Height="461.5" Width="667.5" Loaded="Window_Loaded">
+    <Grid Margin="0,0,0,-20">
+        <DataGrid x:Name="dgSummary" HorizontalAlignment="Left" Margin="264,114,0,0" VerticalAlignment="Top" Height="214" Width="257" ItemsSource="{Binding ElementName=PhotoGallery, Path=PhotoList, 
+      UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Path=Title}" />
+                <DataGridTextColumn Header="Date Taken"  Width="*" Binding="{Binding DateTaken, StringFormat=\{0:dd.MM.yyyy\}}" />
+                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="482,378,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
 
     </Grid>
 </Window>

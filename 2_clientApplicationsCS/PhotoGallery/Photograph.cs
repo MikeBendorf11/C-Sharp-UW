@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.ComponentModel;
 
 namespace PhotoGallery
 {
-    public class Photograph
+    public class Photograph : INotifyPropertyChanged
     {
         string title;
         DateTime dateTaken;
@@ -20,14 +21,23 @@ namespace PhotoGallery
         string keywords;
         string location;
 
+        //Properties
         public string Title
         {
-            set { title = value; }
+            set
+            {
+                title = value;
+                NotifyChanged("Title");
+            }
             get { return title; }
         }
         public DateTime DateTaken
         {
-            set { dateTaken = value; }
+            set
+            {
+                dateTaken = value;
+                NotifyChanged("DateTaken");
+            }
             get { return dateTaken; }
         }
         public DateTime DateAdeed
@@ -37,7 +47,11 @@ namespace PhotoGallery
         }
         public string Description
         {
-            set { description = value; }
+            set
+            {
+                description = value;
+                NotifyChanged("Description");
+            }
             get { return description; }
         }
         public string Author
@@ -55,9 +69,18 @@ namespace PhotoGallery
             set { location = value; }
             get { return location; }
         }
-        
+ 
+  
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyChanged(String property)
+        {
+            if (PropertyChanged != null) //if anybody is listening
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+ 
         //constructor
-        public Photograph(string Title, DateTime dateTaken, DateTime dateAdded, string description, string author, string keywords, string location )
+        public Photograph(string title, DateTime dateTaken, DateTime dateAdded, string description, string author, string keywords, string location )
         {
             Title = title;
             DateTaken = dateTaken;
