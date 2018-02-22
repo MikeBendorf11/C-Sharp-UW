@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ using System.Windows.Shapes;
 
 namespace Checkbook
 {
-    public partial class MainWindow : Window 
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         Transaction selectedTransac;
         TransactionList transactionList = new TransactionList();
@@ -30,24 +31,22 @@ namespace Checkbook
 
        public Transaction SelectedTransaction
         {
-            get
-            {
-                return selectedTransac;
-            }
-            set
-            {
-                if (lbTransactions.SelectedIndex < 0) return;
-                selectedTransac = transactionList[lbTransactions.SelectedIndex];
-                lblAmountString.Content = selectedTransac.AmountString;
-                selectedTransac.NotifyChanged("AmountString");
-            }
+            get{ return selectedTransac; }
+            set{ selectedTransac = value; NotifyChanged("SelectedTransaction"); }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        private void NotifyChanged(String property) //was private
+        {
+            if (PropertyChanged != null) //if anybody is listening
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
+        }
 
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -88,9 +87,9 @@ namespace Checkbook
             //Manually update display after changes: Toggle source
             if (editTransac.ShowDialog() == true )
             {
-                lbTransactions.ItemsSource = null;   
-                lbTransactions.ItemsSource = transactionList;
-                lbTransactions.SelectedIndex = 0;
+                //lbTransactions.ItemsSource = null;   
+               // lbTransactions.ItemsSource = transactionList;
+                //lbTransactions.SelectedIndex = 0;
                 
                 categoryList.Refresh();
                 lbCategories.ItemsSource = null;

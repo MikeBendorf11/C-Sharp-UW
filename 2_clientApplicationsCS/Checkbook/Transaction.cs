@@ -32,12 +32,16 @@ namespace Checkbook
         public string Category
         {
             get { return category; }
-            set { category = value; NotifyChanged("Category"); }
+            set { category = value; NotifyChanged("Category");
+                NotifyChanged("TransactionSummary");
+            }
         }
         public DateTime Date
         {
             get { return date; }
-            set { date = value; NotifyChanged("Date"); }
+            set { date = value; NotifyChanged("Date");
+                NotifyChanged("TransactionSummary");
+            }
         }
         public string Description
         {
@@ -47,7 +51,11 @@ namespace Checkbook
         public decimal Amount
         {
             get { return amount; }
-            set { amount = value; NotifyChanged("Amount"); }
+            set { amount = value; NotifyChanged("Amount");
+                NotifyChanged("TransactionSummary");
+                NotifyChanged("AmountString");
+                NotifyChanged("CalculationAmount");
+            }
         }
         public string Checknum
         {

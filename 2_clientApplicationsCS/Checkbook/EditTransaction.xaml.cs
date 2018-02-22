@@ -41,7 +41,7 @@ namespace Checkbook
             tbDescription.Text = transaction.Description;
             tbDate.Text = transaction.Date.ToShortDateString();
             lblAmountString.Content = transaction.AmountString;
-            tbAmount.Text = transaction.Amount.ToString("C");
+            tbAmount.Text = transaction.Amount.ToString("#.00");
             //Set a combo box to an specific string value
             cbCategory.SelectedItem = transaction.Category;
             tbCheckNum.Text = transaction.Checknum;
@@ -56,6 +56,7 @@ namespace Checkbook
                 transaction.Category = cbCategory.SelectedItem.ToString();
                 transaction.Date = DateTime.Parse(tbDate.Text);
                 transaction.Checknum = tbCheckNum.Text;
+                transaction.Amount = decimal.Parse(tbAmount.Text);
                 this.DialogResult = true;
                 this.Close();
             }
