@@ -46,18 +46,13 @@ namespace PhotoGallery
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //dgSummary.Columns[DATEADDED].Visibility = Visibility.Collapsed;
-            //dgSummary.Columns[AUTHOR].Visibility = Visibility.Collapsed;
-            //dgSummary.Columns[KEYWORDS].Visibility = Visibility.Collapsed;
-            //dgSummary.Columns[LOCATION].Visibility = Visibility.Collapsed;
-            //dgSummary.ItemsSource = photolist;
-
 
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void dgSummary_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Debug.WriteLine(dgSummary.Columns[0].GetType());
+            Uri uri = new Uri(((Photograph)dgSummary.SelectedValue).Location);
+            imageBox.Source = new BitmapImage(uri);
         }
     }
 }

@@ -19,14 +19,14 @@ namespace PhotoGallery
         /// <param name="Directory"></param>
         public PhotographList(string Directory)
         {
-            string[] initialFiles = GetImmages(Directory);
-            int fileCount = initialFiles.Length;
+            string[] filesUri = GetImmages(Directory);
+            int fileCount = filesUri.Length;
             Random rnd = new Random();
             string[] keys = { "key1", "key2", "key3", "key4" };
             List<string> rdnKey = new List<string>(); //the possible keywords
             rdnKey.AddRange(keys);
             DateTime date = new DateTime(2015, 1, 1);
-            
+
             for (int count = 0; count < fileCount; count++)
             {
                 string keyComb = ""; //the keywords to be added
@@ -35,17 +35,18 @@ namespace PhotoGallery
 
                 //keyComb becomes a random number and selection rdnKey
                 for (int i = 0; i < rndNum; i++)
-                    keyComb += rdnKey[i] + (i == (rndNum - 1) ? "": ", ");
+                    keyComb += rdnKey[i] + (i == (rndNum - 1) ? "" : ", ");
 
                 Add(
                         new Photograph(
-                            "Title" + (count + 1),
+                            Path.GetFileName(filesUri[count]),
                             date.AddDays(rnd.Next(1, 300)),
                             date.AddDays(rnd.Next(301, 600)),
-                            "Description" + (count + 1), 
+                            "desc" + count + ": " +
+                            "This is was added by the system",
                             "Author" + (count + 1),
-                            keyComb, 
-                            "Location" + (count + 1))
+                            keyComb,
+                            filesUri[count])
                     );
 
                 Debug.WriteLine(this[count].Title);
