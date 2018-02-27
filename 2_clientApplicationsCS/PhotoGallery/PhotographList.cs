@@ -11,7 +11,29 @@ namespace PhotoGallery
 {
     public class PhotographList : ObservableCollection<Photograph>
     {
-        
+        public PhotographList() { }
+
+        /// <summary>
+        /// Copies the contents of one photograph list to another
+        /// </summary>
+        /// <param name="inputList"></param>
+        public PhotographList(PhotographList inputList)
+        {
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                Add(
+                       new Photograph(
+                                inputList[i].Title,
+                                inputList[i].DateTaken,
+                                inputList[i].DateAdeed,
+                                inputList[i].Description,
+                                inputList[i].Author,
+                                inputList[i].Keywords,
+                                inputList[i].Location
+                           )
+                    );
+            }
+        }
         /// <summary>
         /// Creates a list of Photograph data using pictures from a given
         /// directory and writes random information in the object fields
@@ -30,7 +52,7 @@ namespace PhotoGallery
             for (int count = 0; count < fileCount; count++)
             {
                 string keyComb = ""; //the keywords to be added
-                int rndNum = rnd.Next(1, 5);
+                int rndNum = rnd.Next(1, 3);
                 rdnKey.Shuffle();
 
                 //keyComb becomes a random number and selection rdnKey
@@ -42,21 +64,21 @@ namespace PhotoGallery
                             Path.GetFileName(filesUri[count]),
                             date.AddDays(rnd.Next(1, 300)),
                             date.AddDays(rnd.Next(301, 600)),
-                            "desc" + count + ": " +
-                            "This is was added by the system",
+                            "desc(" + count + ")" + ": " +
+                            "This was added by the system",
                             "Author" + (count + 1),
                             keyComb,
                             filesUri[count])
                     );
 
-                Debug.WriteLine(this[count].Title);
-                Debug.WriteLine(this[count].DateTaken);
-                Debug.WriteLine(this[count].DateAdeed);
-                Debug.WriteLine(this[count].Description);
-                Debug.WriteLine(this[count].Author);
-                Debug.WriteLine(this[count].Keywords);
-                Debug.WriteLine(this[count].Location);
-                Debug.WriteLine("");
+                //Debug.WriteLine(this[count].Title);
+                //Debug.WriteLine(this[count].DateTaken);
+                //Debug.WriteLine(this[count].DateAdeed);
+                //Debug.WriteLine(this[count].Description);
+                //Debug.WriteLine(this[count].Author);
+                //Debug.WriteLine(this[count].Keywords);
+                //Debug.WriteLine(this[count].Location);
+                //Debug.WriteLine("");
                 
             }
         }
@@ -72,6 +94,8 @@ namespace PhotoGallery
             string[] files = Directory.GetFiles(directory, supportedFormat);
             return files;
         }
+
+
     }
     
 }

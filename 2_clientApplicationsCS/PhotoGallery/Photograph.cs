@@ -90,5 +90,7 @@ namespace PhotoGallery
             Keywords = keywords;
             Location = location;
         }
+
+
     }
 }

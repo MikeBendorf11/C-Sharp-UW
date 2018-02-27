@@ -13,30 +13,55 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace PhotoGallery
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public const int TITLE = 0;
-        public const int DATETAKEN = 1;
-        public const int DATEADDED = 2;
-        public const int DESCRIPTION = 3;
-        public const int AUTHOR = 4;
-        public const int KEYWORDS = 5;
-        public const int LOCATION = 6;
-
         static string homeDirectory = @"C:\Users\Public\Pictures\Sample Pictures";
-        PhotographList photoList = new PhotographList(homeDirectory);
+        static PhotographList photoList = new PhotographList(homeDirectory);
+        PhotographList photoListSubset = new PhotographList(photoList);
+        Photograph selectedPhoto;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyChanged(String property)
+        {
+            if (PropertyChanged != null) 
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
+        }
 
         //for dgSummary binding
         public PhotographList PhotoList
         {
             get { return photoList; }
-            set { photoList = value; }
+            set { photoList = value; } //not used until search
+        }
+
+        //in use by the search feature
+        public PhotographList PhotoListSubset 
+        {
+            set
+            {
+                photoListSubset = value;
+                NotifyChanged("PhotoListSubset");
+            }
+            get { return photoListSubset; }
+        }
+
+        //for detail form text boxes
+        public Photograph SelectedPhoto
+        {
+            set
+            {
+                selectedPhoto = value;
+                NotifyChanged("SelectedPhoto");
+            }
+            get { return selectedPhoto; }
         }
 
         public MainWindow()
@@ -44,15 +69,60 @@ namespace PhotoGallery
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void dgSummary_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Uri uri = new Uri(((Photograph)dgSummary.SelectedValue).Location);
+            SelectedPhoto = (Photograph)dgSummary.SelectedValue;
+            if (SelectedPhoto == null) return; //while searching dgsummary becomes null
+            Uri uri = new Uri(SelectedPhoto.Location);
             imageBox.Source = new BitmapImage(uri);
+        }
+
+        private void tbSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbSearch.Text == "Type your search criteria...")
+                tbSearch.Text = "";
+        }
+
+        private void btSearch_Click(object sender, RoutedEventArgs e) 
+        {
+            if (tbSearch.Text == "Type your search criteria..." || tbSearch.Text == "")
+            {
+                PhotoListSubset = PhotoList;
+            }
+            else
+            {
+                Regex pattern = new Regex(@"[a-zA-Z0-9]{3,}");
+                MatchCollection wordsinTb = pattern.Matches(tbSearch.Text);
+                PhotographList tempPhotolist = new PhotographList();
+                foreach (Match wordTb in wordsinTb)
+                {
+                    foreach (Photograph p in PhotoList)
+                    {
+                        Regex pattern2 = new Regex(wordTb.ToString(), RegexOptions.IgnoreCase);
+                        Match mTitle, mDesc, mAuth, mKey;
+                        mTitle = pattern2.Match(p.Title);
+                        mDesc = pattern2.Match(p.Description);
+                        mAuth = pattern2.Match(p.Author);
+                        mKey = pattern2.Match(p.Keywords);
+
+                        if (tempPhotolist.Contains(p)) //ignore duplicated results found
+                            continue;
+                        else if (mTitle.Success || mDesc.Success || mAuth.Success || mKey.Success)
+                            tempPhotolist.Add(p);
+                        else Debug.WriteLine("No match found in {0}", p.Title);
+                    }
+                }
+                PhotoListSubset = tempPhotolist;
+            }
+            dgSummary.SelectedIndex = 0;
+        }
+
+        private void btClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbSearch.Text = "Type your search criteria...";
+            PhotoListSubset = PhotoList;
         }
     }
 }

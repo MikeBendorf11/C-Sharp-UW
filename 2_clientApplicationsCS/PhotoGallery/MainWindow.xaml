@@ -6,72 +6,105 @@
         xmlns:local="clr-namespace:PhotoGallery"
         mc:Ignorable="d"
         x:Name="PhotoGallery"
-        Title="Picture Organizer" Height="571" Width="762" Loaded="Window_Loaded">
-    <Grid Margin="0,0,0,-20">
-
+        Title="Picture Organizer" Height="571" Width="762">
+    <Grid Margin="-2,-4,2,-16">
         <!--AutoGenerateColumns was populating with all fields and using the 
         default DateTime.toString(). Bound the individual columns instead-->
-        <DataGrid x:Name="dgSummary" HorizontalAlignment="Left" Margin="114,116,0,0" VerticalAlignment="Top" Height="125" Width="534" ItemsSource="{Binding ElementName=PhotoGallery, Path=PhotoList, 
-      UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionChanged="dgSummary_SelectionChanged" FontFamily="Raavi" >
-            <!-- Turns cell red on validation error. For DateTaken Column, I added
-            EditingElementStyle="{StaticResource errorStyle}" and ValidatesOnExceptions=True-->
-            <DataGrid.Resources>
-                <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">
-                    <Setter Property="Padding" Value="-2"/>
-                    <Style.Triggers>
-                        <Trigger Property="Validation.HasError" Value="True">
-                            <Setter Property="Background" Value="Red"/>
-                            <Setter Property="ToolTip" 
-          Value="{Binding RelativeSource={RelativeSource Self},
-            Path=(Validation.Errors)[0].ErrorContent}"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Resources>
-            <!-- -->
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Date Taken" EditingElementStyle="{StaticResource errorStyle}"   Width="100" Binding="{Binding DateTaken, StringFormat=\{0:yyyy/MM/dd\}, ValidatesOnExceptions=True}" />
-                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Image x:Name="imageBox" HorizontalAlignment="Left" Height="198" Margin="496,315,0,0" VerticalAlignment="Top" Width="224" Stretch="Fill"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="496,315,0,0" VerticalAlignment="Top" Width="224"/>
-        <GroupBox x:Name="groupBox" Header="Image Details Form" HorizontalAlignment="Left" Margin="28,274,0,0" VerticalAlignment="Top" Height="243" Width="444">
-            <Grid HorizontalAlignment="Left" Height="220" VerticalAlignment="Top" Width="445">
-                <Label x:Name="label1" Content="Title:" HorizontalAlignment="Left" Margin="14,16,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label1_Copy" Content="Date Taken:" HorizontalAlignment="Left" Margin="14,44,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label1_Copy1" Content="Date Added: " HorizontalAlignment="Left" Margin="14,73,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label1_Copy2" Content="Description: " HorizontalAlignment="Left" Margin="14,161,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label1_Copy3" Content="Author: " HorizontalAlignment="Left" Margin="215,16,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label1_Copy4" Content="Keywords: " HorizontalAlignment="Left" Margin="14,131,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label1_Copy5" Content="Location: " HorizontalAlignment="Left" Margin="14,101,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="90,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="tbDateTaken" HorizontalAlignment="Left" Height="23" Margin="90,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="tbDateAdded" HorizontalAlignment="Left" Height="23" Margin="90,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="tbKeywords" HorizontalAlignment="Left" Height="23" Margin="90,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="326"/>
-                <TextBox x:Name="tbAuthor" HorizontalAlignment="Left" Height="23" Margin="272,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
-                <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Height="49" Margin="90,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="325"/>
-                <TextBox x:Name="tbLocation" HorizontalAlignment="Left" Height="23" Margin="90,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="325" IsReadOnly="True"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="Gray" HorizontalAlignment="Left" Height="215" Margin="478,299,0,0" VerticalAlignment="Top" Width="241
+                " RenderTransformOrigin="0.5,0.5"/>
+        <Image x:Name="imageBox" HorizontalAlignment="Left" Height="182" Margin="479,316,0,0" VerticalAlignment="Top" Width="239
+               
+               
+               
+               " RenderTransformOrigin="0.5,0.5"/>
+        <GroupBox x:Name="groupBox" Header="Image Details Form" HorizontalAlignment="Left" Margin="28,289,0,0" VerticalAlignment="Top" Height="229" Width="434">
+            <Grid HorizontalAlignment="Left" Height="224" VerticalAlignment="Top" Width="445" Margin="0,0,-13,-12">
+                <Grid.Resources>
+                    <ControlTemplate x:Key="validationTemplate">
+                        <DockPanel>
+                            <TextBlock Foreground="Red" FontSize="20"><Run Text="!"/></TextBlock>
+                            <AdornedElementPlaceholder/>
+                        </DockPanel>
+                    </ControlTemplate>
+
+                    <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <Label x:Name="label1" Content="Title:"  HorizontalAlignment="Left" Margin="13,9,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy" Content="Date Taken:" HorizontalAlignment="Left" Margin="13,37,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy1" Content="Date Added: " HorizontalAlignment="Left" Margin="13,66,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy2" Content="Description: " HorizontalAlignment="Left" Margin="13,154,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy3" Content="Author: " HorizontalAlignment="Left" Margin="221,9,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy4" Content="Keywords: " HorizontalAlignment="Left" Margin="13,124,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy5" Content="Location: " HorizontalAlignment="Left" Margin="13,94,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="94,11,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118" 
+                         Text="{Binding SelectedPhoto.Title, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5" />
+                <TextBox x:Name="tbDateTaken" HorizontalAlignment="Left" Height="23" Margin="94,39,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}"
+                         Text="{Binding SelectedPhoto.DateTaken, ElementName=PhotoGallery, StringFormat=\{0:yyyy/MM/dd\}, UpdateSourceTrigger=LostFocus}" RenderTransformOrigin="0.5,0.5"/>
+                <TextBox x:Name="tbDateAdded" HorizontalAlignment="Left" Height="23" Margin="94,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}"
+                         Text="{Binding SelectedPhoto.DateAdeed, ElementName=PhotoGallery, StringFormat=\{0:yyyy/MM/dd\}, UpdateSourceTrigger=LostFocus}" RenderTransformOrigin="0.5,0.5"/>
+                <TextBox x:Name="tbKeywords" HorizontalAlignment="Left" Height="23" Margin="94,124,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="321"
+                         Text="{Binding SelectedPhoto.Keywords, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5"/>
+                <TextBox x:Name="tbAuthor" HorizontalAlignment="Left" Height="23" Margin="271,11,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="143"
+                         Text="{Binding SelectedPhoto.Author, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Height="49" Margin="94,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320"
+                         Text="{Binding SelectedPhoto.Description, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5"/>
+                <TextBox x:Name="tbLocation" HorizontalAlignment="Left" Height="23" Margin="94,96,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="320" IsReadOnly="True"
+                         Text="{Binding SelectedPhoto.Location, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5" IsEnabled="False"/>
             </Grid>
         </GroupBox>
-        <Label x:Name="label" Content="Your image collection:" HorizontalAlignment="Left" Margin="112,83,0,0" VerticalAlignment="Top" Width="126"/>
-        <Button x:Name="btNew" Content="Add New Picture" HorizontalAlignment="Left" Margin="538,284,0,0" VerticalAlignment="Top" Width="138"/>
-        <Button x:Name="btSearch" Content="Search" HorizontalAlignment="Left" Margin="324,85,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="tbSearch" HorizontalAlignment="Left" Height="23" Margin="412,85,0,0" TextWrapping="Wrap" Text="Type your search criteria..." VerticalAlignment="Top" Width="236"/>
-        <Label x:Name="label2" Content="WELCOME TO UW C# CLIENT APPS - FINAL" HorizontalAlignment="Left" Margin="28,33,0,0" VerticalAlignment="Top" Width="426" FontFamily="Rockwell Extra Bold" FontSize="16"/>
+        <Label x:Name="label2" Content="WELCOME TO UW C# CLIENT APPS - FINAL" HorizontalAlignment="Left" Margin="163,22,0,0" VerticalAlignment="Top" Width="426" FontFamily="Rockwell Extra Bold" FontSize="17"/>
+        <GroupBox x:Name="groupBox1" Header="Your current collection" HorizontalAlignment="Left" Margin="30,61,0,0" VerticalAlignment="Top" Height="214" Width="690">
+            <Grid HorizontalAlignment="Left" Height="213" Margin="10,-9,-37,-12" VerticalAlignment="Top" Width="705">
+                <DataGrid x:Name="dgSummary" HorizontalAlignment="Left" Margin="60,41,0,0" VerticalAlignment="Top" Height="126" Width="534" 
+                          
+                          ItemsSource="{Binding PhotoListSubset, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}" 
+                          
+                          AutoGenerateColumns="False" SelectionChanged="dgSummary_SelectionChanged" FontFamily="Raavi" SelectedIndex="0" >
+                    <!-- Turns cell red on validation error. For DateTaken Column, I added
+            EditingElementStyle="{StaticResource errorStyle}" and ValidatesOnExceptions=True-->
+                    <DataGrid.Resources>
+                        <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">
+                            <Setter Property="Padding" Value="-2"/>
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="ToolTip" 
+                                        Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+                    <!-- -->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Date Taken" EditingElementStyle="{StaticResource errorStyle}"   Width="100" Binding="{Binding DateTaken, StringFormat=\{0:yyyy/MM/dd\}, ValidatesOnExceptions=True}" />
+                        <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="btNew" Content="Add New Picture" HorizontalAlignment="Left" Margin="60,175,0,-13" VerticalAlignment="Top" Width="138"/>
+                <Button x:Name="btSearch" Content="Search" HorizontalAlignment="Left" Margin="471,12,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="2.635,0.591" Click="btSearch_Click"/>
+                <TextBox x:Name="tbSearch" HorizontalAlignment="Left" Height="22" Margin="278,12,0,0" Text="Type your search criteria..." VerticalAlignment="Top" Width="184" GotFocus="tbSearch_GotFocus" Foreground="#FF787878"/>
+                <Button x:Name="btClear" Content="Clear" HorizontalAlignment="Left" Margin="536,12,0,0" VerticalAlignment="Top" Width="58" Click="btClear_Click"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Window>
