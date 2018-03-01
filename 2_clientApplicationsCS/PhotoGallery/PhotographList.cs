@@ -61,7 +61,7 @@ namespace PhotoGallery
 
                 Add(
                         new Photograph(
-                            Path.GetFileName(filesUri[count]),
+                            Path.GetFileNameWithoutExtension(filesUri[count]),
                             date.AddDays(rnd.Next(1, 300)),
                             date.AddDays(rnd.Next(301, 600)),
                             "desc(" + count + ")" + ": " +
@@ -69,17 +69,7 @@ namespace PhotoGallery
                             "Author" + (count + 1),
                             keyComb,
                             filesUri[count])
-                    );
-
-                //Debug.WriteLine(this[count].Title);
-                //Debug.WriteLine(this[count].DateTaken);
-                //Debug.WriteLine(this[count].DateAdeed);
-                //Debug.WriteLine(this[count].Description);
-                //Debug.WriteLine(this[count].Author);
-                //Debug.WriteLine(this[count].Keywords);
-                //Debug.WriteLine(this[count].Location);
-                //Debug.WriteLine("");
-                
+                    );                
             }
         }
 

@@ -11,10 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using System.IO;
 
 namespace PhotoGallery
 {
@@ -123,6 +125,42 @@ namespace PhotoGallery
         {
             tbSearch.Text = "Type your search criteria...";
             PhotoListSubset = PhotoList;
+        }
+
+        //adds a new picture to the collection
+        private void btNew_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            dlg.InitialDirectory = homeDirectory;
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            dlg.FilterIndex = 3;
+            dlg.RestoreDirectory = true;
+            
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                Photograph tempPhoto = new Photograph(
+                        Path.GetFileNameWithoutExtension(dlg.FileName),
+                        DateTime.Today.AddDays(-365),
+                        DateTime.Today,
+                        "", "", "", dlg.FileName
+                        );
+                foreach(Photograph p in PhotoList)
+                {
+                    //Don't do anything if file exists already
+                    if (p.Location == tempPhoto.Location)
+                    {
+                        MessageBox.Show("Picture already exists!");
+                        return;
+                    }
+                }
+
+                PhotoList.Add(tempPhoto);
+                PhotoListSubset = PhotoList;
+            }
+
         }
     }
 }
