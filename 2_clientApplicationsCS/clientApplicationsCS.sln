@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkbook", "Checkbook\Chec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoGallery", "PhotoGallery\PhotoGallery.csproj", "{6A9C1204-C2AB-4FA7-85AE-8E372275BA54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbDemo", "DbDemo\DbDemo.csproj", "{CDD0E8CD-43F7-4416-9B11-431CA4B1504C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{6A9C1204-C2AB-4FA7-85AE-8E372275BA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A9C1204-C2AB-4FA7-85AE-8E372275BA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A9C1204-C2AB-4FA7-85AE-8E372275BA54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDD0E8CD-43F7-4416-9B11-431CA4B1504C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDD0E8CD-43F7-4416-9B11-431CA4B1504C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDD0E8CD-43F7-4416-9B11-431CA4B1504C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDD0E8CD-43F7-4416-9B11-431CA4B1504C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

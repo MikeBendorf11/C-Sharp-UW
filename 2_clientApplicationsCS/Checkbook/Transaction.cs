@@ -65,7 +65,7 @@ namespace Checkbook
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void NotifyChanged(String property) //was private
+        public void NotifyChanged(String property) 
         {
             if (PropertyChanged != null) //if anybody is listening
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
@@ -161,7 +161,7 @@ namespace Checkbook
             sb.Append(s);                          
         }
 
-        //why do we need this ???
+        //Used as DisplayMemberPath in lbTransactions
         public String TransactionSummary { get { return ToString(); } }
 
         public Transaction(DateTime dateTime, TransactionType type, string
@@ -176,9 +176,6 @@ namespace Checkbook
             Checknum = checknum;
         }
         public abstract decimal CalculationAmount { get; }
-
-
-
     }
 
     //These children are the only way to create a Transaction obj
