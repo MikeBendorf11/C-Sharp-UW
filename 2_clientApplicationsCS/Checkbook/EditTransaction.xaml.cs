@@ -76,7 +76,7 @@ namespace Checkbook
                     string description = tbDescription.Text;
                     decimal amount = decimal.Parse(tbAmount.Text);
                     string checknum = "";
-                    if (tbType.Text.ToUpper() == "CHECK")
+                    if (tbType.Text.ToUpper() == "CHECK") //if check copy the value
                         checknum = tbCheckNum.Text;
 
                     //Change the current transaction object

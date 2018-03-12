@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace PhotoGallery
 {
+
     static class ShuffleList
     {
         private static Random rng = new Random();
 
+        /// <summary>
+        /// Fisher-Yates Shuffle or as it is also known as, Knuth shuffle. 
+        /// </summary>
         public static void Shuffle<T>(this IList<T> list)
         {
             int n = list.Count;

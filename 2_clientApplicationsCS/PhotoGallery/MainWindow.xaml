@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PhotoGallery"
         mc:Ignorable="d"
         x:Name="PhotoGallery"
-        Title="Picture Organizer" Height="571" Width="762">
+        Title="Picture Organizer" Height="571" Width="762" Closed="PhotoGallery_Closed" Loaded="PhotoGallery_Loaded">
     <Grid Margin="-2,-4,2,-16">
         <!--AutoGenerateColumns was populating with all fields and using the 
         default DateTime.toString(). Bound the individual columns instead-->
@@ -41,9 +41,9 @@
                 <TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="94,11,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118" 
                          Text="{Binding SelectedPhoto.Title, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5" TabIndex="6" />
                 <TextBox x:Name="tbDateTaken" HorizontalAlignment="Left" Height="23" Margin="94,39,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}"
-                         Text="{Binding SelectedPhoto.DateTaken, ElementName=PhotoGallery, StringFormat=\{0:yyyy/MM/dd\}, UpdateSourceTrigger=LostFocus}" RenderTransformOrigin="0.5,0.5" TabIndex="8"/>
+                         Text="{Binding SelectedPhoto.DateTaken, ElementName=PhotoGallery, StringFormat=\{0:yyyy/MM/dd\}, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}" Validation.Error="tbDateTaken_Error" RenderTransformOrigin="0.5,0.5" TabIndex="8"/>
                 <TextBox x:Name="tbDateAdded" HorizontalAlignment="Left" Height="23" Margin="94,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="118" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}"
-                         Text="{Binding SelectedPhoto.DateAdeed, ElementName=PhotoGallery, StringFormat=\{0:yyyy/MM/dd\}, UpdateSourceTrigger=LostFocus}" RenderTransformOrigin="0.5,0.5" TabIndex="9"/>
+                         Text="{Binding SelectedPhoto.DateAdeed, ElementName=PhotoGallery, StringFormat=\{0:yyyy/MM/dd\}, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}" Validation.Error="tbDateAdded_Error"  RenderTransformOrigin="0.5,0.5" TabIndex="9"/>
                 <TextBox x:Name="tbKeywords" HorizontalAlignment="Left" Height="23" Margin="94,124,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="321"
                          Text="{Binding SelectedPhoto.Keywords, ElementName=PhotoGallery, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5" TabIndex="10"/>
                 <TextBox x:Name="tbAuthor" HorizontalAlignment="Left" Height="23" Margin="271,11,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="143"

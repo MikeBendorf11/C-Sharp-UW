@@ -13,6 +13,7 @@ namespace PhotoGallery
 {
     public class Photograph : INotifyPropertyChanged
     {
+        static int id;
         string title;
         DateTime dateTaken;
         DateTime dateAdded;
@@ -22,6 +23,12 @@ namespace PhotoGallery
         string location;
 
         //Properties
+        public int Id
+        {
+            set { id = value; }
+            get { return id; }
+        }
+
         public string Title
         {
             set
@@ -70,7 +77,6 @@ namespace PhotoGallery
             get { return location; }
         }
  
-  
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyChanged(String property)
         {
@@ -78,10 +84,10 @@ namespace PhotoGallery
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
- 
         //constructor
-        public Photograph(string title, DateTime dateTaken, DateTime dateAdded, string description, string author, string keywords, string location )
+        public Photograph(int id, string title, DateTime dateTaken, DateTime dateAdded, string description, string author, string keywords, string location )
         {
+            Id = id;
             Title = title;
             DateTaken = dateTaken;
             DateAdeed = dateAdded;

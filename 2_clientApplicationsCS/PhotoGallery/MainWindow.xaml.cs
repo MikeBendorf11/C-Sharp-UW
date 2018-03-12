@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace PhotoGallery
 {
@@ -27,6 +28,7 @@ namespace PhotoGallery
     {
         static string homeDirectory = @"C:\Users\Public\Pictures\Sample Pictures";
         static PhotographList photoList = new PhotographList(homeDirectory);
+
         PhotographList photoListSubset = new PhotographList(photoList);
         Photograph selectedPhoto;
 
@@ -85,8 +87,10 @@ namespace PhotoGallery
         {
             if (tbSearch.Text == "Type your search criteria...")
                 tbSearch.Text = "";
+            tbSearch.Foreground = Brushes.Black; 
         }
 
+        //search using words separated by commas or spaces
         private void btSearch_Click(object sender, RoutedEventArgs e) 
         {
             if (tbSearch.Text == "Type your search criteria..." || tbSearch.Text == "")
@@ -95,19 +99,19 @@ namespace PhotoGallery
             }
             else
             {
-                Regex pattern = new Regex(@"[a-zA-Z0-9]{3,}");
-                MatchCollection wordsinTb = pattern.Matches(tbSearch.Text);
+                Regex wordPattern = new Regex(@"[a-zA-Z0-9]{3,}");
+                MatchCollection wordsinTextBox = wordPattern.Matches(tbSearch.Text);
                 PhotographList tempPhotolist = new PhotographList();
-                foreach (Match wordTb in wordsinTb)
+                foreach (Match m in wordsinTextBox)
                 {
                     foreach (Photograph p in PhotoList)
                     {
-                        Regex pattern2 = new Regex(wordTb.ToString(), RegexOptions.IgnoreCase);
+                        Regex wordsInObj = new Regex(m.ToString(), RegexOptions.IgnoreCase);
                         Match mTitle, mDesc, mAuth, mKey;
-                        mTitle = pattern2.Match(p.Title);
-                        mDesc = pattern2.Match(p.Description);
-                        mAuth = pattern2.Match(p.Author);
-                        mKey = pattern2.Match(p.Keywords);
+                        mTitle = wordsInObj.Match(p.Title);
+                        mDesc = wordsInObj.Match(p.Description);
+                        mAuth = wordsInObj.Match(p.Author);
+                        mKey = wordsInObj.Match(p.Keywords);
 
                         if (tempPhotolist.Contains(p)) //ignore duplicated results found
                             continue;
@@ -125,13 +129,16 @@ namespace PhotoGallery
         {
             tbSearch.Text = "Type your search criteria...";
             PhotoListSubset = PhotoList;
+            tbSearch.Foreground = Brushes.Gray;
         }
 
         //adds a new picture to the collection
         private void btNew_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
+            btClear_Click(sender, e);
 
+            OpenFileDialog dlg = new OpenFileDialog();
+            int tempId = 0; //**will be inserted on last row of db
             dlg.InitialDirectory = homeDirectory;
             dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
             dlg.FilterIndex = 3;
@@ -141,7 +148,8 @@ namespace PhotoGallery
 
             if (result == true)
             {
-                Photograph tempPhoto = new Photograph(
+                Photograph tp = new Photograph(
+                        tempId,
                         Path.GetFileNameWithoutExtension(dlg.FileName),
                         DateTime.Today.AddDays(-365),
                         DateTime.Today,
@@ -150,18 +158,78 @@ namespace PhotoGallery
                 foreach(Photograph p in PhotoList)
                 {
                     //Don't do anything if file exists already
-                    if (p.Location == tempPhoto.Location)
+                    if (p.Location == tp.Location)
                     {
                         MessageBox.Show("Picture already exists!");
                         return;
                     }
+                    tempId++;
                 }
-
-                PhotoList.Add(tempPhoto);
+                tp.Id = tempId + 1;
+                PhotoList.Add(tp);
                 PhotoListSubset = PhotoList;
-            }
 
+                //add new photo to the db
+                using (SqlConnection conn = new SqlConnection(PhotoList.connectionString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        PhotoList.TableInsert(tp.Id, tp.Title, tp.DateTaken, tp.DateAdeed, tp.Description, tp.Author, tp.Keywords, tp.Location, conn);
+                        conn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("An exception ocurred while adding the new Photo: " + ex.Message);
+                    }     
+                }
+            }
         }
+        //**only when pressing search and clear the photolist is getting updated to the displayed
+        //values, might have smth to do with the events, Photolist and the PhotoListSubset 
+        //when the program closes, update the db
+        private void PhotoGallery_Closed(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(PhotoList.connectionString))
+            {
+                try
+                {
+                    int tempId = 1;
+                    conn.Open();
+                    foreach(Photograph p in PhotoList)
+                    {
+                        PhotoList.TableUpdate(tempId, p.Title, p.DateTaken, p.DateAdeed, p.Description, p.Author, p.Keywords, p.Location, conn);
+                        tempId++;
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("An exception ocurred while updating the db on exit: " + ex.Message);
+                }
+            }
+        }
+
+        private void PhotoGallery_Loaded(object sender, RoutedEventArgs e)
+        {
+            PhotoListSubset = PhotoList;
+        }
+        private void tbDateTaken_Error(object sender, ValidationErrorEventArgs e)
+
+        {
+            MessageBox.Show("Invalid Date: " + e);
+            tbDateTaken.Undo();
+            Keyboard.Focus(tbDateTaken);
+        }
+        private void tbDateAdded_Error(object sender, ValidationErrorEventArgs e)
+
+        {
+            MessageBox.Show("Invalid Date: " + e);
+            tbDateAdded.Undo();
+            Keyboard.Focus(tbDateAdded);
+        }
+
+
     }
 }
 
