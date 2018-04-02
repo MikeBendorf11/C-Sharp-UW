@@ -1,0 +1,66 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <meta charset="utf-8" />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link rel="import" href="Sidebar.html">
+
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+    <div class="templatemo-flex-row">
+        <div id="container" class="templatemo-sidebar"> </div>
+        <script>
+            var link = document.querySelector('link[rel="import"]');
+            var template = link.import.querySelector('template');
+            var clone = document.importNode(template.content, true);
+            document.querySelector('#container').appendChild(clone);
+        </script>
+
+
+        <div class="templatemo-content col-1 light-gray-bg">
+            <div class="templatemo-flex-row flex-content-row">
+                <div id="asg1" class="templatemo-content-widget white-bg col-1">
+                    <i class="fa fa-times"></i>
+                    <div class="square"></div>
+                    <h2 class="templatemo-inline-block">Topics include:</h2><hr>
+                    <ul style="list-style-type: circle">
+                        <li>HTML5 concepts</li>
+                        <li>Using Javascript</li>
+                        <li>Intro to jQuery</li>
+                        <li>ODATA</li>
+                        <li>REST</li>
+                        <li>JSON</li>
+                        <li>CSS 3</li>
+                        <li>ASP.NET MVC</li>
+                        <li>Using web services from server</li>
+                    </ul>
+                </div>
+                <div id="asg1" class="templatemo-content-widget orange-bg">
+                    <i class="fa fa-times"></i>
+                    <p>1) HTML (from Home to HTML Styles)</p>
+                    <a href="http://www.w3schools.com/html/default.asp">http://www.w3schools.com/html/default.asp</a>
+                    <p>2) JavaScript (from Home to JS Objects)</p>
+                    <a href="http://www.w3schools.com/js/default.asp">http://www.w3schools.com/js/default.asp</a>
+                    <p>3) ASP.NET (from Home to ASP)</p>
+                    <a href="https://www.w3schools.com/asp/default.asp">https://www.w3schools.com/asp/default.asp</a>
+                </div>
+            </div>
+            
+                
+            
+        </div>
+    </div>
+    <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+    <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+    <script type="text/javascript" src="js/templatemo-script.js"></script>
+
+
+</body>
+</html>

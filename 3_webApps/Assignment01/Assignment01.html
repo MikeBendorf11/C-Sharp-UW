@@ -1,0 +1,53 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assingment 01</title>
+    <meta charset="utf-8" />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link rel="import" href="Sidebar.html">
+
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+    <div class="templatemo-flex-row">
+        <div id="container" class="templatemo-sidebar"> </div>
+        <script>
+            var link = document.querySelector('link[rel="import"]');
+            var template = link.import.querySelector('template');
+            var clone = document.importNode(template.content, true);
+            document.querySelector('#container').appendChild(clone);
+        </script>
+
+
+        <div class="templatemo-content col-1 light-gray-bg">
+            <div class="templatemo-flex-row flex-content-row">
+                <div id="asg1" class="templatemo-content-widget white-bg col-1">
+                    <i class="fa fa-times"></i>
+                    <div class="square"></div>
+                    <h2 class="templatemo-inline-block">Assignment01:</h2><hr>
+                       <h4>Create your own demo</h4>                    
+                    <p>Now that you have seen how others describe and demonstrate these concepts, let’s try out your skills by creating a new ASP.NET page and Word document that demonstrates how to create ASP.NET web pages that use HTML and JavaScript.</p>
+                    <ul style="list-style-type:decimal">
+                        <li> Create a new Empty ASP.NET project.</li>
+                        <li>Create a web page that includes ASP.NET (C#), HTML, and JavaScript.</li>
+                    </ul>
+                    
+                </div>
+           </div>
+
+
+
+        </div>
+    </div>
+    <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+    <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+    <script type="text/javascript" src="js/templatemo-script.js"></script>
+
+
+</body>
+</html>
