@@ -19,17 +19,17 @@
             DataTable dt = new DataTable();
             DataRow dr;
             dt.Columns.Add(new DataColumn("Id", typeof(Int32)));
-            dt.Columns.Add(new DataColumn("Date", typeof(DateTime)));
+            dt.Columns.Add(new DataColumn("Date", typeof(string)));
             dt.Columns.Add(new DataColumn("Type", typeof(string)));
-            dt.Columns.Add(new DataColumn("Amount", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Amount", typeof(string)));
 
             for (int i = 0; i < 10; i++)
             {
                 dr = dt.NewRow();
                 dr[0] = tl[i].Id;
-                dr[1] = tl[i].Date;
+                dr[1] = tl[i].Date.ToShortDateString();
                 dr[2] = tl[i].Type;
-                dr[3] = tl[i].Amount;
+                dr[3] = tl[i].Amount.ToString("#0.00");
                 dt.Rows.Add(dr);
             }
             DataView dv = new DataView(dt);
