@@ -1,6 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind= "~/Assignment02.cs"%>
-
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Assignment02.aspx.cs" Inherits="Assignments.Assignment02" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,14 +9,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     <link rel="import" href="Sidebar.html">
-
-    <script runat="server">
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Assignments.Assignment02.asd = 1;
-            
-        }
-    </script>
 
 </head>
 <body>

@@ -81,13 +81,7 @@
                 <h2 class="text-uppercase">User Table</h2>
             </div>
             <div class="table-responsive">
-                <asp:DataGrid ID="ItemsGrid"
-                              class="table table-striped table-bordered"
-                              BorderColor="black"
-                              BorderWidth="1"
-                              CellPadding="3"
-                              AutoGenerateColumns="true"
-                              runat="server">
+                <asp:DataGrid class="table table-striped table-bordered" ID="ItemsGrid" runat="server">
 
                     <HeaderStyle BackColor="#00aaaa"></HeaderStyle>
 
