@@ -24,7 +24,7 @@
 
         <div class="templatemo-content col-1 light-gray-bg">
             <div class="templatemo-flex-row flex-content-row">
-                <div id="asg1" class="templatemo-content-widget white-bg col-1">
+                <div id="asg1" class="templatemo-content-widget white-bg col-1"><%--to child--%>
                     <i class="fa fa-times"></i>
                     <div class="square"></div>
                     <h2 class="templatemo-inline-block">Assignment02:</h2>
@@ -67,7 +67,7 @@
                                 <asp:TextBox class="form-control" Width="100%" Height="250" ID="TBReason" runat="server" TextMode="MultiLine"></asp:TextBox>
                             </td>
                         </tr>
-                        <tr><td><br /><asp:Button class="templatemo-blue-button" ID="Button1" width="110" runat="server" Text="Summit" /></td></tr>
+                        <tr><td><br /><asp:Button class="templatemo-blue-button" ID="Button1" width="110" runat="server" Text="Summit" OnClick="Button1_Click" /></td></tr>
                     </table>
                 </form>
 

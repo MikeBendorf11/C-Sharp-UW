@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Assignments.Master.cs" Inherits="Assignments.Assignments" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>
+        <%--Some script to auto enter title from child page--%>
+
+    </title>
+    <meta charset="utf-8" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/templatemo-style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="templatemo-flex-row">
+        <div id="container" class="templatemo-sidebar">
+            <header class="templatemo-site-header">
+                <div class="square"></div>
+                <h1>C# Client Apps</h1>
+            </header>
+            <div class="profile-photo-container">
+                <img src="images/profile-photo.jpg" alt="Profile Photo" class="img-responsive">
+                <div class="profile-photo-overlay"></div>
+            </div>
+            <!-- Search box -->
+
+            <div class="mobile-menu-icon">
+                <i class="fa fa-bars"></i>
+            </div>
+            <nav class="templatemo-left-nav">
+                <ul>
+                    <li><a href="Home.html" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                    <li><a href="Assignment01.aspx"><i class="fa fa-bar-chart fa-fw"></i>Assignment 01</a></li>
+                    <li><a href="Assignment02.aspx"><i class="fa fa-eject fa-fw"></i>Assignment 02</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="templatemo-content col-1 light-gray-bg">
+            <div class="templatemo-flex-row flex-content-row">
+                <asp:ContentPlaceHolder ID="phContent1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <!--  jQuery Migrate Plugin -->
+    <script type="text/javascript" src="js/templatemo-script.js"></script>
+
+</body>
+</html>

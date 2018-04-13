@@ -11,13 +11,13 @@ namespace Assignments
 {
     public class Assignment02 : System.Web.UI.Page
     {
-        protected global::System.Web.UI.WebControls.Button Button1;
+        //protected global::System.Web.UI.WebControls.Button Button1;
         protected global::System.Web.UI.WebControls.TextBox
             TBName, TBEmail, TBLogin, TBReason;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Button1.Click += new EventHandler(this.Button1_Click);
+            //Button1.Click += new EventHandler(this.Button1_Click);
 
         }
         protected void Button1_Click(object sender, EventArgs e)
