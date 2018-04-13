@@ -1,18 +1,11 @@
-﻿<%@ Page Language="C#" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Assignments.Master" %>
 <%@ Import Namespace="trs" %>
 <%@ Import Namespace="System.Data" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Assingment 01</title>
-    <meta charset="utf-8" />
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/templatemo-style.css" rel="stylesheet">
-    <link rel="import" href="Sidebar.html">
-
+<asp:Content ContentPlaceHolderID="phHead" runat="server">
+    <title>Assignment 01</title>
     <script runat="server">
+
         TransactionList tl = new TransactionList();
         ICollection CreateDataSource()
         {
@@ -48,20 +41,9 @@
         }
 
     </script>
+</asp:Content>
 
-</head>
-<body>
-    <div class="templatemo-flex-row">
-        <div id="container" class="templatemo-sidebar"> </div>
-        <script>
-            var link = document.querySelector('link[rel="import"]');
-            var template = link.import.querySelector('template');
-            var clone = document.importNode(template.content, true);
-            document.querySelector('#container').appendChild(clone);
-        </script>
-
-
-        <div class="templatemo-content col-1 light-gray-bg">
+<asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
             <div class="templatemo-flex-row flex-content-row">
                 <div id="asg1" class="templatemo-content-widget white-bg col-1">
                     <i class="fa fa-times"></i>
@@ -88,15 +70,5 @@
                 </asp:DataGrid>
             </div>
         </div>
-        </div>
+</asp:Content>
 
-        <!--table-->
-        
-    </div>
-    <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
-    <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
-    <script type="text/javascript" src="js/templatemo-script.js"></script>
-
-
-</body>
-</html>

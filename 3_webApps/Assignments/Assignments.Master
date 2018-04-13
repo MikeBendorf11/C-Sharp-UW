@@ -4,14 +4,13 @@
 
 <html>
 <head runat="server">
-    <title>
-        <%--Some script to auto enter title from child page--%>
-
-    </title>
+    <title></title>
     <meta charset="utf-8" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="phHead" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <div class="templatemo-flex-row">
@@ -39,14 +38,11 @@
         </div>
 
         <div class="templatemo-content col-1 light-gray-bg">
-            <div class="templatemo-flex-row flex-content-row">
-                <asp:ContentPlaceHolder ID="phContent1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
+            <asp:ContentPlaceHolder ID="phContent1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
-
-
     </div>
+
     <script src="js/jquery-1.11.2.min.js"></script>
     <!-- jQuery -->
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
