@@ -7,6 +7,7 @@
     <script runat="server">
 
         TransactionList tl = new TransactionList();
+        
         ICollection CreateDataSource()
         {
             DataTable dt = new DataTable();
@@ -31,7 +32,7 @@
         }
         void Page_Load(Object sender, EventArgs e)
         {
-
+            trs.Transaction.lastId = 0;
             if (!IsPostBack)
             {
                 // Load this data only once.

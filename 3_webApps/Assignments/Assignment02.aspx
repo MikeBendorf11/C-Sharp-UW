@@ -12,7 +12,7 @@
             <h2 class="templatemo-inline-block">Assignment02:</h2>
             <hr>
             <h4>Write a file on the server</h4>
-            <p>In this homework you will collect registration data from the user and write it to a text file on the web server. Once that is working you need to at at least one CSS3 and on HTML5 feature to the page. Finally you must create a document of what you did </p>
+            <p>In this homework you will collect registration data from the user and write it to a text file on the web server. Once that is working you need to add at least one CSS3 and on HTML5 feature to the page. Finally you must create a document of what you did </p>
             <ul style="list-style-type: decimal">
                 <li>Create a new Empty ASP.NET page.</li>
                 <li>Create a web page that includes ASP.NET (C#), HTML, CSS and JavaScript.</li>
@@ -46,7 +46,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><br /><asp:Button class="templatemo-blue-button" ID="Button1" Width="110" runat="server" Text="Summit" OnClick="Button1_Click" /></td>
+                    <td colspan="2"><br /><asp:Button class="templatemo-blue-button" ID="Button1" Width="110" runat="server" Text="Summit" OnClick="Button1_Click" />
+                        &nbsp; <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                    </td>
                 </tr>
             </table>
         </form>

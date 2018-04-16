@@ -30,9 +30,11 @@
             </div>
             <nav class="templatemo-left-nav">
                 <ul>
-                    <li><a href="Home.html" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                    <li><a href="Home.aspx" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
                     <li><a href="Assignment01.aspx"><i class="fa fa-bar-chart fa-fw"></i>Assignment 01</a></li>
                     <li><a href="Assignment02.aspx"><i class="fa fa-eject fa-fw"></i>Assignment 02</a></li>
+                     <li><a href="AboutUs.aspx"><i class="fa fa-map-marker fa-fw"></i>About</a></li>
+                     <li><a href="LoginRequest.aspx"><i class="fa fa-users fa-fw"></i>Login</a></li>
                 </ul>
             </nav>
         </div>

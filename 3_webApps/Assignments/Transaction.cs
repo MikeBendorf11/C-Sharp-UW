@@ -71,7 +71,7 @@ namespace trs
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        private static int lastId = 0;
+        public static int lastId = 0;
 
         int nextId() { return ++lastId; }
 
