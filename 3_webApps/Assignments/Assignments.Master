@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Assignments.Master.cs" Inherits="Assignments.Assignments" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Assignments.Master.cs" Inherits="Assignments.Assignments" %>
 
 <!DOCTYPE html>
 
@@ -16,8 +16,8 @@
     <div class="templatemo-flex-row">
         <div id="container" class="templatemo-sidebar">
             <header class="templatemo-site-header">
-                <div class="square"></div>
-                <h1>C# Client Apps</h1>
+                <div class="square-light"></div>
+                <h1>UW-Web Apps</h1>
             </header>
             <div class="profile-photo-container">
                 <img src="images/profile-photo.jpg" alt="Profile Photo" class="img-responsive">
@@ -33,6 +33,7 @@
                     <li><a href="Home.aspx" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
                     <li><a href="Assignment01.aspx"><i class="fa fa-bar-chart fa-fw"></i>Assignment 01</a></li>
                     <li><a href="Assignment02.aspx"><i class="fa fa-eject fa-fw"></i>Assignment 02</a></li>
+                    <li><a href="Assignment04.aspx"><i class="fa fa-server fa-fw"></i>Assignment 04</a></li>
                      <li><a href="AboutUs.aspx"><i class="fa fa-map-marker fa-fw"></i>About</a></li>
                      <li><a href="LoginRequest.aspx"><i class="fa fa-users fa-fw"></i>Login</a></li>
                 </ul>

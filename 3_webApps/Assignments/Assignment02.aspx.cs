@@ -38,7 +38,7 @@ namespace Assignments
             }
             TBName.Text = TBEmail.Text = TBLogin.Text = TBReason.Text = "";
             Button1.Text = "SUCCESS";
-            Label1.Text = "A file has been created \"~/data.txt\"";
+            Label1.Text = "A file has been created: \"~/data.txt\"";
         }
     }
 }

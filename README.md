@@ -1,29 +1,31 @@
-				
-				11/25/2017 12:13:05 PM
+#### University of Washington - C# ####
 
-**Assignment 08 - Child Forms, Menus**
+The program lasts 7 months and has 3 Levels. Below a detail of the programming concepts applied in this assignments repository:
 
-This assignment has just started. It is better to keep controls inside of other containers then it becomes easier and more organized to handle group events.
-____				
+**Programming in C#**
 
-				11/25/2017 12:13:05 PM
+- OOP, Structures, Polymorphism
+- Using static members
+- Use of common collections, lists and dictionary
+- Concatenation and string buffers
+- Throwing and catching exceptions
+- Exception objects
 
-**Database Connections** 
+**Client Applications in C#**
 
-I'm still wrapping things around in my head regarding how all this pages connect together.
+- Common data structures, Generics, WPF
+- Data binding to controls
+- ADO.NET and databases
+- Advanced exception handling
+- Events and delegates
+- Strings, regular expressions, and collections
 
-We know that Site.Master has the main `hmtl/ASP` layout. It contains an `asp:ContentPlaceHolder` that most of the other .aspx files will use to display variable information.
 
-Now, I'm trying to understand how both the `ShoppingCart.aspx` and the codeBehind interact with both `ShoppingActions.cs`(under the logic folder) and `CartItem.cs` model(which interacts with the new portion of the db called `ShoppingCartItems` under `ProductContext.cs`)
-____
+**Web Applications in C#**
 
-				11/23/2017 10:45:37 AM 
-
-**Branching out and Exercise 6 WPF** 
-
-I started a new branch `cmdwpf` and included a few corrections to my version of the Vending machine. The most important change is to
-be able to remove an object from a list by matching a property(instead of the object itself). This was possible by using `LINQ` and the type `IEnumerable<T>`.
-
-Apart from that, I integrated the console library developed for the class. I also created the base GUI for the vending machine but I still have to implement the event handlers.
-
+- HTML5 concepts, Javascript
+- Intro to jQuery
+- ODATA, REST, JSON, CSS 3
+- ASP.NET MVC
+- Web services
 

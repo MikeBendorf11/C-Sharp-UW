@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Assignments.Master" %>
+<%@ Page Language="C#" MasterPageFile="~/Assignments.Master" %>
+
 <%@ Import Namespace="trs" %>
 <%@ Import Namespace="System.Data" %>
 
@@ -7,7 +8,7 @@
     <script runat="server">
 
         TransactionList tl = new TransactionList();
-        
+
         ICollection CreateDataSource()
         {
             DataTable dt = new DataTable();
@@ -45,31 +46,37 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
-            <div class="templatemo-flex-row flex-content-row">
-                <div id="asg1" class="templatemo-content-widget white-bg col-1">
-                    <i class="fa fa-times"></i>
-                    <div class="square"></div>
-                    <h2 class="templatemo-inline-block">Assignment01:</h2><hr>
-                    <h4>Create your own demo</h4>
-                    <p>Now that you have seen how others describe and demonstrate these concepts, let’s try out your skills by creating a new ASP.NET page and Word document that demonstrates how to create ASP.NET web pages that use HTML and JavaScript.</p>
-                    <ul style="list-style-type:decimal">
-                        <li> Create a new Empty ASP.NET project.</li>
-                        <li>Create a web page that includes ASP.NET (C#), HTML, and JavaScript.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden">
-            <i class="fa fa-times"></i>
-            <div class="panel-heading templatemo-position-relative">
-                <h2 class="text-uppercase">User Table</h2>
-            </div>
-            <div class="table-responsive">
-                <asp:DataGrid class="table table-striped table-bordered" ID="ItemsGrid" runat="server">
-
-                    <HeaderStyle BackColor="#00aaaa"></HeaderStyle>
-
-                </asp:DataGrid>
-            </div>
+    <div class="templatemo-flex-row flex-content-row">
+    <div class="col-2">
+        <div style="height:150px;"></div>
+        <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden col-2">
+        <i class="fa fa-times"></i>
+        <div class="panel-heading templatemo-position-relative">
+            <h2 class="text-uppercase">Transaction Table</h2>
         </div>
+        <div class="table-responsive">
+            <asp:DataGrid class="table table-striped table-bordered" ID="ItemsGrid" runat="server">
+
+                <HeaderStyle BackColor="#00aaaa"></HeaderStyle>
+
+            </asp:DataGrid>
+        </div>
+    </div>
+        
+    </div>
+        <div id="asg1" class="templatemo-content-widget blue-bg col-1">
+            <i class="fa fa-times"></i>
+            <div class="square-dark"></div>
+            <h2 class="templatemo-inline-block">Assignment01:</h2>
+            <hr>
+            <h4>Create your own demo</h4>
+            <p>Now that you have seen how others describe and demonstrate these concepts, let’s try out your skills by creating a new ASP.NET page and Word document that demonstrates how to create ASP.NET web pages that use HTML and JavaScript.</p>
+            <ul style="list-style-type: decimal">
+                <li>Create a new Empty ASP.NET project.</li>
+                <li>Create a web page that includes ASP.NET (C#), HTML, and JavaScript.</li>
+            </ul>
+        </div>
+    </div>
+    
 </asp:Content>
 

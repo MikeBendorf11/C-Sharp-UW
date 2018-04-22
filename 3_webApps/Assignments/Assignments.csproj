@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AboutUs.aspx" />
+    <Content Include="Assignment04.aspx" />
     <Content Include="Assignment02.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Assignments.Master" %>
+<%@ Page Language="C#" MasterPageFile="~/Assignments.Master" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Home</title>
@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
     <div class="templatemo-flex-row flex-content-row">
-        <div class="templatemo-content-widget white-bg col-1">
+        <div class="templatemo-content-widget white-bg col-1" style="">
             <i class="fa fa-times"></i>
             <div class="square"></div>
             <h2 class="templatemo-inline-block">Topics include:</h2>
@@ -23,7 +23,13 @@
                 <li>Using web services from server</li>
             </ul>
         </div>
-        <div class="templatemo-content-widget orange-bg">
+        <div class="col-1"></div>
+
+        
+    </div>
+    <div class="templatemo-flex-row flex-content-row">
+        <div class="col-1"></div>
+        <div class="templatemo-content-widget orange-bg col-1" style="" >
             <i class="fa fa-times"></i>
             <div class="square"></div>
             <h2 class="templatemo-inline-block">Resources:</h2>
@@ -34,8 +40,10 @@
             <a href="http://www.w3schools.com/js/default.asp">http://www.w3schools.com/js/default.asp</a>
             <p>3) ASP.NET (from Home to ASP)</p>
             <a href="https://www.w3schools.com/asp/default.asp">https://www.w3schools.com/asp/default.asp</a>
+            <p></p>
+            <p></p>
         </div>
-    </div>
+     </div>
 </asp:Content>
 
 
