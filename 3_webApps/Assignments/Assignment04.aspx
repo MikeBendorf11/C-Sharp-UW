@@ -1,79 +1,104 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Assignments.Master" %>
 
 <%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Data.OleDb" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Assingment 04</title>
+
     <script runat="server">
-        ICollection CreateDataSource()
+        const int CNAME = 0, CEMAIL = 1, CLOGIN = 2, CREASON = 3, CTOTCOLS = 4;
+        string strOledbConnection = @"Provider=SQLOLEDB;
+                                    Data Source=MBENDORF-E7240\SQLEXPRESS;
+                                    Integrated Security=SSPI;
+                                    Initial Catalog=ASPNetHomework";
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            OleDbConnection objOleCon = new OleDbConnection();
+            try
+            {
+                objOleCon.ConnectionString = strOledbConnection;
+                OleDbCommand objCmd = new OleDbCommand("pInsLogins", objOleCon);
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objCmd.Parameters.AddWithValue("@Name", TBName.Text);
+                objCmd.Parameters.AddWithValue("@EmailAddress", TBEmail.Text);
+                objCmd.Parameters.AddWithValue("@LoginName", TBName.Text);
+                objCmd.Parameters.AddWithValue("@ReasonForAccess", TBReason.Text);
+                objOleCon.Open();
+                objCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { Label1.Text += "<b>" + ex.ToString() + "</b>"; }
+            finally
+            {
+                objOleCon.Close();
+                LoadTable();
+            }
+        }
+
+        ICollection CreateDataSource(int iNofRows, string[][] strDataArray)
         {
             DataTable dt = new DataTable();
             DataRow dr;
             dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            dt.Columns.Add(new DataColumn("EmailAddress", typeof(string)));
+            dt.Columns.Add(new DataColumn("Email", typeof(string)));
             dt.Columns.Add(new DataColumn("LoginName", typeof(string)));
-            dt.Columns.Add(new DataColumn("ReasonForAccess", typeof(string)));
+            dt.Columns.Add(new DataColumn("Reason", typeof(string)));
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < iNofRows; i++)
             {
                 dr = dt.NewRow();
-                //dr[0] = tl[i].Id;
-                //dr[1] = tl[i].Date.ToShortDateString();
-                //dr[2] = tl[i].Type;
-                //dr[3] = tl[i].Amount.ToString("#0.00");
+                dr[CNAME] = strDataArray[i][CNAME];
+                dr[CEMAIL] = strDataArray[i][CEMAIL];
+                dr[CLOGIN] = strDataArray[i][CLOGIN];
+                dr[CREASON] = strDataArray[i][CREASON];
                 dt.Rows.Add(dr);
             }
             DataView dv = new DataView(dt);
             return dv;
-
         }
-        protected void Button1_Click(object sender, EventArgs e)
-        {
 
-        }
-        protected void Page_Load(Object sender, EventArgs e)
+        protected void LoadTable()
         {
-            System.Data.OleDb.OleDbConnection objOleCon = new System.Data.OleDb.OleDbConnection();
-            System.Data.OleDb.OleDbCommand objCmd = new System.Data.OleDb.OleDbCommand();
+            OleDbConnection objOleCon = new OleDbConnection();
+            OleDbCommand objCmd = new OleDbCommand();
             try
-            {   //1. Make a Connection
-                string strOledbConnection = @"Provider=SQLOLEDB;
-                                    Data Source=MBENDORF-E7240\SQLEXPRESS;
-                                    Integrated Security=SSPI;
-                                    Initial Catalog=ASPNetHomework";
+            {
                 objOleCon.ConnectionString = strOledbConnection;
                 objOleCon.Open();
 
-                //2. Issue a Command
+                //find nOfRows
                 objCmd.Connection = objOleCon;
+                objCmd.CommandText = "Select Count(*) From [Logins]";
+                int iNofRows = (int)objCmd.ExecuteScalar();
+                string[][] strDataArray = new string[iNofRows][];
+                for (int i = 0; i < iNofRows; i++)
+                    strDataArray[i] = new string[CTOTCOLS];
+
+                //Command reading all
                 objCmd.CommandText = "Select * From [Logins]";
-                System.Data.OleDb.OleDbDataReader reader = objCmd.ExecuteReader();
-
-                //3.Creade datatable
-                DataTable dt = new DataTable();
-                DataRow dr;
-                dt.Columns.Add(new DataColumn("Name", typeof(string)));
-                dt.Columns.Add(new DataColumn("EmailAddress", typeof(string)));
-                dt.Columns.Add(new DataColumn("LoginName", typeof(string)));
-                dt.Columns.Add(new DataColumn("ReasonForAccess", typeof(string)));
-
-                //3. Process the Results
+                OleDbDataReader reader = objCmd.ExecuteReader();
+                int count = 0;
                 while (reader.Read())
                 {
-                    dr = dt.NewRow();
-                    dr[0] = (string)reader["Name"];
-                    dr[1] = (string)reader["EmailAddress"];
-                    dr[2] = (string)reader["LoginName"];
-                    dr[3] = (string)reader["ReasonForAccess"];
-                    dt.Rows.Add(dr);
+                    strDataArray[count][CNAME] = (string)reader["Name"];
+                    strDataArray[count][CEMAIL] = (string)reader["EmailAddress"];
+                    strDataArray[count][CLOGIN] = (string)reader["LoginName"];
+                    strDataArray[count][CREASON] = (string)reader["ReasonForAccess"];
+                    count++;
                 }
-                DataView dv = new DataView(dt);
-                ItemsGrid2.DataSource = dv;
+                //draw table
+                ItemsGrid2.DataSource = CreateDataSource(iNofRows, strDataArray);
                 ItemsGrid2.DataBind();
+
             }
             catch (Exception ex) { Label1.Text += "<b>" + ex.ToString() + "</b>"; }
-            finally { objOleCon.Close(); } //4. Run clean up code
-
+            finally { objOleCon.Close(); }
+        }
+        protected void Page_Load(Object sender, EventArgs e)
+        {
+            LoadTable();
         }
     </script>
 </asp:Content>
@@ -82,10 +107,9 @@
     <div class="templatemo-flex-row flex-content-row">
         <div id="asg1" class="templatemo-content-widget white-bg col-1">
             <i class="fa fa-times"></i>
-            <div class="square"></div>
+            <div class="square-light"></div>
             <h2 class="templatemo-inline-block">Assignment04:</h2>
             <hr>
-            <div class="square-light"></div>
             <h4>Adding info to a Database:</h4>
             <p>In this homework you will details about debugging ASP.NET pages that use client side, server side, and database functions</p>
             <ul style="list-style-type: decimal">
@@ -140,7 +164,7 @@
     </div>
     <div class="templatemo-flex-row flex-content-row">
         <div class="col-2">
-            
+
             <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden col-2">
                 <i class="fa fa-times"></i>
                 <div class="panel-heading templatemo-position-relative">
@@ -157,7 +181,6 @@
 
         </div>
     </div>
-    <%--//s--%>
 </asp:Content>
 
 
