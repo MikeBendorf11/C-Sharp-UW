@@ -1,29 +1,37 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Assignment02.aspx.cs" Inherits="Assignments.Assignment02" MasterPageFile="~/Assignments.Master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Project02.aspx.cs" Inherits="Projects.Project02" MasterPageFile="~/Projects.Master" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
-    <title>Assingment 02</title>
+    <title>Project 02</title>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
+     <div class="templatemo-flex-row flex-content-row">
+        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom:15px; padding-top: 15px">
+            <h1>Project 02</h1>
+        </div>
+    </div>
     <div class="templatemo-flex-row flex-content-row">
-        <div id="asg1" class="templatemo-content-widget white-bg col-1">
+        <div id="asg1" class="templatemo-content-widget white-bg col-1" style="height:fit-content">
             <i class="fa fa-times"></i>
             <div class="square-light"></div>
-            <h2 class="templatemo-inline-block">Assignment02:</h2>
+            <h2 class="templatemo-inline-block">Writing Files</h2>
             <hr>
-            <h4>Write a file on the server</h4>
-            <p>In this homework you will collect registration data from the user and write it to a text file on the web server. Once that is working you need to add at least one CSS3 and on HTML5 feature to the page. Finally you must create a document of what you did </p>
+            <h4>Controls and Master Pages</h4>
+            <p>After reviewing HTML, Server and Validation Controls, I decided to use User Controls. I also moved all projects to be under a master page whereas before I was using HTML template tags</p>
             <ul style="list-style-type: decimal">
-                <li>Create a new Empty ASP.NET page.</li>
-                <li>Create a web page that includes ASP.NET (C#), HTML, CSS and JavaScript.</li>
+                <li>Experimented with code behind files</li>
+                <li>By creating Controls with the same name I was able to put the logic in a separate file</li>
+                <li>The same idea stands for creating events</li>
+                <li>Notice I'm not using a designer page</li>
+                
             </ul>
         </div>
-        <div class="col-2">
-            <div style="height:180px"></div>
+        <div class="col-1">
+            
             <div class="templatemo-content-widget blue-bg">
                 <i class="fa fa-times"></i>
                 <form runat="server" class="templatemo-login-form">
-                    <table style="margin: auto; width: 70%;">
+                    <table style="margin: auto; width: 90%;">
                         <tr>
                             <td><span>Name: </span></td>
                             <td>

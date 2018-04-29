@@ -1,10 +1,10 @@
-<%@ Page Language="C#" MasterPageFile="~/Assignments.Master" %>
+<%@ Page Language="C#" MasterPageFile="~/Projects.Master" %>
 
 <%@ Import Namespace="trs" %>
 <%@ Import Namespace="System.Data" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
-    <title>Assignment 01</title>
+    <title>Project 01</title>
     <script runat="server">
 
         TransactionList tl = new TransactionList();
@@ -46,9 +46,14 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
+     <div class="templatemo-flex-row flex-content-row">
+        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom:15px; padding-top: 15px">
+            <h1>PROJECT 01</h1>
+        </div>
+    </div>
     <div class="templatemo-flex-row flex-content-row">
     <div class="col-2">
-        <div style="height:150px;"></div>
+        
         <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden col-2">
         <i class="fa fa-times"></i>
         <div class="panel-heading templatemo-position-relative">
@@ -64,17 +69,20 @@
     </div>
         
     </div>
-        <div id="asg1" class="templatemo-content-widget blue-bg col-1">
+        <div id="asg1" class="templatemo-content-widget blue-bg col-1" style="height:fit-content;">
             <i class="fa fa-times"></i>
             <div class="square-dark"></div>
-            <h2 class="templatemo-inline-block">Assignment01:</h2>
+            <h2 class="templatemo-inline-block">Course Intro:</h2>
             <hr>
-            <h4>Create your own demo</h4>
-            <p>Now that you have seen how others describe and demonstrate these concepts, let’s try out your skills by creating a new ASP.NET page and Word document that demonstrates how to create ASP.NET web pages that use HTML and JavaScript.</p>
+            <h4>Using HTML, CSS, JS and ASP.net</h4>
+            <p></p>
             <ul style="list-style-type: decimal">
-                <li>Create a new Empty ASP.NET project.</li>
-                <li>Create a web page that includes ASP.NET (C#), HTML, and JavaScript.</li>
-            </ul>
+                <li>Transaction classes are on 2 separate files</li>
+                <li>Regex is used to parse through XML for transaction data</li>
+                <li>A datagrid is bound to the transaction object to display the table</li>
+                <li>An example of the original data before parsing:</li>
+            </ul><br />
+            <textarea style="width:300px; height: 100px"><Transactions><Transaction><Id>1</Id><Date>11/23/2014</Date><Type>Deposit</Type><Description>Pay</Description><Category>Income</Category><Amount>1327</Amount></Transaction><Transaction><Id>2</Id><Date>11/24/2014</Date><Type>Check</Type><Description>Food</</textarea>
         </div>
     </div>
     

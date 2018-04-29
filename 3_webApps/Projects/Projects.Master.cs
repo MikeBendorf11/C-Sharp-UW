@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignments
+namespace Projects
 {
-    public class Assignments : System.Web.UI.MasterPage
+    public class Projects : System.Web.UI.MasterPage
     {
        
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;

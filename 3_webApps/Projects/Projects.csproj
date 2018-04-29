@@ -95,14 +95,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AboutUs.aspx" />
-    <Content Include="Assignment04.aspx" />
-    <Content Include="Assignment02.aspx" />
+    <Content Include="Project03.aspx" />
+    <Content Include="Project02.aspx" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\templatemo-style.css" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assignments.Master" />
+    <Content Include="Projects.Master" />
     <Content Include="LoginRequest.aspx" />
+    <None Include="Properties\PublishProfiles\Winhost.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -111,28 +116,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assignment01.aspx" />
-    <Content Include="Home.aspx" />
+    <Content Include="Project01.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assignment02.aspx.cs">
-      <DependentUpon>Assignment02.aspx</DependentUpon>
+    <Compile Include="Project02.aspx.cs">
+      <DependentUpon>Project02.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Assignments.Master.cs">
-      <DependentUpon>Assignments.Master</DependentUpon>
+    <Compile Include="Projects.Master.cs">
+      <DependentUpon>Projects.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="css\" />
     <Folder Include="fonts\" />
     <Folder Include="images\" />
     <Folder Include="js\" />

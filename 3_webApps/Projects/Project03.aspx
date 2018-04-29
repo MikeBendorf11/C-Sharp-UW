@@ -1,18 +1,45 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Assignments.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Projects.Master" %>
 
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.OleDb" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
-    <title>Assingment 04</title>
+    <title>Project 04</title>
 
     <script runat="server">
         const int CNAME = 0, CEMAIL = 1, CLOGIN = 2, CREASON = 3, CTOTCOLS = 4;
-        string strOledbConnection = @"Provider=SQLOLEDB;
-                                    Data Source=MBENDORF-E7240\SQLEXPRESS;
-                                    Integrated Security=SSPI;
-                                    Initial Catalog=ASPNetHomework";
+        //string strOledbConnection = @"Provider=SQLOLEDB;
+        //                            Data Source=MBENDORF-E7240\SQLEXPRESS;
+        //                            Integrated Security=SSPI;
+        //                            Initial Catalog=ASPNetHomework";
+        string strOledbConnection = @"Provider=SQLOLEDB;Data Source=tcp:s17.winhost.com;Initial Catalog=DB_122058_test2;User ID=DB_122058_test2_user;Password=uwcs;";
+        
+        protected void Page_Load(Object sender, EventArgs e)
+        {
+            LoadTable();
+        }
 
+        //Delete
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+             OleDbConnection objOleCon = new OleDbConnection();
+            try
+            {
+                objOleCon.ConnectionString = strOledbConnection;
+                OleDbCommand objCmd = new OleDbCommand("pDelLogins", objOleCon);
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objOleCon.Open();
+                objCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { Label1.Text += "<b>" + ex.ToString() + "</b>"; }
+            finally
+            {
+                objOleCon.Close();
+                LoadTable();
+            }
+        }
+        //insert
         protected void Button1_Click(object sender, EventArgs e)
         {
             OleDbConnection objOleCon = new OleDbConnection();
@@ -96,30 +123,31 @@
             catch (Exception ex) { Label1.Text += "<b>" + ex.ToString() + "</b>"; }
             finally { objOleCon.Close(); }
         }
-        protected void Page_Load(Object sender, EventArgs e)
-        {
-            LoadTable();
-        }
-    </script>
+</script>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
+         <div class="templatemo-flex-row flex-content-row">
+        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom:15px; padding-top: 15px">
+            <h1>Project 03</h1>
+        </div>
+    </div>
     <div class="templatemo-flex-row flex-content-row">
         <div id="asg1" class="templatemo-content-widget white-bg col-1">
             <i class="fa fa-times"></i>
             <div class="square-light"></div>
-            <h2 class="templatemo-inline-block">Assignment04:</h2>
+            <h2 class="templatemo-inline-block">Databases</h2>
             <hr>
-            <h4>Adding info to a Database:</h4>
-            <p>In this homework you will details about debugging ASP.NET pages that use client side, server side, and database functions</p>
+            <h4>MSSQL and Stored Procedures</h4>
+            <p></p>
             <ul style="list-style-type: decimal">
-                <li>Modify Assignment02.aspx Content page </li>
-                <li>Create a database using the provided SQL code</li>
-                <li>Create one stored procedure of your worn</li>
-                <li>Modify the database using the created stored procedures</li>
+                <li>Each button event triggers a corresponding Stored Procedure</li>
+                <li>This is better than using SQL command strings as it prevents SQL injection attacks</li>
+                <li>From here on I will just write data to my hosted database, so everything is updated from one repository</li>
+                <li>I am using VS Publish feature to update my remote project, goodbye to FTP clients</li>
             </ul>
         </div>
-        <div class="templatemo-content-widget blue-bg">
+        <div class="templatemo-content-widget pink-bg">
             <i class="fa fa-times"></i>
             <form runat="server" class="templatemo-login-form">
                 <table style="margin: auto; width: 70%;">
@@ -146,20 +174,21 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine"></asp:TextBox><br>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <br />
-                            <asp:Button class="templatemo-blue-button" ID="Button1" Width="110" runat="server" Text="Summit" OnClick="Button1_Click" />
-                            &nbsp;
-                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                        <td colspan="1">
+                            
+                            <asp:Button class="templatemo-white-button" ID="Button1" Width="150" runat="server" Text="Add Row" OnClick="Button1_Click" />                            
+                        </td>
+                        <td>
+                            <asp:Button class="templatemo-white-button" ID="Button2" runat="server" Text="Delete Row" OnClick="Button2_Click" />
                         </td>
                     </tr>
                 </table>
             </form>
-
+            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </div>
     </div>
     <div class="templatemo-flex-row flex-content-row">

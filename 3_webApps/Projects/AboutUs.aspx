@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Assignments.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Projects.Master" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>About us</title>
