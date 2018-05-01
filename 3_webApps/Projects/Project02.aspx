@@ -3,14 +3,13 @@
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Project 02</title>
     <script>
+        var flag = true;
         $(document).ready(function () {
-            $(":text").click(function () {
-                $(":text").val('');
-                $("#phContent1_TBReason").val('');
-            });
-            $("#phContent1_TBReason").click(function () {
-                $(":text").val('');
-                $("#phContent1_TBReason").val('');
+            $(":text, #phContent1_TBReason").click(function () {
+                if (flag) {
+                    $(":text, #phContent1_TBReason").val('');
+                    flag = false;
+                }
             });
             $('.blink').each(function () {
                 var elem = $(this);
