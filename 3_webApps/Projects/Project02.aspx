@@ -2,6 +2,29 @@
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Project 02</title>
+    <script>
+        $(document).ready(function () {
+            $(":text").click(function () {
+                $(":text").val('');
+                $("#phContent1_TBReason").val('');
+            });
+            $("#phContent1_TBReason").click(function () {
+                $(":text").val('');
+                $("#phContent1_TBReason").val('');
+            });
+            $('.blink').each(function () {
+                var elem = $(this);
+                setInterval(function () {
+                    if (elem.css('visibility') == 'hidden') {
+                        elem.css('visibility', 'visible');
+                    } else {
+                        elem.css('visibility', 'hidden');
+                    }
+                }, 700);
+            });
+        });
+    </script>
+     
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
@@ -24,30 +47,30 @@
                 <li>The same idea stands for creating events</li>
                 <li>Notice I'm not using a designer page</li>
                 
-            </ul>
+            </ul><br /><asp:Label class="blink" ID="Label1" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
         </div>
         <div class="col-1">
             
             <div class="templatemo-content-widget blue-bg">
                 <i class="fa fa-times"></i>
-                <form runat="server" class="templatemo-login-form">
+                <form runat="server" class="templatemo-login-form"><%-- style="color:lightgray"--%>
                     <table style="margin: auto; width: 90%;">
                         <tr>
                             <td><span>Name: </span></td>
-                            <td>
-                                <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBName" runat="server"></asp:TextBox></td>
+                            <td colspan="2">
+                                <asp:TextBox class="form-control" Width="300px" ID="TBName" runat="server" text="A name"></asp:TextBox></td>
                             <td style="width: 100px"></td>
                         </tr>
                         <tr>
                             <td><span>Email Address: </span></td>
-                            <td>
-                                <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBEmail" runat="server"></asp:TextBox></td>
+                            <td colspan="2">
+                                <asp:TextBox class="form-control" Width="300px"  ID="TBEmail" runat="server" text="name@domain.com"></asp:TextBox></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><span>Login Name: </span></td>
-                            <td>
-                                <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBLogin" runat="server"></asp:TextBox></td>
+                            <td colspan="2">
+                                <asp:TextBox class="form-control" Width="300px"  ID="TBLogin" runat="server" text="Initials"></asp:TextBox></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -55,7 +78,7 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <asp:TextBox class="form-control" Width="100%" Height="250" ID="TBReason" runat="server" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox class="form-control" Width="100%" Height="250" ID="TBReason" runat="server" TextMode="MultiLine" >Click the boxes to clear the form or just click send to write the file</asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -63,7 +86,7 @@
                                 <br />
                                 <asp:Button class="templatemo-blue-button" ID="Button1" Width="110" runat="server" Text="Summit" OnClick="Button1_Click" />
                                 &nbsp;
-                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                            
                             </td>
                         </tr>
                     </table>

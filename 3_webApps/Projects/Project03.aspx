@@ -124,6 +124,18 @@
             finally { objOleCon.Close(); }
         }
 </script>
+    <script>
+        $(document).ready(function () {
+            $(":text").click(function () {
+                $(":text").val('');
+                $("#phContent1_TBReason").val('');
+            });
+            $("#phContent1_TBReason").click(function () {
+                $(":text").val('');
+                $("#phContent1_TBReason").val('');
+            });
+        });
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
@@ -154,19 +166,19 @@
                     <tr>
                         <td><span>Name: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBName" runat="server"></asp:TextBox></td>
+                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBName" text="A name" runat="server"></asp:TextBox></td>
                         <td style="width: 100px"></td>
                     </tr>
                     <tr>
                         <td><span>Email Address: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBEmail" runat="server"></asp:TextBox></td>
+                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBEmail" text="name@domain.com" runat="server"></asp:TextBox></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><span>Login Name: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBLogin" runat="server"></asp:TextBox></td>
+                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBLogin" text="Your initials" runat="server"></asp:TextBox></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -174,7 +186,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine"></asp:TextBox><br>
+                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine">Click the boxes to clear the form or just click send to add a row to the database</asp:TextBox><br>
                         </td>
                     </tr>
                     <tr>

@@ -5,6 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Project 01</title>
+    
     <script runat="server">
 
         TransactionList tl = new TransactionList();
@@ -43,6 +44,13 @@
         }
 
     </script>
+    <script>
+        $(document).ready(function () {
+            $("#tableDiv").animate({
+                height: '100%'
+            }, 2000);
+        });
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
@@ -54,7 +62,7 @@
     <div class="templatemo-flex-row flex-content-row">
     <div class="col-2">
         
-        <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden col-2">
+        <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden col-2" style="height:0px" id="tableDiv">
         <i class="fa fa-times"></i>
         <div class="panel-heading templatemo-position-relative">
             <h2 class="text-uppercase">Transaction Table</h2>

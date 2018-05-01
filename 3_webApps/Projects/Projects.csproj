@@ -108,6 +108,8 @@
     <Content Include="Projects.Master" />
     <Content Include="LoginRequest.aspx" />
     <None Include="Properties\PublishProfiles\Winhost.pubxml" />
+    <None Include="scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="scripts\jquery-3.3.1.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
