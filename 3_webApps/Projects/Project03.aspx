@@ -125,19 +125,14 @@
         }
 </script>
     <script>
+        var flag = true;
         $(document).ready(function () {
-            var flag = true;
-            if (flag) {
-                flag = false;
-                $(":text").click(function () {
-                    $(":text").val('');
-                    $("#phContent1_TBReason").val('');
-                });
-                $("#phContent1_TBReason").click(function () {
-                    $(":text").val('');
-                    $("#phContent1_TBReason").val('');
-                });
-            }
+            $(":text, #phContent1_TBReason").click(function () {
+                if (flag) {
+                    $(":text, #phContent1_TBReason").val('');
+                    flag = false;
+                }
+            });
         });
     </script>
 </asp:Content>
