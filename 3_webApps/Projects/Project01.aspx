@@ -2,6 +2,9 @@
 
 <%@ Import Namespace="trs" %>
 <%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="Projects.App_Code" %>
+<%@ Register Src="~/WebUserControl1.ascx" TagPrefix="uc1" TagName="WebUserControl1" %>
+
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Project 01</title>
@@ -9,6 +12,7 @@
     <script runat="server">
 
         TransactionList tl = new TransactionList();
+        UserData proj1Data;
 
         ICollection CreateDataSource()
         {
@@ -37,10 +41,16 @@
             trs.Transaction.lastId = 0;
             if (!IsPostBack)
             {
+                //###
+                ViewState["UserData"] = new UserData();
+                proj1Data = (UserData)ViewState["UserData"];
                 // Load this data only once.
                 ItemsGrid.DataSource = CreateDataSource();
                 ItemsGrid.DataBind();
             }
+           
+            
+
         }
 
     </script>
@@ -53,10 +63,16 @@
     </script>
 </asp:Content>
 
+<asp:Content ContentPlaceHolderID="phUserInfo" runat="server" >
+    <uc1:WebUserControl1 runat="server" ID="WebUserControl1" />
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
      <div class="templatemo-flex-row flex-content-row">
         <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom:15px; padding-top: 15px">
-            <h1>PROJECT 01</h1>
+            <%--###--%>
+            <h1>PROJECT 01<%=proj1Data.stopwatch.Elapsed %></h1>
+            <form><input type="submit" /></form>
         </div>
     </div>
     <div class="templatemo-flex-row flex-content-row">
@@ -90,7 +106,7 @@
                 <li>A datagrid is bound to the transaction object to display the table</li>
                 <li>An example of the original data before parsing:</li>
             </ul><br />
-            <textarea style="width:300px; height: 100px"><Transactions><Transaction><Id>1</Id><Date>11/23/2014</Date><Type>Deposit</Type><Description>Pay</Description><Category>Income</Category><Amount>1327</Amount></Transaction><Transaction><Id>2</Id><Date>11/24/2014</Date><Type>Check</Type><Description>Food</</textarea>
+            <textarea style="width:300px; height: 100px"><Transactions><Transaction><Id>1</Id><Date>11/23/2014</Date><Type>Deposit</Type><Description>Pay</Description><Category>Income</Category><Amount>1327</Amount></Transaction><Transaction><Id>2</Id><Date>11/24/2014</Date><Type>Check</Type><Description>Food</Description></textarea>
         </div>
     </div>
     

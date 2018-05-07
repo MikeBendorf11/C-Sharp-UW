@@ -2,6 +2,7 @@
 
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.OleDb" %>
+<%@ Register Src="~/WebUserControl1.ascx" TagPrefix="uc1" TagName="WebUserControl1" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Project 04</title>
@@ -135,6 +136,10 @@
             });
         });
     </script>
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="phUserInfo" runat="server" >
+    <uc1:WebUserControl1 runat="server" ID="WebUserControl1" />
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">

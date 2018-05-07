@@ -94,7 +94,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AboutUs.aspx" />
     <Content Include="Project03.aspx" />
     <Content Include="Project02.aspx" />
     <Content Include="css\bootstrap.css" />
@@ -106,7 +105,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Projects.Master" />
-    <Content Include="LoginRequest.aspx" />
+    <Content Include="WebUserControl1.ascx" />
     <None Include="Properties\PublishProfiles\Winhost.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\jquery-3.3.1.js" />
@@ -125,6 +124,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\UserData.cs" />
     <Compile Include="Project02.aspx.cs">
       <DependentUpon>Project02.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

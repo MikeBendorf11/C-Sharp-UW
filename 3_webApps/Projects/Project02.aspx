@@ -1,5 +1,9 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Project02.aspx.cs" Inherits="Projects.Project02" MasterPageFile="~/Projects.Master" %>
 
+<%@ Register Src="~/WebUserControl1.ascx" TagPrefix="uc1" TagName="WebUserControl1" %>
+
+<%@ Import Namespace="Projects.App_Code" %>
+
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Project 02</title>
     <script>
@@ -24,6 +28,10 @@
         });
     </script>
      
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="phUserInfo" runat="server" >
+    <uc1:WebUserControl1 runat="server" ID="WebUserControl1" />
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
