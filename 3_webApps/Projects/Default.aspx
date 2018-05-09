@@ -3,6 +3,8 @@
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Home</title>
+
+
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="phUserInfo" runat="server" >
@@ -10,6 +12,7 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
+
     <div class="templatemo-flex-row flex-content-row">
         <div class="templatemo-content-widget grey-bg col-1" style="">
             <h1>- UW - TOPICS COVERED</h1>

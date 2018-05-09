@@ -9,11 +9,11 @@ using System.Diagnostics;
 
 namespace Projects.App_Code
 {
-    [Serializable]
+    
     public class UserData 
     {
+        public static Stopwatch sw = new Stopwatch();
         static List<string> strPrevPage = new List<string>();
-        public Stopwatch stopwatch = new Stopwatch();//###
 
         public static string StrPrevPage(string sInput) {
             string result = "";
@@ -34,11 +34,6 @@ namespace Projects.App_Code
             }
             return result;
         }
-        //###
-        public UserData()
-        {
-            this.stopwatch.Start();
-        }
-        
+
     }
 }

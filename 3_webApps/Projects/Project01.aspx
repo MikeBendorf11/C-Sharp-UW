@@ -12,7 +12,6 @@
     <script runat="server">
 
         TransactionList tl = new TransactionList();
-        UserData proj1Data;
 
         ICollection CreateDataSource()
         {
@@ -41,17 +40,12 @@
             trs.Transaction.lastId = 0;
             if (!IsPostBack)
             {
-                //###
-                ViewState["UserData"] = new UserData();
-                proj1Data = (UserData)ViewState["UserData"];
                 // Load this data only once.
                 ItemsGrid.DataSource = CreateDataSource();
                 ItemsGrid.DataBind();
             }
-           
-            
-
         }
+
 
     </script>
     <script>
@@ -70,9 +64,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
      <div class="templatemo-flex-row flex-content-row">
         <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom:15px; padding-top: 15px">
-            <%--###--%>
-            <h1>PROJECT 01<%=proj1Data.stopwatch.Elapsed %></h1>
-            <form><input type="submit" /></form>
+            <h1>PROJECT 01</h1>
         </div>
     </div>
     <div class="templatemo-flex-row flex-content-row">

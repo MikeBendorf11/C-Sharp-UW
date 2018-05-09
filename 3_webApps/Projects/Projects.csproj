@@ -94,6 +94,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\avatar1.jpg" />
+    <Content Include="images\avatar2.jpg" />
+    <Content Include="images\avatar3.jpg" />
+    <Content Include="images\avatar4.jpg" />
+    <Content Include="images\avatar5.jpg" />
+    <Content Include="images\avatar6.jpg" />
+    <Content Include="images\checkbox-radio-sheet.png" />
+    <Content Include="images\grey_bg.jpg" />
+    <Content Include="images\profile-photo.jpg" />
     <Content Include="Project03.aspx" />
     <Content Include="Project02.aspx" />
     <Content Include="css\bootstrap.css" />
@@ -140,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="fonts\" />
-    <Folder Include="images\" />
     <Folder Include="js\" />
   </ItemGroup>
   <PropertyGroup>

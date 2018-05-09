@@ -9,11 +9,115 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
+
+    <%--Track cookies - show overlay--%>
     <script src="scripts/jquery-3.3.1.js"></script>
+    <script runat="server">
+        protected void Page_Load(Object sender, EventArgs e)
+        {
+            string avatar;
+            if (!this.IsCookieDisabled()) //if cookies enabled
+            {
+                HttpCookie cookie = Request.Cookies["mb11"];
+                if (cookie != null)
+                {
+                    avatar = cookie["avatar"];
+                }
+                else
+                {
+                    cookie = new HttpCookie("mb11");
+                    cookie.Expires = DateTime.Now.AddDays(30);
+                    cookie["avatar"] = ""; //selected picture
+                    Response.Cookies.Add(cookie);
+                }
+            }
+            //errorMsgLabel.Text = Resources.Resource.BrowserDontSupportCookies;
+
+
+        }
+        void togglePanels()
+        {
+            divProject.Visible = !divProject.Visible;
+            divAvatar.Visible = !divAvatar.Visible;
+        }
+        private bool IsCookieDisabled()
+        {
+            string currentUrl = Request.RawUrl;
+
+            if (Request.QueryString["cookieCheck"] == null)
+            {
+                try
+                {
+                    HttpCookie c = new HttpCookie("SupportCookies", "true");
+                    Response.Cookies.Add(c);
+
+                    if (currentUrl.IndexOf("?") > 0)
+                        currentUrl = currentUrl + "&cookieCheck=true";
+                    else
+                        currentUrl = currentUrl + "?cookieCheck=true";
+
+                    Response.Redirect(currentUrl);
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+
+            if (!Request.Browser.Cookies || Request.Cookies["SupportCookies"] == null)
+                return true;
+
+            return false;
+        }
+    </script>
+
+    <script>
+        <%--Passes the avatar selection name to the hidden label lblAvatar--%>
+     
+        
+    </script>
+
     <asp:ContentPlaceHolder ID="phHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
+     <%--Track cookies - show overlay--%>
+    <asp:Label runat="server" Text=""></asp:Label>
+    <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay" onclick="off()">
+        <div class="templatemo-flex-row flex-content-row">
+            <div class="templatemo-content-widget avatar-bg col-1 center" style="position: absolute;">
+                <h3>Hi first time visitor! <br />Please select your Avatar to proceed:&nbsp;&nbsp;</h3>
+                <table>
+                    <caption>
+                        <br />
+                        <tr>
+                            <td>
+                                <div class="img-circular" style="background-image: url('images/avatar6.jpg')"/>
+                            </td>
+                            <td>
+                                <div class="img-circular" style="background-image: url('images/avatar2.jpg')"/>
+                            </td>
+                            <td>
+                                <div class="img-circular" style="background-image: url('images/avatar5.jpg')"/>
+                            </td>
+                            <td>
+                                <div class="img-circular" style="background-image: url('images/avatar4.jpg')"/>
+                            </td>
+                            <td>
+                                <div class="img-circular" style="background-image: url('images/avatar3.jpg')"/>
+                            </td>
+                            <td>
+                                <div class="img-circular" style="background-image: url('images/avatar1.jpg')" />
+                                &nbsp; </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align:right;"><br />Images by <a href="https://dribbble.com/shots/2084099-%20%20%20Avatars-Atlassian">Andrew McKay ©</a> </td>
+                        </tr>
+                    </caption>
+                </table>
+            </div>
+        </div>
+    </asp:Panel>
     <div class="templatemo-flex-row">
         <div id="container" class="templatemo-sidebar">
             <header class="templatemo-site-header">
@@ -30,7 +134,7 @@
                 <i class="fa fa-bars"></i>
             </div>
             <nav class="templatemo-left-nav">
-                <%--##--%>
+                <%--Query String - visited pages sequence info--%>
                 <ul>
                     <li><a id="Default" onclick="setHref('Default');"><i class="fa fa-home fa-fw"></i>Home</a></li>
                     <li><a href="#" id="Project01" onclick="setHref('Project01');"><i class="fa fa-bar-chart fa-fw"></i>Project 01</a></li>
@@ -51,21 +155,20 @@
                     }
 
                 </script>
+                <%--Query String - visited pages sequence info--%>
             </nav>
         </div>
 
         <div class="templatemo-content col-1 light-gray-bg">
-            <div class="templatemo-top-nav-container">
-                <div class="row"  style="margin-left:0px; margin-right:0px">
-                   
-                        <asp:ContentPlaceHolder ID="phUserInfo" runat="server">
-                        </asp:ContentPlaceHolder>
-
-                  
+            <%--Shows if user has avatar or cookies disabled--%>
+            <asp:Panel ID="divProject" runat="server">
+                <div class="templatemo-top-nav-container">
+                    <asp:ContentPlaceHolder ID="phUserInfo" runat="server">
+                    </asp:ContentPlaceHolder>
                 </div>
-            </div>
-            <asp:ContentPlaceHolder ID="phContent1" runat="server">
-            </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="phContent1" runat="server">
+                </asp:ContentPlaceHolder>
+            </asp:Panel>
         </div>
     </div>
 
