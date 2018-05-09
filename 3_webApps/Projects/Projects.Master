@@ -1,4 +1,5 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Projects.Master.cs" Inherits="Projects.Projects" %>
+<%@ Import Namespace="Projects.App_Code" %>
 
 <!DOCTYPE html>
 
@@ -15,30 +16,21 @@
     <script runat="server">
         protected void Page_Load(Object sender, EventArgs e)
         {
-            string avatar;
-            if (!this.IsCookieDisabled()) //if cookies enabled
+            
+            if (this.IsCookieDisabled())
+                togglePanels();
+            if (Request.Cookies["Avatar"] != null)
             {
-                HttpCookie cookie = Request.Cookies["mb11"];
-                if (cookie != null)
-                {
-                    avatar = cookie["avatar"];
-                }
-                else
-                {
-                    cookie = new HttpCookie("mb11");
-                    cookie.Expires = DateTime.Now.AddDays(30);
-                    cookie["avatar"] = ""; //selected picture
-                    Response.Cookies.Add(cookie);
-                }
+                UserData.Avatar = (string)Request.Cookies["Avatar"].Value;
+                togglePanels();
             }
-            //errorMsgLabel.Text = Resources.Resource.BrowserDontSupportCookies;
 
 
         }
         void togglePanels()
         {
-            divProject.Visible = !divProject.Visible;
-            divAvatar.Visible = !divAvatar.Visible;
+            divProject.Visible = true;
+            divAvatar.Visible = false;
         }
         private bool IsCookieDisabled()
         {
@@ -72,8 +64,31 @@
     </script>
 
     <script>
-        <%--Passes the avatar selection name to the hidden label lblAvatar--%>
-     
+        //Create cookie
+        function setCookie(avatar) {
+            //animate Avatar
+            var activeAvatar = parseInt(avatar[6]);
+            var avatarList = [];
+            for (i = 1; i < 7; i++) {
+                if (i == activeAvatar) continue;
+                avatarList.push("avatar" + i);
+            }
+            var queryString = "";
+            
+            for (i = 0; ; i++){
+                queryString += "#" + avatarList[i];
+                if (i == 4) break;
+                queryString += ", ";
+            }
+            $(queryString).fadeTo("3000", 0.33);
+
+            //createCookie
+            var d = new Date();
+            d.setTime(d.getTime() + (5 * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = "Avatar=" + avatar + ";" + expires + ";path=/";
+        }
+        
         
     </script>
 
@@ -82,38 +97,36 @@
 </head>
 <body>
      <%--Track cookies - show overlay--%>
-    <asp:Label runat="server" Text=""></asp:Label>
-    <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay" onclick="off()">
+    <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay">
         <div class="templatemo-flex-row flex-content-row">
             <div class="templatemo-content-widget avatar-bg col-1 center" style="position: absolute;">
                 <h3>Hi first time visitor! <br />Please select your Avatar to proceed:&nbsp;&nbsp;</h3>
+                <br />
                 <table>
-                    <caption>
-                        <br />
+
                         <tr>
                             <td>
-                                <div class="img-circular" style="background-image: url('images/avatar6.jpg')"/>
+                                <a href="." onclick="setCookie('avatar6');"><img class="img-circular" id="avatar6" src="images/avatar6.jpg" /></a>
                             </td>
                             <td>
-                                <div class="img-circular" style="background-image: url('images/avatar2.jpg')"/>
+                                <a href="." onclick="setCookie('avatar2');"><img class="img-circular" id="avatar2" src="images/avatar2.jpg" /></a>
                             </td>
                             <td>
-                                <div class="img-circular" style="background-image: url('images/avatar5.jpg')"/>
+                                <a href="." onclick="setCookie('avatar5');"><img class="img-circular" id="avatar5" src="images/avatar5.jpg" /></a>
                             </td>
                             <td>
-                                <div class="img-circular" style="background-image: url('images/avatar4.jpg')"/>
+                                <a href="." onclick="setCookie('avatar4');"><img class="img-circular" id="avatar4" src="images/avatar4.jpg" /></a>
                             </td>
                             <td>
-                                <div class="img-circular" style="background-image: url('images/avatar3.jpg')"/>
+                                <a href="." onclick="setCookie('avatar3');"><img class="img-circular" id="avatar3" src="images/avatar3.jpg" /></a>
                             </td>
                             <td>
-                                <div class="img-circular" style="background-image: url('images/avatar1.jpg')" />
+                                <a href="." onclick="setCookie('avatar1');"><img class="img-circular" id="avatar1" src="images/avatar1.jpg" /></a>
                                 &nbsp; </td>
                         </tr>
                         <tr>
                             <td colspan="6" style="text-align:right;"><br />Images by <a href="https://dribbble.com/shots/2084099-%20%20%20Avatars-Atlassian">Andrew McKay ©</a> </td>
                         </tr>
-                    </caption>
                 </table>
             </div>
         </div>
@@ -161,7 +174,7 @@
 
         <div class="templatemo-content col-1 light-gray-bg">
             <%--Shows if user has avatar or cookies disabled--%>
-            <asp:Panel ID="divProject" runat="server">
+            <asp:Panel ID="divProject" visible="false" runat="server">
                 <div class="templatemo-top-nav-container">
                     <asp:ContentPlaceHolder ID="phUserInfo" runat="server">
                     </asp:ContentPlaceHolder>

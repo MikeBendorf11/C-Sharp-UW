@@ -10,27 +10,27 @@
     <div class="col-1">
         <div class="templatemo-flex-row flex-content-row">
             <div class="col-1">
-                <span><b>Last Visited: </b><%= UserData.StrPrevPage(Request.QueryString["prev"]) %></span>
+                <span><b>Order Visited: </b><%= UserData.StrPrevPage(Request.QueryString["prev"]) %></span>
             </div>
             <div class="col-1">
-                Another field: xxxxxxxxxxxx
+                <b>Another field: </b> [No data yet]
             </div>
         </div>
         <div class="templatemo-flex-row flex-content-row">
             <div class="col-1">
-                Another field: aaaaaaaaaaaa
+                <b>Another field: </b> [No data yet]
             </div>
             <div class="col-1">
-                Another field: bbbbbbbbbbbb
+                <b>Another field: </b> [No data yet]
             </div>
         </div>
     </div>
     <table>
         <tr>
-            <td>Welcome!&nbsp;
+            <td><b>WELCOME!</b>&nbsp;
             </td>
             <td>
-                <div class="img-circular-small" style="background-image: url('images/avatar7.jpg')" />
+                <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" Title="<%=UserData.Avatar%>" />
             </td>
         </tr>
     </table>

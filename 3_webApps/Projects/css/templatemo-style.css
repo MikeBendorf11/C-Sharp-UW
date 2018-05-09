@@ -125,7 +125,6 @@ footer { padding: 15px; }
     background-size: contain;
     color: white;
     border: solid;
-	cursor: pointer;
 	margin:5px;
 }
 .img-circular-small{
@@ -309,7 +308,7 @@ footer { padding: 15px; }
   z-index: 15;
   top: 50%;
   left: 50%;
-  margin: -170px 0 0 -370px;
+  margin: -170px 0 0 -300px;
 }
 .templatemo-content-widget.alt-padding {	padding-top:10px ; }
 .fa-times {

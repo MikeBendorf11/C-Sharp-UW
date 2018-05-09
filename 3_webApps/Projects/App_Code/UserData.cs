@@ -12,7 +12,8 @@ namespace Projects.App_Code
     
     public class UserData 
     {
-        public static Stopwatch sw = new Stopwatch();
+
+        public static string Avatar = "avatar7";
         static List<string> strPrevPage = new List<string>();
 
         public static string StrPrevPage(string sInput) {
@@ -28,8 +29,8 @@ namespace Projects.App_Code
             
             for(int i = strPrevPage.Count-1, results=4; i >=0 ; i--, results--)
             {   
-                if (results < 1) break;
-                if (strPrevPage[i] == "") continue;
+                if (results < 1 || strPrevPage[i] == null) break;
+                if (strPrevPage[i] == "" || strPrevPage[i].Contains("?")) continue;
                 result += strPrevPage[i] + " | "; 
             }
             return result;
