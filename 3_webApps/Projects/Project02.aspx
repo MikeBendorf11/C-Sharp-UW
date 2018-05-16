@@ -30,9 +30,7 @@
      
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="phUserInfo" runat="server" >
-    <uc1:WebUserControl1 runat="server" ID="WebUserControl1" />
-</asp:Content>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
      <div class="templatemo-flex-row flex-content-row">
@@ -60,7 +58,7 @@
             
             <div class="templatemo-content-widget blue-bg">
                 <i class="fa fa-times"></i>
-                <form runat="server" class="templatemo-login-form"><%-- style="color:lightgray"--%>
+                <div class="templatemo-login-form"><%-- style="color:lightgray"--%>
                     <table style="margin: auto; width: 90%;">
                         <tr>
                             <td><span>Name: </span></td>
@@ -97,7 +95,7 @@
                             </td>
                         </tr>
                     </table>
-                </form>
+                </div>
 
             </div>
         </div>

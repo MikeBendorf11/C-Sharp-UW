@@ -28,7 +28,7 @@ namespace Projects
                 , TBName.Text, TBEmail.Text, TBLogin.Text, TBReason.Text);
             try
             {
-                File.WriteAllText(Server.MapPath("~/data.txt"), text);
+                File.WriteAllText(Server.MapPath("~/App_Data/data.txt"), text);
                 Debug.WriteLine("###" + Server.MapPath("~/"));
                 
             }
@@ -38,7 +38,7 @@ namespace Projects
             }
             TBName.Text =  TBEmail.Text = TBLogin.Text = TBReason.Text = "";
             Button1.Text = "SUCCESS";
-            Label1.Text = "A file has been created: \"~/data.txt\"";
+            Label1.Text = "A file has been created at the server \"~/App_Data/data.txt\"";
         }
     }
 }

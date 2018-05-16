@@ -14,7 +14,7 @@
         //                            Integrated Security=SSPI;
         //                            Initial Catalog=ASPNetHomework";
         string strOledbConnection = @"Provider=SQLOLEDB;Data Source=tcp:s17.winhost.com;Initial Catalog=DB_122058_test2;User ID=DB_122058_test2_user;Password=uwcs;";
-        
+
         protected void Page_Load(Object sender, EventArgs e)
         {
             LoadTable();
@@ -23,7 +23,7 @@
         //Delete
         protected void Button2_Click(object sender, EventArgs e)
         {
-             OleDbConnection objOleCon = new OleDbConnection();
+            OleDbConnection objOleCon = new OleDbConnection();
             try
             {
                 objOleCon.ConnectionString = strOledbConnection;
@@ -124,7 +124,7 @@
             catch (Exception ex) { Label1.Text += "<b>" + ex.ToString() + "</b>"; }
             finally { objOleCon.Close(); }
         }
-</script>
+    </script>
     <script>
         var flag = true;
         $(document).ready(function () {
@@ -138,13 +138,11 @@
     </script>
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="phUserInfo" runat="server" >
-    <uc1:WebUserControl1 runat="server" ID="WebUserControl1" />
-</asp:Content>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
-         <div class="templatemo-flex-row flex-content-row">
-        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom:15px; padding-top: 15px">
+    <div class="templatemo-flex-row flex-content-row">
+        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom: 15px; padding-top: 15px">
             <h1>Project 03</h1>
         </div>
     </div>
@@ -165,24 +163,24 @@
         </div>
         <div class="templatemo-content-widget pink-bg">
             <i class="fa fa-times"></i>
-            <form runat="server" class="templatemo-login-form">
+            <div class="templatemo-login-form">
                 <table style="margin: auto; width: 70%;">
                     <tr>
                         <td><span>Name: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBName" text="A name" runat="server"></asp:TextBox></td>
+                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBName" Text="A name" runat="server"></asp:TextBox></td>
                         <td style="width: 100px"></td>
                     </tr>
                     <tr>
                         <td><span>Email Address: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBEmail" text="name@domain.com" runat="server"></asp:TextBox></td>
+                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBEmail" Text="name@domain.com" runat="server"></asp:TextBox></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><span>Login Name: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBLogin" text="Your initials" runat="server"></asp:TextBox></td>
+                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBLogin" Text="Your initials" runat="server"></asp:TextBox></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -195,15 +193,15 @@
                     </tr>
                     <tr>
                         <td colspan="1">
-                            
-                            <asp:Button class="templatemo-white-button" ID="Button1" Width="150" runat="server" Text="Add Row" OnClick="Button1_Click" />                            
+
+                            <asp:Button class="templatemo-white-button" ID="Button1" Width="150" runat="server" Text="Add Row" OnClick="Button1_Click" />
                         </td>
                         <td>
                             <asp:Button class="templatemo-white-button" ID="Button2" runat="server" Text="Delete Row" OnClick="Button2_Click" />
                         </td>
                     </tr>
                 </table>
-            </form>
+            </div>
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </div>
     </div>

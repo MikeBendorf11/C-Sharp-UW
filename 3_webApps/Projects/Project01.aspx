@@ -57,9 +57,7 @@
     </script>
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="phUserInfo" runat="server" >
-    <uc1:WebUserControl1 runat="server" ID="WebUserControl1" />
-</asp:Content>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
      <div class="templatemo-flex-row flex-content-row">

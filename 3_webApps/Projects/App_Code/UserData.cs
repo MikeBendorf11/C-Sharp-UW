@@ -9,32 +9,41 @@ using System.Diagnostics;
 
 namespace Projects.App_Code
 {
-    
-    public class UserData 
-    {
 
+    public class UserData
+    {
         public static string Avatar = "avatar7";
         static List<string> strPrevPage = new List<string>();
+        static string sessionTime;
 
-        public static string StrPrevPage(string sInput) {
+        public static string StrPrevPage(string sInput)
+        {
             string result = "";
             if (!strPrevPage.Any())
             {
                 strPrevPage.Add("");
                 return result;
             }
-                
             else
                 strPrevPage.Add(sInput);
-            
-            for(int i = strPrevPage.Count-1, results=4; i >=0 ; i--, results--)
-            {   
+
+            for (int i = strPrevPage.Count - 1, results = 4; i >= 0; i--, results--)
+            {
                 if (results < 1 || strPrevPage[i] == null) break;
                 if (strPrevPage[i] == "" || strPrevPage[i].Contains("?")) continue;
-                result += strPrevPage[i] + " | "; 
+                result += strPrevPage[i] + " < ";
             }
             return result;
         }
-
+    }
+    public class Pages
+    {
+        public string Name { get; set; }
+        public string TimeSpend { get; set; }
+        public Pages(string name, string timeSpend)
+        {
+            Name = name;
+            TimeSpend = timeSpend;
+        }
     }
 }

@@ -1,5 +1,7 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Projects.Master.cs" Inherits="Projects.Projects" %>
+<%@ Master Language="C#" AutoEventWireup="true" %>
+
 <%@ Import Namespace="Projects.App_Code" %>
+<%@ Import Namespace="System.Diagnostics" %>
 
 <!DOCTYPE html>
 
@@ -11,12 +13,20 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
 
-    <%--Track cookies - show overlay--%>
     <script src="scripts/jquery-3.3.1.js"></script>
+    <%--<script src="js/Stopwatch2.js"></script>--%>
     <script runat="server">
+
+        static Stopwatch sw;
+        static TimeSpan tsSession, tsPage;
+        string currentPage;
+
         protected void Page_Load(Object sender, EventArgs e)
         {
-            
+            //used in timer and queryString
+            currentPage = Regex.Replace(Request.CurrentExecutionFilePath.Split('/')[1], @".aspx", "");
+
+            //Track cookies - show overlay
             if (this.IsCookieDisabled())
                 togglePanels();
             if (Request.Cookies["Avatar"] != null)
@@ -25,6 +35,52 @@
                 togglePanels();
             }
 
+            //Start counting time spend
+            if (!IsPostBack)
+            {
+                sw = new Stopwatch();
+                sw.Start();
+            }
+            if (Session["Stopwatch"] == null)
+                Session["Stopwatch"] = new TimeSpan(0,0,0);
+
+            if (Session[currentPage]==null)
+                Session[currentPage] = new TimeSpan(0,0,0);
+        }
+
+        //setting timer lbl to hours, mins and secs
+        protected void tmSession_Tick(object sender, EventArgs e)
+        {
+            long sec = sw.Elapsed.Seconds;
+            long min = sw.Elapsed.Minutes;
+            long hour = sw.Elapsed.Hours;
+
+            tsPage = tsSession = sw.Elapsed;
+
+            TimeSpan tsSessTemp = tsSession.Add((TimeSpan)Session["Stopwatch"]);
+            TimeSpan tsViewTemp = tsPage.Add((TimeSpan)Session[currentPage]);
+            tsSession = tsSessTemp;
+            tsPage = tsViewTemp;
+
+            LblTimeCp1.Text = LblTime1.Text = String.Format("{0:00}:{1:00}:{2:00}",
+            tsPage.Hours, tsPage.Minutes, tsPage.Seconds);
+
+            LblTimeCp2.Text = LblTime2.Text = String.Format("{0:00}:{1:00}:{2:00}",
+            tsSession.Hours, tsSession.Minutes, tsSession.Seconds);
+
+        }
+
+        protected void Links_Click(Object sender, EventArgs e)
+        {
+            //update Session timer
+            Session["Stopwatch"] = tsSession;
+            Session[currentPage] = tsPage;
+
+            //set href of LinkButton to senderID + queryString
+            //SenderID matches html destination name ex.Default, Project01, etc..
+            string id = ((LinkButton)sender).ClientID;
+            string url = id + ".aspx?prev=" + currentPage;
+            Response.Redirect(url);
 
         }
         void togglePanels()
@@ -61,135 +117,279 @@
 
             return false;
         }
+
+
     </script>
 
+
+    <%--    //Avatar animation
+    ###Looks like jquery runs first and then js function has to be called from within--%>
     <script>
-        //Create cookie
-        function setCookie(avatar) {
+        $(document).ready(function () {
+            $("img[id*='avatar']").click(
+                function (event) {
+                    animateAvatar(event.target.id);
+                    setCookie(event.target.id);
+                });
+        });
+
+        
+        function animateAvatar(avatar) {
+            if (!avatar.includes("avatar")) return;
+
             //animate Avatar
-            var activeAvatar = parseInt(avatar[6]);
+            var activeAvatar = parseInt(avatar[6]); //number part of id
             var avatarList = [];
-            for (i = 1; i < 7; i++) {
+            var tdList = []
+            for (i = 1; i < 7; i++) { //list without activated avatar
                 if (i == activeAvatar) continue;
                 avatarList.push("avatar" + i);
+                tdList.push("tdAvat" + i);
             }
-            var queryString = "";
-            
-            for (i = 0; ; i++){
-                queryString += "#" + avatarList[i];
-                if (i == 4) break;
-                queryString += ", ";
-            }
-            $(queryString).fadeTo("3000", 0.33);
 
-            //createCookie
+            var concatAvat = "";
+            var concatTd = "";
+            for (i = 0; ; i++) { //all avats and td ids in one sentence
+                concatAvat += "#" + avatarList[i];
+                concatTd += "#" + tdList[i];
+                if (i == 4) break;
+                concatAvat += ", ";
+                concatTd += ", ";
+            }
+            
+            $(concatAvat).fadeTo("3000", 0.0);
+            $(concatTd).hide("10000");
+            $("#" + avatar).animate({
+                width: '60px',
+                height: '60px',
+            },3000,function () { location.reload(); });
+            $("#divAvatCont").css({ 'background-color': 'transparent' }).animate({
+                'top': '10%',
+                'left': '100%',
+            },3000);
+            $("#h3Welcome").each(function () {
+                var elem = $(this);
+                elem.html("WELCOME");
+                setInterval(function () {
+                    if (elem.css('visibility') == 'hidden') {
+                        elem.css('visibility', 'visible');
+                    } else {
+                        elem.css('visibility', 'hidden');
+                    }
+                }, 400);
+            });
+            $(".avatText").css('visibility', 'hidden');
+        }
+
+        //Create cookie
+        function setCookie(avatar) {
             var d = new Date();
             d.setTime(d.getTime() + (5 * 24 * 60 * 60 * 1000));
             var expires = "expires=" + d.toUTCString();
             document.cookie = "Avatar=" + avatar + ";" + expires + ";path=/";
         }
-        
-        
     </script>
 
     <asp:ContentPlaceHolder ID="phHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-     <%--Track cookies - show overlay--%>
-    <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay">
-        <div class="templatemo-flex-row flex-content-row">
-            <div class="templatemo-content-widget avatar-bg col-1 center" style="position: absolute;">
-                <h3>Hi first time visitor! <br />Please select your Avatar to proceed:&nbsp;&nbsp;</h3>
-                <br />
-                <table>
-
+    <form runat="server">
+        <%--Track cookies - show overlay--%>
+        <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay">
+            <div class="templatemo-flex-row flex-content-row">
+                <div id="divAvatCont" class="templatemo-content-widget avatar-bg col-1 center" style="position: absolute;">
+                    <h3 class="avatText">Hi first time visitor!
+                    <br />
+                        Please select your Avatar to proceed:&nbsp;&nbsp;</h3>
+                    <br />
+                    <table>
                         <tr>
                             <td>
-                                <a href="." onclick="setCookie('avatar6');"><img class="img-circular" id="avatar6" src="images/avatar6.jpg" /></a>
+                                <h3 id="h3Welcome"></h3>
                             </td>
-                            <td>
-                                <a href="." onclick="setCookie('avatar2');"><img class="img-circular" id="avatar2" src="images/avatar2.jpg" /></a>
+                            <td id="tdAvat6">
+                                    <img class="img-circular" id="avatar6" src="images/avatar6.jpg" />
                             </td>
-                            <td>
-                                <a href="." onclick="setCookie('avatar5');"><img class="img-circular" id="avatar5" src="images/avatar5.jpg" /></a>
+                            <td id="tdAvat2">
+                                    <img class="img-circular" id="avatar2" src="images/avatar2.jpg" />
                             </td>
-                            <td>
-                                <a href="." onclick="setCookie('avatar4');"><img class="img-circular" id="avatar4" src="images/avatar4.jpg" /></a>
+                            <td id="tdAvat5">
+                                    <img class="img-circular" id="avatar5" src="images/avatar5.jpg" />
                             </td>
-                            <td>
-                                <a href="." onclick="setCookie('avatar3');"><img class="img-circular" id="avatar3" src="images/avatar3.jpg" /></a>
+                            <td id="tdAvat4">
+                                <img class="img-circular" id="avatar4" src="images/avatar4.jpg" />
                             </td>
-                            <td>
-                                <a href="." onclick="setCookie('avatar1');"><img class="img-circular" id="avatar1" src="images/avatar1.jpg" /></a>
+                            <td id="tdAvat3">
+                                    <img class="img-circular" id="avatar3" src="images/avatar3.jpg" />
+                            </td>
+                            <td id="tdAvat1">
+                                    <img class="img-circular" id="avatar1" src="images/avatar1.jpg" />
                                 &nbsp; </td>
                         </tr>
                         <tr>
-                            <td colspan="6" style="text-align:right;"><br />Images by <a href="https://dribbble.com/shots/2084099-%20%20%20Avatars-Atlassian">Andrew McKay ©</a> </td>
+                            <td colspan="7" style="text-align: right;">
+                                <br />
+                                <span class="avatText">Images by <a href="https://dribbble.com/shots/2084099-%20%20%20Avatars-Atlassian">Andrew McKay ©</a> </span></td>
                         </tr>
-                </table>
-            </div>
-        </div>
-    </asp:Panel>
-    <div class="templatemo-flex-row">
-        <div id="container" class="templatemo-sidebar">
-            <header class="templatemo-site-header">
-                <div class="square-light"></div>
-                <h1>Portfolio</h1>
-            </header>
-            <div class="profile-photo-container">
-                <img src="images/profile-photo.jpg" alt="Profile Photo" class="img-responsive">
-                <div class="profile-photo-overlay"></div>
-            </div>
-            <!-- Search box -->
-
-            <div class="mobile-menu-icon">
-                <i class="fa fa-bars"></i>
-            </div>
-            <nav class="templatemo-left-nav">
-                <%--Query String - visited pages sequence info--%>
-                <ul>
-                    <li><a id="Default" onclick="setHref('Default');"><i class="fa fa-home fa-fw"></i>Home</a></li>
-                    <li><a href="#" id="Project01" onclick="setHref('Project01');"><i class="fa fa-bar-chart fa-fw"></i>Project 01</a></li>
-                    <li><a id="Project02" onclick="setHref('Project02');"><i class="fa fa-eject fa-fw"></i>Project 02</a></li>
-                    <li><a id="Project03" onclick="setHref('Project03');"><i class="fa fa-server fa-fw"></i>Project 03</a></li>
-                </ul>
-                <script>
-                    function getPageName() {
-                        var index = window.location.href.lastIndexOf("/") + 1,
-                            filenameWithExtension = window.location.href.substr(index),
-                            filename = filenameWithExtension.split(".")[0];
-                        if (filename == "")
-                            filename = "?prev=Default";
-                        return filename;
-                    }
-                    function setHref(linkName) {
-                        document.getElementById(linkName).href = linkName + ".aspx?prev=" + getPageName();
-                    }
-
-                </script>
-                <%--Query String - visited pages sequence info--%>
-            </nav>
-        </div>
-
-        <div class="templatemo-content col-1 light-gray-bg">
-            <%--Shows if user has avatar or cookies disabled--%>
-            <asp:Panel ID="divProject" visible="false" runat="server">
-                <div class="templatemo-top-nav-container">
-                    <asp:ContentPlaceHolder ID="phUserInfo" runat="server">
-                    </asp:ContentPlaceHolder>
+                    </table>
                 </div>
-                <asp:ContentPlaceHolder ID="phContent1" runat="server">
-                </asp:ContentPlaceHolder>
-            </asp:Panel>
+            </div>
+        </asp:Panel>
+        <div class="templatemo-flex-row">
+            <div id="container" class="templatemo-sidebar">
+                <header class="templatemo-site-header">
+                    <div class="square-light"></div>
+                    <h1>Portfolio</h1>
+                </header>
+                <div class="profile-photo-container">
+                    <img src="images/profile-photo.jpg" alt="Profile Photo" class="img-responsive">
+                    <div class="profile-photo-overlay"></div>
+                </div>
+                <!-- Search box -->
+
+                <div class="mobile-menu-icon">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <nav class="templatemo-left-nav">
+
+                    <%--Links add a sequence of pages visited using query string and they also update the hidden fields to use with Session and View state
+                        ID is used to generate the href link, so has to be the same as the page name ex.Default.aspx --%>
+                    <ul>
+                        <li>
+                            <asp:LinkButton runat="server" ID="Default" OnClick="Links_Click"><i class="fa fa-home fa-fw"></i>Home</asp:LinkButton></li>
+                        <li>
+                            <asp:LinkButton runat="server" ID="Project01" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>Project 01</asp:LinkButton></li>
+                        <li>
+                            <asp:LinkButton runat="server" ID="Project02" OnClick="Links_Click"><i class="fa fa-eject fa-fw"></i>Project 02</asp:LinkButton></li>
+                        <li>
+                            <asp:LinkButton runat="server" ID="Project03" OnClick="Links_Click"><i class="fa fa-server fa-fw"></i>Project 03</asp:LinkButton></li>
+                        <li>
+                            <asp:LinkButton runat="server" ID="Project04" OnClick="Links_Click"><i class="fa fa-line-chart fa-fw"></i>Project 04</asp:LinkButton></li>
+                    </ul>
+
+
+                </nav>
+            </div>
+
+            <div class="templatemo-content col-1 light-gray-bg">
+                <%--Shows if user has avatar or cookies disabled--%>
+                <asp:Panel ID="divProject" Visible="false" runat="server">
+                    <div id="PanelUserData" class="templatemo-top-nav-container">
+                        <div id="divUserData" class="templatemo-flex-row flex-content-row">
+                            <div  class="col-1">
+                                <div class="templatemo-flex-row flex-content-row">
+                                    <div class="col-2">
+                                        <br /><span><b>Order Visited: &nbsp;</b><%= UserData.StrPrevPage(Request.QueryString["prev"]) %></span></div>
+                                    <div class="col-1">
+
+                                        <asp:ScriptManager ID="Scriptmanager2" runat="server"></asp:ScriptManager>
+                                        <%-- to avoid uncaught js exception in the browser logs, 
+                                            PageRequestManagerServerErrorException asp:timers --%>
+                                        <script type="text/javascript">
+                                            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+                                            function EndRequestHandler(sender, args) {
+                                                if (args.get_error() != undefined) {
+                                                    args.set_errorHandled(true);
+                                                }
+                                            }
+                                        </script>
+
+                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                            <ContentTemplate>
+                                                <br /><span><b>Page State: </b>&nbsp;&nbsp;&nbsp;</span>
+                                                <asp:Label runat="server" ID="LblTime1" Text=""></asp:Label>
+                                                <asp:Timer ID="Timer1" Interval="1000" runat="server" OnTick="tmSession_Tick" />
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
+
+                                    </div>
+                                     <div class="col-1"> 
+                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                            <ContentTemplate>
+                                                <br /><span ><b>Session State: </b></span>
+                                                <asp:Label runat="server" ID="LblTime2" Text=""></asp:Label>
+                                                <asp:Timer ID="tm1" Interval="1000" runat="server" OnTick="tmSession_Tick" />
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                            <table>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td style="text-align:center">
+                                        <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" title="<%=UserData.Avatar%>" /><br />
+                                        <span style="font-size:smaller"><b>WELCOME</b>&nbsp;</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <%--Project04 UserData, visible when in Project04.aspx--%>
+                        <table class="table-assi4">
+                            <tr>
+                                <th colspan="2"><h2>Stored in class UserData</h2></th>
+                            </tr>
+                            
+                            <tr>
+                                <td><b>Pages Visited: </b></td>
+                                <td><%= UserData.StrPrevPage(Request.QueryString["prev"])%></td>
+                            </tr>
+                            <tr>
+                                <td><b>Page State: </b></td>
+                                <td>
+                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Label ID="LblTimeCp1" runat="server" Text=""></asp:Label>
+                                            <asp:Timer ID="Timer2" Interval="1000" runat="server" OnTick="tmSession_Tick" />
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Session State: </b></td>
+                                <td>
+                                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Label ID="LblTimeCp2" runat="server" Text=""></asp:Label>
+                                            <asp:Timer ID="Timer3" Interval="1000" runat="server" OnTick="tmSession_Tick" />
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                    <asp:ContentPlaceHolder ID="phContent1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </asp:Panel>
+            </div>
         </div>
-    </div>
 
-    <script src="js/jquery-1.11.2.min.js"></script>
-    <!-- jQuery -->
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <!--  jQuery Migrate Plugin -->
-    <script type="text/javascript" src="js/templatemo-script.js"></script>
-
+        <script src="js/jquery-1.11.2.min.js"></script>
+        <!-- jQuery -->
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+        <!--  jQuery Migrate Plugin -->
+        <script type="text/javascript" src="js/templatemo-script.js"></script>
+    </form>
 </body>
 </html>
