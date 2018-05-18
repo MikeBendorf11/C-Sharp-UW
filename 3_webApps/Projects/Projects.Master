@@ -42,10 +42,10 @@
                 sw.Start();
             }
             if (Session["Stopwatch"] == null)
-                Session["Stopwatch"] = new TimeSpan(0,0,0);
+                Session["Stopwatch"] = new TimeSpan(0, 0, 0);
 
-            if (Session[currentPage]==null)
-                Session[currentPage] = new TimeSpan(0,0,0);
+            if (Session[currentPage] == null)
+                Session[currentPage] = new TimeSpan(0, 0, 0);
         }
 
         //setting timer lbl to hours, mins and secs
@@ -133,7 +133,7 @@
                 });
         });
 
-        
+
         function animateAvatar(avatar) {
             if (!avatar.includes("avatar")) return;
 
@@ -156,17 +156,17 @@
                 concatAvat += ", ";
                 concatTd += ", ";
             }
-            
-            $(concatAvat).fadeTo("3000", 0.0);
-            $(concatTd).hide("10000");
+
+            //$(concatAvat).fadeTo("3000", 0.0);
+            $(concatTd).hide();
             $("#" + avatar).animate({
                 width: '60px',
                 height: '60px',
-            },3000,function () { location.reload(); });
+            }, 2000, function () { location.reload(); });
             $("#divAvatCont").css({ 'background-color': 'transparent' }).animate({
                 'top': '10%',
-                'left': '100%',
-            },3000);
+                'left': '90%',
+            }, 2000);
             $("#h3Welcome").each(function () {
                 var elem = $(this);
                 elem.html("WELCOME");
@@ -184,7 +184,7 @@
         //Create cookie
         function setCookie(avatar) {
             var d = new Date();
-            d.setTime(d.getTime() + (5 * 24 * 60 * 60 * 1000));
+            d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
             var expires = "expires=" + d.toUTCString();
             document.cookie = "Avatar=" + avatar + ";" + expires + ";path=/";
         }
@@ -209,22 +209,22 @@
                                 <h3 id="h3Welcome"></h3>
                             </td>
                             <td id="tdAvat6">
-                                    <img class="img-circular" id="avatar6" src="images/avatar6.jpg" />
+                                <img class="img-circular" id="avatar6" src="images/avatar6.jpg" />
                             </td>
                             <td id="tdAvat2">
-                                    <img class="img-circular" id="avatar2" src="images/avatar2.jpg" />
+                                <img class="img-circular" id="avatar2" src="images/avatar2.jpg" />
                             </td>
                             <td id="tdAvat5">
-                                    <img class="img-circular" id="avatar5" src="images/avatar5.jpg" />
+                                <img class="img-circular" id="avatar5" src="images/avatar5.jpg" />
                             </td>
                             <td id="tdAvat4">
                                 <img class="img-circular" id="avatar4" src="images/avatar4.jpg" />
                             </td>
                             <td id="tdAvat3">
-                                    <img class="img-circular" id="avatar3" src="images/avatar3.jpg" />
+                                <img class="img-circular" id="avatar3" src="images/avatar3.jpg" />
                             </td>
                             <td id="tdAvat1">
-                                    <img class="img-circular" id="avatar1" src="images/avatar1.jpg" />
+                                <img class="img-circular" id="avatar1" src="images/avatar1.jpg" />
                                 &nbsp; </td>
                         </tr>
                         <tr>
@@ -275,12 +275,13 @@
             <div class="templatemo-content col-1 light-gray-bg">
                 <%--Shows if user has avatar or cookies disabled--%>
                 <asp:Panel ID="divProject" Visible="false" runat="server">
-                    <div id="PanelUserData" class="templatemo-top-nav-container">
+                    <div class="templatemo-top-nav-container">
                         <div id="divUserData" class="templatemo-flex-row flex-content-row">
-                            <div  class="col-1">
+                            <div class="col-1">
                                 <div class="templatemo-flex-row flex-content-row">
                                     <div class="col-2">
-                                        <br /><span><b>Order Visited: &nbsp;</b><%= UserData.StrPrevPage(Request.QueryString["prev"]) %></span></div>
+                                        <br />
+                                        <b>Order Visited: &nbsp;</b><%= UserData.StrPrevPage(Request.QueryString["prev"]) %></div>
                                     <div class="col-1">
 
                                         <asp:ScriptManager ID="Scriptmanager2" runat="server"></asp:ScriptManager>
@@ -297,7 +298,8 @@
 
                                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                             <ContentTemplate>
-                                                <br /><span><b>Page State: </b>&nbsp;&nbsp;&nbsp;</span>
+                                                <br />
+                                                <span><b>Page State: </b>&nbsp;&nbsp;&nbsp;</span>
                                                 <asp:Label runat="server" ID="LblTime1" Text=""></asp:Label>
                                                 <asp:Timer ID="Timer1" Interval="1000" runat="server" OnTick="tmSession_Tick" />
                                             </ContentTemplate>
@@ -307,10 +309,11 @@
                                         </asp:UpdatePanel>
 
                                     </div>
-                                     <div class="col-1"> 
+                                    <div class="col-1">
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>
-                                                <br /><span ><b>Session State: </b></span>
+                                                <br />
+                                                <span><b>Session State: </b></span>
                                                 <asp:Label runat="server" ID="LblTime2" Text=""></asp:Label>
                                                 <asp:Timer ID="tm1" Interval="1000" runat="server" OnTick="tmSession_Tick" />
                                             </ContentTemplate>
@@ -321,66 +324,91 @@
                                     </div>
                                 </div>
 
-                               
+
                             </div>
                             <table>
                                 <tr>
-                                    <td>
-                                    </td>
-                                    <td style="text-align:center">
+                                    <td></td>
+                                    <td style="text-align: center">
                                         <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" title="<%=UserData.Avatar%>" /><br />
-                                        <span style="font-size:smaller"><b>WELCOME</b>&nbsp;</span>
+                                        <span style="font-size: smaller"><b>WELCOME</b>&nbsp;</span>
                                     </td>
                                 </tr>
                             </table>
                         </div>
 
-                        <%--Project04 UserData, visible when in Project04.aspx--%>
-                        <table class="table-assi4">
-                            <tr>
-                                <th colspan="2"><h2>Stored in class UserData</h2></th>
-                            </tr>
-                            
-                            <tr>
-                                <td><b>Pages Visited: </b></td>
-                                <td><%= UserData.StrPrevPage(Request.QueryString["prev"])%></td>
-                            </tr>
-                            <tr>
-                                <td><b>Page State: </b></td>
-                                <td>
-                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                                        <ContentTemplate>
-                                            <asp:Label ID="LblTimeCp1" runat="server" Text=""></asp:Label>
-                                            <asp:Timer ID="Timer2" Interval="1000" runat="server" OnTick="tmSession_Tick" />
-                                        </ContentTemplate>
-                                        <Triggers>
-                                            <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
-                                        </Triggers>
-                                    </asp:UpdatePanel>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><b>Session State: </b></td>
-                                <td>
-                                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                                        <ContentTemplate>
-                                            <asp:Label ID="LblTimeCp2" runat="server" Text=""></asp:Label>
-                                            <asp:Timer ID="Timer3" Interval="1000" runat="server" OnTick="tmSession_Tick" />
-                                        </ContentTemplate>
-                                        <Triggers>
-                                            <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
-                                        </Triggers>
-                                    </asp:UpdatePanel>
-
-                                </td>
-                            </tr>
-                        </table>
-
 
                     </div>
                     <asp:ContentPlaceHolder ID="phContent1" runat="server">
                     </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="phProj4" runat="server">
+                    </asp:ContentPlaceHolder>
+
+                    <div  id="PanelProj4" class="templatemo-flex-row flex-content-row" style="display:none">
+                        <div id="DivProj4" class="templatemo-content-widget white-bg col-1" style="margin:-400px 0px 0px 550px">
+                            <%--Project04 UserData, visible when in Project04.aspx--%>
+                            <table class="table-assi4">
+                                <tr>
+                                    <th>
+                                        <h3>Technology</h3>
+                                    </th>
+                                    <th colspan="2">
+                                        <h3>Results</h3>
+                                    </th>
+                                    <th>
+                                        <h3>Description</h3>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <td><b>Query String</b></td>
+                                    <td colspan="2"><%= UserData.StrPrevPage(Request.QueryString["prev"])%></td>
+                                    <td>Last 4 pages visited </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Session State</b></td>
+                                    <td>hh:mm:ss</td>
+                                    <td>
+                                        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                            <ContentTemplate>
+                                                <asp:Label ID="LblTimeCp1" runat="server" Text=""></asp:Label>
+                                                <asp:Timer ID="Timer2" Interval="1000" runat="server" OnTick="tmSession_Tick" />
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
+                                            </Triggers>
+                                        </asp:UpdatePanel> 
+                                    </td>
+                                    <td>Time spend in current page</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Session State (total)</b></td>
+                                    <td>hh:mm:ss</td>
+                                    <td>
+                                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                            <ContentTemplate>
+                                                <asp:Label ID="LblTimeCp2" runat="server" Text=""></asp:Label>
+                                                <asp:Timer ID="Timer3" Interval="1000" runat="server" OnTick="tmSession_Tick" />
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
+                                    </td>
+                                    <td>Time spend in this website</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cookies</b></td>
+                                    <td><%=UserData.Avatar%></td>
+                                    <td> <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" /></td>
+                                    <td>Your avatar choice will last for 30 days</td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+
                 </asp:Panel>
             </div>
         </div>

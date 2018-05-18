@@ -1,5 +1,4 @@
 <%@ Page Language="C#" MasterPageFile="~/Projects.Master" %>
-<%@ Register Src="~/WebUserControl1.ascx" TagPrefix="uc1" TagName="WebUserControl1" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Home</title>

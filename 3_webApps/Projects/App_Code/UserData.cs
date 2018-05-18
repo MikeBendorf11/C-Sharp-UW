@@ -31,7 +31,7 @@ namespace Projects.App_Code
             {
                 if (results < 1 || strPrevPage[i] == null) break;
                 if (strPrevPage[i] == "" || strPrevPage[i].Contains("?")) continue;
-                result += strPrevPage[i] + " < ";
+                result += strPrevPage[i] + "&nbsp;<i class='fa fa-arrow-circle-left fa-fw'></i>&nbsp;";
             }
             return result;
         }

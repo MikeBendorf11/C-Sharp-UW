@@ -2,18 +2,14 @@
 
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.OleDb" %>
-<%@ Register Src="~/WebUserControl1.ascx" TagPrefix="uc1" TagName="WebUserControl1" %>
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
     <title>Project 04</title>
 
     <script runat="server">
         const int CNAME = 0, CEMAIL = 1, CLOGIN = 2, CREASON = 3, CTOTCOLS = 4;
-        //string strOledbConnection = @"Provider=SQLOLEDB;
-        //                            Data Source=MBENDORF-E7240\SQLEXPRESS;
-        //                            Integrated Security=SSPI;
-        //                            Initial Catalog=ASPNetHomework";
-        string strOledbConnection = @"Provider=SQLOLEDB;Data Source=tcp:s17.winhost.com;Initial Catalog=DB_122058_test2;User ID=DB_122058_test2_user;Password=uwcs;";
+
+        string strOledbConnection = ConfigurationManager.ConnectionStrings["RemoteServer"].ConnectionString;
 
         protected void Page_Load(Object sender, EventArgs e)
         {
@@ -147,48 +143,55 @@
         </div>
     </div>
     <div class="templatemo-flex-row flex-content-row">
-        <div id="asg1" class="templatemo-content-widget white-bg col-1">
+        <div id="asg1" class="templatemo-content-widget white-bg col-1" style="height: fit-content">
             <i class="fa fa-times"></i>
             <div class="square-light"></div>
             <h2 class="templatemo-inline-block">Databases</h2>
-            <hr>
             <h4>MSSQL and Stored Procedures</h4>
-            <p></p>
-            <ul style="list-style-type: decimal">
+            <p>The Database and procedures were created using SQL Server 2014 Management Studio. Test values were added to the table and the Primary key is hidden from the user display. </p>
+            <ul style="list-style-type: decimal; padding-left: 25px">
                 <li>Each button event triggers a corresponding Stored Procedure</li>
-                <li>This is better than using SQL command strings as it prevents SQL injection attacks</li>
-                <li>From here on I will just write data to my hosted database, so everything is updated from one repository</li>
-                <li>I am using VS Publish feature to update my remote project, goodbye to FTP clients</li>
+                <li>It prevents SQL injection attacks since it is not using SQL command strings</li>
+
             </ul>
+            <%--Github widget--%>
+            <p>&nbsp;</p>
+            <p align="right">
+                <iframe src="gh.html?sha=faa6987701533adb5fac7aac74b4b51a5284f75c"
+                    allowtransparency="true" frameborder="0" scrolling="no" width="350px" height="130px"></iframe>
+            </p>
+
         </div>
-        <div class="templatemo-content-widget pink-bg">
+        <div class="templatemo-content-widget pink-bg col-1">
             <i class="fa fa-times"></i>
             <div class="templatemo-login-form">
                 <table style="margin: auto; width: 70%;">
                     <tr>
                         <td><span>Name: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBName" Text="A name" runat="server"></asp:TextBox></td>
-                        <td style="width: 100px"></td>
+                            <asp:TextBox class="form-control" Width="200px" ID="TBName" Text="A name" runat="server"></asp:TextBox></td>
+
                     </tr>
                     <tr>
                         <td><span>Email Address: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBEmail" Text="name@domain.com" runat="server"></asp:TextBox></td>
+                            <asp:TextBox class="form-control" Width="200px" ID="TBEmail" Text="name@domain.com" runat="server"></asp:TextBox></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><span>Login Name: </span></td>
                         <td>
-                            <asp:TextBox class="form-control" Width="150px" Height="16px" ID="TBLogin" Text="Your initials" runat="server"></asp:TextBox></td>
-                        <td></td>
+                            <asp:TextBox class="form-control" Width="200px" ID="TBLogin" Text="Your initials" runat="server"></asp:TextBox></td>
+
                     </tr>
                     <tr>
-                        <td colspan="3"><span>Reason for Access?</span></td>
+                        <td colspan="2"><span>
+                            <br />
+                            Reason for Access?</span></td>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine">Click the boxes to clear the form or just click send to add a row to the database</asp:TextBox><br>
+                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine">Click the boxes to clear the form or just use the buttons below to change the database</asp:TextBox><br>
                         </td>
                     </tr>
                     <tr>
@@ -206,6 +209,7 @@
         </div>
     </div>
     <div class="templatemo-flex-row flex-content-row">
+        <div class="col-1"></div>
         <div class="col-2">
 
             <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden col-2">
@@ -223,6 +227,7 @@
             </div>
 
         </div>
+        <div class="col-1"></div>
     </div>
 </asp:Content>
 

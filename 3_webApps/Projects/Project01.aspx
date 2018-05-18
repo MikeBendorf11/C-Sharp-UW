@@ -3,7 +3,6 @@
 <%@ Import Namespace="trs" %>
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="Projects.App_Code" %>
-<%@ Register Src="~/WebUserControl1.ascx" TagPrefix="uc1" TagName="WebUserControl1" %>
 
 
 <asp:Content ContentPlaceHolderID="phHead" runat="server">
@@ -87,18 +86,24 @@
             <i class="fa fa-times"></i>
             <div class="square-dark"></div>
             <h2 class="templatemo-inline-block">Course Intro:</h2>
-            <hr>
+            
             <h4>Using HTML, CSS, JS and ASP.net</h4>
             <p></p>
-            <ul style="list-style-type: decimal">
+            <ul style="list-style-type: decimal; padding-left:25px">
                 <li>Transaction classes are on 2 separate files</li>
                 <li>Regex is used to parse through XML for transaction data</li>
                 <li>A datagrid is bound to the transaction object to display the table</li>
                 <li>An example of the original data before parsing:</li>
             </ul><br />
-            <textarea style="width:300px; height: 100px"><Transactions><Transaction><Id>1</Id><Date>11/23/2014</Date><Type>Deposit</Type><Description>Pay</Description><Category>Income</Category><Amount>1327</Amount></Transaction><Transaction><Id>2</Id><Date>11/24/2014</Date><Type>Check</Type><Description>Food</Description></textarea>
+            <textarea style="width:350px; height: 70px"><Transactions><Transaction><Id>1</Id><Date>11/23/2014</Date><Type>Deposit</Type><Description>Pay</Description><Category>Income</Category><Amount>1327</Amount></Transaction><Transaction><Id>2</Id><Date>11/24/2014</Date><Type>Check</Type><Description>Food</Description></textarea>
+
+            <%--Github widget--%>
+            <p>&nbsp;</p>
+            <p></p>
+            <iframe src="gh.html?sha=9c326a99342a7edf9fb48e542967249879e8efd7"
+                allowtransparency="true" frameborder="0" scrolling="no" width="350px" height="130px"></iframe>
         </div>
     </div>
-    
+
 </asp:Content>
 
