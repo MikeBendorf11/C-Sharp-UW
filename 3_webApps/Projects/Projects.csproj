@@ -118,6 +118,7 @@
     </Content>
     <Content Include="Projects.Master" />
     <Content Include="Project04.aspx" />
+    <Content Include="Final.aspx" />
     <None Include="Properties\PublishProfiles\Winhost.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\jquery-3.3.1.js" />

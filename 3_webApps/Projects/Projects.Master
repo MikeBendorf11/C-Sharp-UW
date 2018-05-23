@@ -4,9 +4,9 @@
 <%@ Import Namespace="System.Diagnostics" %>
 
 <!DOCTYPE html>
-
+ 
 <html>
-<head runat="server">
+<head runat="server">     
     <title></title>
     <meta charset="utf-8" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -261,11 +261,13 @@
                         <li>
                             <asp:LinkButton runat="server" ID="Project01" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>Project 01</asp:LinkButton></li>
                         <li>
-                            <asp:LinkButton runat="server" ID="Project02" OnClick="Links_Click"><i class="fa fa-eject fa-fw"></i>Project 02</asp:LinkButton></li>
+                            <asp:LinkButton runat="server" ID="Project02" OnClick="Links_Click"><i class="fa fa-save fa-fw"></i>Project 02</asp:LinkButton></li>
                         <li>
                             <asp:LinkButton runat="server" ID="Project03" OnClick="Links_Click"><i class="fa fa-server fa-fw"></i>Project 03</asp:LinkButton></li>
                         <li>
                             <asp:LinkButton runat="server" ID="Project04" OnClick="Links_Click"><i class="fa fa-line-chart fa-fw"></i>Project 04</asp:LinkButton></li>
+                        <li>
+                            <asp:LinkButton runat="server" ID="Final" OnClick="Links_Click"><i class="fa fa-university fa-fw"></i>Final Project</asp:LinkButton></li>
                     </ul>
 
 
