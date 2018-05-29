@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Final.Models;
+
 
 namespace Final.Controllers
 {
     public class DefaultController : Controller
     {
-        // GET: Default
+        DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
+        //GET: Default
         public ActionResult Courses()
         {
-            return View();
+            return View(db.vClasses.ToList());
         }
         public ActionResult MyCourses()
         {
