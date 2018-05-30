@@ -4,4 +4,23 @@
 }
 
 <h2>Login</h2>
+<p><b>@ViewBag.Message</b></p>
 
+@using (Html.BeginForm("Login", "Default", FormMethod.Post))
+{
+    <table class="table-condensed">
+        <tr>
+            <td>Login: </td>
+            <td>@Html.TextBox("Login", "")</td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td>@Html.TextBox("Password", "")</td>
+        </tr>
+        <tr>
+            <td><input type="submit" id="validate" class="validate" /></td>
+            <td></td>
+        </tr>
+    </table>
+
+}
