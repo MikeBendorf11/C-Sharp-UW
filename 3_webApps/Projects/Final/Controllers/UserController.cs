@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
 using System.Web.Mvc;
 using Final.Models;
-using System.Data;
+
 using System.Configuration;
 using System.Data.OleDb;
 
@@ -34,12 +32,15 @@ namespace Final.Controllers
                     objOleCon.Open();
                     if ((Int32)objCmd.ExecuteScalar() == 1)
                     {
-                        ViewBag.Message = "Welcome!";
-                        Session["User"] = "valid";                       
+                        ViewBag.Message = "Welcome!"; //return name from db
+                        Session["User"] = "valid"; //extract id form db                      
                         return RedirectToAction("MyCourses");
                     }
                     else
-                        ViewBag.Message = "User not found"; 
+                    {
+                        ViewBag.Message = "User not found";
+                        return View();
+                    }
                 }
                 catch (Exception ex){ViewBag.Message = ex.ToString();}
                 finally { objOleCon.Close(); }
@@ -49,6 +50,7 @@ namespace Final.Controllers
                 ViewBag.Message = "You are already logged in";
                 return RedirectToAction("MyCourses");
             }
+            ViewBag.Message = "Unknown Condition";
             return View();
         }
         public ActionResult MyCourses()

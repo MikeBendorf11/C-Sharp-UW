@@ -3,5 +3,32 @@
     ViewBag.Title = "NewLogin";
 }
 
-<h2>NewLogin</h2>
+<h2>New Login</h2>
+<p><b>@ViewBag.Message</b></p>
 
+@using (Html.BeginForm("NewLogin", "Default", FormMethod.Post))
+{
+    <table class="table-condensed">
+        <tr>
+            <td>Name: </td>
+            <td>@Html.TextBox("Name", "")</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>@Html.TextBox("Email", "")</td>
+        </tr>
+        <tr>
+            <td>Login: </td>
+            <td>@Html.TextBox("Login", "")</td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td>@Html.TextBox("Password", "")</td>
+        </tr>
+        <tr>
+            <td><input type="submit" id="createUser" class="createUser" /></td>
+            <td></td>
+        </tr> 
+    </table>
+
+}

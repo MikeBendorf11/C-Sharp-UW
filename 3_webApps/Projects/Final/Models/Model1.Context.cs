@@ -164,5 +164,26 @@ namespace Final.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pUpdClassStudents", originalClassIdParameter, originalStudentIdParameter, newClassIdParameter, newStudentIdParameter);
         }
+    
+        public virtual int pInsStudents(string studentName, string studentEmail, string studentLogin, string studentPassword)
+        {
+            var studentNameParameter = studentName != null ?
+                new ObjectParameter("StudentName", studentName) :
+                new ObjectParameter("StudentName", typeof(string));
+    
+            var studentEmailParameter = studentEmail != null ?
+                new ObjectParameter("StudentEmail", studentEmail) :
+                new ObjectParameter("StudentEmail", typeof(string));
+    
+            var studentLoginParameter = studentLogin != null ?
+                new ObjectParameter("StudentLogin", studentLogin) :
+                new ObjectParameter("StudentLogin", typeof(string));
+    
+            var studentPasswordParameter = studentPassword != null ?
+                new ObjectParameter("StudentPassword", studentPassword) :
+                new ObjectParameter("StudentPassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pInsStudents", studentNameParameter, studentEmailParameter, studentLoginParameter, studentPasswordParameter);
+        }
     }
 }
