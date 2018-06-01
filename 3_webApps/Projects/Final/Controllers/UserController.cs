@@ -2,7 +2,7 @@
 
 using System.Web.Mvc;
 using Final.Models;
-
+using Final.App_Code;
 using System.Configuration;
 using System.Data.OleDb;
 
@@ -10,8 +10,10 @@ namespace Final.Controllers
 {
     public class UserController : Controller
     {
+        StudentProcessor processor = new StudentProcessor();
         DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
         string strOledbConnection = ConfigurationManager.ConnectionStrings["RemoteServer"].ConnectionString;
+        TempData["shortMessage"] = "";
 
         public ActionResult Login(string Login, string Password)
         {
@@ -20,34 +22,24 @@ namespace Final.Controllers
                 ViewBag.Message = "Please Login";
                 return View();
             }
-            else if (Session["User"] == null && Request.HttpMethod == "POST")
+            else if (Session["User"] == null && Request.HttpMethod == "POST")// attempting to log in
             {
-                OleDbConnection objOleCon = new OleDbConnection();
-                objOleCon.ConnectionString = strOledbConnection;
-                OleDbCommand objCmd = new OleDbCommand("Select count(*) from [vStudents] where StudentLogin like '" + Login + "' AND StudentPassword LIKE '" + Password + "'", objOleCon);
-                //objCmd.Parameters.AddWithValue("@StudentLogin", "'"+Login+"'");
-                //objCmd.Parameters.AddWithValue("@StudentPassword", "'"+Password+"'");
-                try
+                int stdId = processor.getStdId(Login, Password);
+                if (stdId > 0)
                 {
-                    objOleCon.Open();
-                    if ((Int32)objCmd.ExecuteScalar() == 1)
-                    {
-                        ViewBag.Message = "Welcome!"; //return name from db
-                        Session["User"] = "valid"; //extract id form db                      
-                        return RedirectToAction("MyCourses");
-                    }
-                    else
-                    {
-                        ViewBag.Message = "User not found";
-                        return View();
-                    }
+                    TempData["shortMessage"] = "Welcome!"; //return name from db
+                    Session["User"] = stdId.ToString(); 
+                    return RedirectToAction("MyCourses");
+                } 
+                else
+                {
+                    ViewBag.Message = "User not found";
+                    return View();
                 }
-                catch (Exception ex){ViewBag.Message = ex.ToString();}
-                finally { objOleCon.Close(); }
             }
             else if (Session["User"] != null) 
             {
-                ViewBag.Message = "You are already logged in";
+                TempData["shortMessage"] = "You are already logged in";
                 return RedirectToAction("MyCourses");
             }
             ViewBag.Message = "Unknown Condition";
@@ -59,6 +51,7 @@ namespace Final.Controllers
             {
                 return View();
             }
+            TempData["shortMessage"] = "Please login first";
             return RedirectToAction("Login");
         }
         public ActionResult Register()
@@ -67,6 +60,7 @@ namespace Final.Controllers
             {
                 return View();
             }
+            TempData["shortMessage"] = "Please login first"; 
             return RedirectToAction("Login");
         }
     }

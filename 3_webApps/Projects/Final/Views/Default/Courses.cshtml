@@ -3,6 +3,10 @@
 @model IEnumerable<Final.Models.vClass>
 @{
     ViewBag.Title = "Courses";
+    if (TempData["shortMessage"] == null)
+    {
+        TempData["shortMessage"] = "";
+    }
 }
 <p><br /> </p>
 <table class="table-condensed table-bordered">

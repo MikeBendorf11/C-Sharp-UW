@@ -1,6 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "Login";
+    if (TempData["shortMessage"] == null)
+    {
+        TempData["shortMessage"] = "";
+    }
 }
 
 <h2>Login</h2>

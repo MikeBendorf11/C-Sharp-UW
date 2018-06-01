@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Final.Models;
-
 using System.Configuration;
-using System.Data.OleDb;
+using Final.App_Code;
 
-namespace Final.Controllers
+
+namespace Final.Controllers 
 {
     public class DefaultController : Controller
     {
+        StudentProcessor processor = new StudentProcessor();
         DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
         string strOledbConnection = ConfigurationManager.ConnectionStrings["RemoteServer"].ConnectionString;
 
@@ -25,22 +23,27 @@ namespace Final.Controllers
         {
             if (Session["User"] != null && Request.HttpMethod != "POST") //already logged in
             {
-                ViewBag.Message = "You are already logged in";
+                TempData["shortMessage"] = "You are already logged in";
                 return RedirectToAction("MyCourses", "User");
             }
-            else if (Session["User"] == null && Request.HttpMethod == "GET")//not logged in a 1st time loaded
+            else if (Session["User"] == null && Request.HttpMethod == "GET")//not logged in and 1st time loaded
             {
                 ViewBag.Message = "Enter your personal info";
                 return View();
             }
-            else if (Session["User"] == null && Request.HttpMethod == "POST")//summit form create user
+            else if (Session["User"] == null && Request.HttpMethod == "POST")//summited form 
             {
-                ViewBag.Message = "Welcome!"; //return name from db
-                Session["User"] = "valid"; //extract id form db                      
+                if(Name=="" || Email=="" || Login=="" || Password == "")//validations??
+                {
+                    ViewBag.Message = "Please fill up the form"; 
+                    return View();
+                }
                 db.pInsStudents(Name, Email, Login, Password);
+                TempData["shortMessage"] = "Welcome " + Name + "!";
+                Session["User"] = processor.getStdId(Login, Password);
                 return RedirectToAction("MyCourses", "User");
             }
-            ViewBag.Message = "Unknown condition";
+            ViewBag.Message = "Unknown condition"; 
             return View();
         }
     }

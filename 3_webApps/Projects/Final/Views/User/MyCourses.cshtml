@@ -1,7 +1,11 @@
 ﻿
 @{
     ViewBag.Title = "MyCourses";
+    if (TempData["shortMessage"] == null)
+    {
+        TempData["shortMessage"] = "";
+    }
 }
 
 <h2>MyCourses</h2>
-<p><b>@ViewBag.Message</b></p>
+<p><b>@TempData["shortMessage"].ToString()</b></p>
