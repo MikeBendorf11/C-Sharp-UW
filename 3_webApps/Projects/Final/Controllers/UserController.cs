@@ -1,19 +1,16 @@
-﻿using System;
-
+﻿using System; 
 using System.Web.Mvc;
 using Final.Models;
 using Final.App_Code;
-using System.Configuration;
-using System.Data.OleDb;
+using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Text.RegularExpressions;
 
 namespace Final.Controllers
 {
     public class UserController : Controller
     {
         StudentProcessor processor = new StudentProcessor();
-        DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
-        string strOledbConnection = ConfigurationManager.ConnectionStrings["RemoteServer"].ConnectionString;
-        TempData["shortMessage"] = "";
 
         public ActionResult Login(string Login, string Password)
         {
@@ -28,7 +25,7 @@ namespace Final.Controllers
                 if (stdId > 0)
                 {
                     TempData["shortMessage"] = "Welcome!"; //return name from db
-                    Session["User"] = stdId.ToString(); 
+                    Session["User"] = stdId; 
                     return RedirectToAction("MyCourses");
                 } 
                 else
@@ -45,15 +42,41 @@ namespace Final.Controllers
             ViewBag.Message = "Unknown Condition";
             return View();
         }
-        public ActionResult MyCourses()
+        
+        //string ClassID is the "value=" attribute of the summit button for every course row
+        public ActionResult MyCourses(string ClassID)
         {
-            if (Session["User"] != null)
+            if (Session["User"] == null)
             {
-                return View();
+                TempData["shortMessage"] = "Please login first";
+                return RedirectToAction("Login");
             }
-            TempData["shortMessage"] = "Please login first";
+            else if (Session["User"] != null && Request.HttpMethod != "POST")
+            {
+                int stdID = int.Parse(Session["User"].ToString());
+                ObjectResult or = processor.db.pSelClassesByStudentID(stdID);
+                return View(or);
+            }
+            else if(Session["User"] != null && Request.HttpMethod == "POST")
+            {
+                int stdID = int.Parse(Session["User"].ToString());
+                Match match = Regex.Match(ClassID, @"\d"); 
+                int classID = int.Parse(match.Value);
+                processor.db.pDelClassStudents(classID, stdID);
+
+                ObjectResult or = processor.db.pSelClassesByStudentID(stdID);
+                return View(or);
+            }
+            TempData["shortMessage"] = "Uknown condition";
+            ViewBag.Message = "Uknown condition";
             return RedirectToAction("Login");
         }
+
+        private ActionResult View(Func<IEnumerator<pSelClassesByStudentID_Result>> getEnumerator)
+        {
+            throw new NotImplementedException();
+        }
+
         public ActionResult Register()
         {
             if (Session["User"] != null)
@@ -64,4 +87,4 @@ namespace Final.Controllers
             return RedirectToAction("Login");
         }
     }
-}
+};

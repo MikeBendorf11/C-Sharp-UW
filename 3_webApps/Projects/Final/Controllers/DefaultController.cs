@@ -10,13 +10,13 @@ namespace Final.Controllers
     public class DefaultController : Controller
     {
         StudentProcessor processor = new StudentProcessor();
-        DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
+        //DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
         string strOledbConnection = ConfigurationManager.ConnectionStrings["RemoteServer"].ConnectionString;
 
         //GET: Default
         public ActionResult Courses()
         {
-            return View(db.vClasses.ToList());
+            return View(processor.db.vClasses.ToList());
         }
     
         public ActionResult NewLogin(string Name, string Email, string Login, string Password)
@@ -38,7 +38,7 @@ namespace Final.Controllers
                     ViewBag.Message = "Please fill up the form"; 
                     return View();
                 }
-                db.pInsStudents(Name, Email, Login, Password);
+                processor.db.pInsStudents(Name, Email, Login, Password);
                 TempData["shortMessage"] = "Welcome " + Name + "!";
                 Session["User"] = processor.getStdId(Login, Password);
                 return RedirectToAction("MyCourses", "User");

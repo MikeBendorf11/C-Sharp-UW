@@ -7,12 +7,13 @@ using System.Diagnostics;
 using Final.Controllers;
 using System.Configuration;
 using System.Data.OleDb;
+using System.Data.Entity.Core.Objects;
 
 namespace Final.App_Code
 {
     public class StudentProcessor
     {
-        DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
+        public DB_122058_test2Entities1 db = new DB_122058_test2Entities1();
         OleDbConnection objOleCon = new OleDbConnection(ConfigurationManager.ConnectionStrings["RemoteServer"].ConnectionString);
         
         /**********************************************
@@ -35,5 +36,7 @@ namespace Final.App_Code
             finally { objOleCon.Close(); }
             return stdId;
         }
+        
+                
     }
 }
