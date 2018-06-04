@@ -28,6 +28,7 @@ namespace Final.Models
         }
     
         public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<ClassStudent> ClassStudents { get; set; }
         public virtual DbSet<LoginRequest> LoginRequests { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Student> Students { get; set; }
@@ -117,6 +118,27 @@ namespace Final.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pInsLogins", nameParameter, emailAddressParameter, loginNameParameter, reasonForAccessParameter);
         }
     
+        public virtual int pInsStudents(string studentName, string studentEmail, string studentLogin, string studentPassword)
+        {
+            var studentNameParameter = studentName != null ?
+                new ObjectParameter("StudentName", studentName) :
+                new ObjectParameter("StudentName", typeof(string));
+    
+            var studentEmailParameter = studentEmail != null ?
+                new ObjectParameter("StudentEmail", studentEmail) :
+                new ObjectParameter("StudentEmail", typeof(string));
+    
+            var studentLoginParameter = studentLogin != null ?
+                new ObjectParameter("StudentLogin", studentLogin) :
+                new ObjectParameter("StudentLogin", typeof(string));
+    
+            var studentPasswordParameter = studentPassword != null ?
+                new ObjectParameter("StudentPassword", studentPassword) :
+                new ObjectParameter("StudentPassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pInsStudents", studentNameParameter, studentEmailParameter, studentLoginParameter, studentPasswordParameter);
+        }
+    
         public virtual ObjectResult<pSelClassesByStudentID_Result> pSelClassesByStudentID(Nullable<int> studentId)
         {
             var studentIdParameter = studentId.HasValue ?
@@ -144,6 +166,15 @@ namespace Final.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pSelLoginIdByLoginAndPassword", studentLoginParameter, studentPasswordParameter, studentId);
         }
     
+        public virtual ObjectResult<pSelRemainingClassesByStudentID_Result> pSelRemainingClassesByStudentID(Nullable<int> studentId)
+        {
+            var studentIdParameter = studentId.HasValue ?
+                new ObjectParameter("StudentId", studentId) :
+                new ObjectParameter("StudentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pSelRemainingClassesByStudentID_Result>("pSelRemainingClassesByStudentID", studentIdParameter);
+        }
+    
         public virtual int pUpdClassStudents(Nullable<int> originalClassId, Nullable<int> originalStudentId, Nullable<int> newClassId, Nullable<int> newStudentId)
         {
             var originalClassIdParameter = originalClassId.HasValue ?
@@ -163,27 +194,6 @@ namespace Final.Models
                 new ObjectParameter("NewStudentId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pUpdClassStudents", originalClassIdParameter, originalStudentIdParameter, newClassIdParameter, newStudentIdParameter);
-        }
-    
-        public virtual int pInsStudents(string studentName, string studentEmail, string studentLogin, string studentPassword)
-        {
-            var studentNameParameter = studentName != null ?
-                new ObjectParameter("StudentName", studentName) :
-                new ObjectParameter("StudentName", typeof(string));
-    
-            var studentEmailParameter = studentEmail != null ?
-                new ObjectParameter("StudentEmail", studentEmail) :
-                new ObjectParameter("StudentEmail", typeof(string));
-    
-            var studentLoginParameter = studentLogin != null ?
-                new ObjectParameter("StudentLogin", studentLogin) :
-                new ObjectParameter("StudentLogin", typeof(string));
-    
-            var studentPasswordParameter = studentPassword != null ?
-                new ObjectParameter("StudentPassword", studentPassword) :
-                new ObjectParameter("StudentPassword", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pInsStudents", studentNameParameter, studentEmailParameter, studentLoginParameter, studentPasswordParameter);
         }
     }
 }

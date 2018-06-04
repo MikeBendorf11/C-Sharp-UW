@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DB_122058_test2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DB_122058_test2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Classes">
           <Key>
             <PropertyRef Name="ClassId" />
@@ -59,6 +59,9 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vClasses' does not have a prim
         <EntityType Name="vClasses">
           <Key>
             <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="ClassDate" />
+            <PropertyRef Name="ClassDescription" />
           </Key>
           <Property Name="ClassId" Type="int" Nullable="false" />
           <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -80,6 +83,11 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vLoginRequests' does not have 
         <EntityType Name="vLoginRequests">
           <Key>
             <PropertyRef Name="LoginId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="LoginName" />
+            <PropertyRef Name="NewOrReactivate" />
+            <PropertyRef Name="ReasonForAccess" />
           </Key>
           <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -94,6 +102,8 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
         <EntityType Name="vStudents">
           <Key>
             <PropertyRef Name="StudentId" />
+            <PropertyRef Name="StudentName" />
+            <PropertyRef Name="StudentEmail" />
           </Key>
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="StudentName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -138,6 +148,9 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
           <Parameter Name="StudentLogin" Type="nvarchar" Mode="In" />
           <Parameter Name="StudentPassword" Type="nvarchar" Mode="In" />
           <Parameter Name="StudentId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="pSelRemainingClassesByStudentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
         </Function>
         <Function Name="pUpdClassStudents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OriginalClassId" Type="int" Mode="In" />
@@ -186,7 +199,8 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
     FROM [dbo].[vStudents] AS [vStudents]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_122058_test2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -198,7 +212,14 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
           <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClassDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ClassDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.ClassStudents" FromRole="Classes" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="ClassStudent">
+          <Key>
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="LoginRequest">
           <Key>
@@ -226,16 +247,18 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
           <Key>
             <PropertyRef Name="StudentId" />
           </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StudentEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StudentLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StudentPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Classes" Relationship="Self.ClassStudents" FromRole="Students" ToRole="Classes" />
         </EntityType>
         <EntityType Name="vClass">
           <Key>
             <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="ClassDate" />
+            <PropertyRef Name="ClassDescription" />
           </Key>
           <Property Name="ClassId" Type="Int32" Nullable="false" />
           <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -247,12 +270,17 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
             <PropertyRef Name="ClassId" />
             <PropertyRef Name="StudentId" />
           </Key>
-          <Property Name="ClassId" Nullable="false" Type="Int32" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vLoginRequest">
           <Key>
             <PropertyRef Name="LoginId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="LoginName" />
+            <PropertyRef Name="NewOrReactivate" />
+            <PropertyRef Name="ReasonForAccess" />
           </Key>
           <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -265,6 +293,8 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
         <EntityType Name="vStudent">
           <Key>
             <PropertyRef Name="StudentId" />
+            <PropertyRef Name="StudentName" />
+            <PropertyRef Name="StudentEmail" />
           </Key>
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="StudentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -272,12 +302,9 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
           <Property Name="StudentLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StudentPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="ClassStudents">
-          <End Role="Classes" Type="Self.Class" Multiplicity="*" />
-          <End Role="Students" Type="Self.Student" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="DB_122058_test2Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="ClassStudents" EntityType="Self.ClassStudent" />
           <EntitySet Name="LoginRequests" EntityType="Self.LoginRequest" />
           <EntitySet Name="Logins" EntityType="Self.Login" />
           <EntitySet Name="Students" EntityType="Self.Student" />
@@ -285,10 +312,6 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
           <EntitySet Name="vClassStudents" EntityType="Self.vClassStudent" />
           <EntitySet Name="vLoginRequests" EntityType="Self.vLoginRequest" />
           <EntitySet Name="vStudents" EntityType="Self.vStudent" />
-          <AssociationSet Name="ClassStudents" Association="Self.ClassStudents">
-            <End Role="Classes" EntitySet="Classes" />
-            <End Role="Students" EntitySet="Students" />
-          </AssociationSet>
           <FunctionImport Name="pDelClassStudents">
             <Parameter Name="ClassId" Mode="In" Type="Int32" />
             <Parameter Name="StudentId" Mode="In" Type="Int32" />
@@ -312,8 +335,14 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
             <Parameter Name="LoginName" Mode="In" Type="String" />
             <Parameter Name="ReasonForAccess" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="pInsStudents">
+            <Parameter Name="StudentName" Mode="In" Type="String" />
+            <Parameter Name="StudentEmail" Mode="In" Type="String" />
+            <Parameter Name="StudentLogin" Mode="In" Type="String" />
+            <Parameter Name="StudentPassword" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="pSelClassesByStudentID" ReturnType="Collection(DB_122058_test2Model.pSelClassesByStudentID_Result)">
-          <Parameter Name="StudentId" Mode="In" Type="Int32" />
+            <Parameter Name="StudentId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pSelClassesByStudents" ReturnType="Collection(DB_122058_test2Model.pSelClassesByStudents_Result)" />
           <FunctionImport Name="pSelLoginIdByLoginAndPassword">
@@ -321,17 +350,14 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
             <Parameter Name="StudentPassword" Mode="In" Type="String" />
             <Parameter Name="StudentId" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="pSelRemainingClassesByStudentID" ReturnType="Collection(DB_122058_test2Model.pSelRemainingClassesByStudentID_Result)">
+            <Parameter Name="StudentId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="pUpdClassStudents">
             <Parameter Name="OriginalClassId" Mode="In" Type="Int32" />
             <Parameter Name="OriginalStudentId" Mode="In" Type="Int32" />
             <Parameter Name="NewClassId" Mode="In" Type="Int32" />
             <Parameter Name="NewStudentId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="pInsStudents">
-            <Parameter Name="StudentName" Mode="In" Type="String" />
-            <Parameter Name="StudentEmail" Mode="In" Type="String" />
-            <Parameter Name="StudentLogin" Mode="In" Type="String" />
-            <Parameter Name="StudentPassword" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pSelClassesByStudentID_Result">
@@ -352,6 +378,12 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
           <Property Type="DateTime" Name="ClassDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="ClassDescription" Nullable="false" MaxLength="2000" />
         </ComplexType>
+        <ComplexType Name="pSelRemainingClassesByStudentID_Result">
+          <Property Type="Int32" Name="ClassId" Nullable="false" />
+          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="ClassDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ClassDescription" Nullable="false" MaxLength="2000" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -365,6 +397,14 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="ClassDate" ColumnName="ClassDate" />
                 <ScalarProperty Name="ClassDescription" ColumnName="ClassDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassStudents">
+            <EntityTypeMapping TypeName="DB_122058_test2Model.ClassStudent">
+              <MappingFragment StoreEntitySet="ClassStudents">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -445,19 +485,12 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ClassStudents" TypeName="DB_122058_test2Model.ClassStudents" StoreEntitySet="ClassStudents">
-            <EndProperty Name="Classes">
-              <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-            </EndProperty>
-            <EndProperty Name="Students">
-              <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="pDelClassStudents" FunctionName="DB_122058_test2Model.Store.pDelClassStudents" />
           <FunctionImportMapping FunctionImportName="pDelLogins" FunctionName="DB_122058_test2Model.Store.pDelLogins" />
           <FunctionImportMapping FunctionImportName="pInsClassStudents" FunctionName="DB_122058_test2Model.Store.pInsClassStudents" />
           <FunctionImportMapping FunctionImportName="pInsLoginRequest" FunctionName="DB_122058_test2Model.Store.pInsLoginRequest" />
           <FunctionImportMapping FunctionImportName="pInsLogins" FunctionName="DB_122058_test2Model.Store.pInsLogins" />
+          <FunctionImportMapping FunctionImportName="pInsStudents" FunctionName="DB_122058_test2Model.Store.pInsStudents" />
           <FunctionImportMapping FunctionImportName="pSelClassesByStudentID" FunctionName="DB_122058_test2Model.Store.pSelClassesByStudentID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB_122058_test2Model.pSelClassesByStudentID_Result">
@@ -485,8 +518,17 @@ warning 6002: The table/view 'DB_122058_test2.dbo.vStudents' does not have a pri
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pSelLoginIdByLoginAndPassword" FunctionName="DB_122058_test2Model.Store.pSelLoginIdByLoginAndPassword" />
+          <FunctionImportMapping FunctionImportName="pSelRemainingClassesByStudentID" FunctionName="DB_122058_test2Model.Store.pSelRemainingClassesByStudentID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_122058_test2Model.pSelRemainingClassesByStudentID_Result">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassDate" ColumnName="ClassDate" />
+                <ScalarProperty Name="ClassDescription" ColumnName="ClassDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pUpdClassStudents" FunctionName="DB_122058_test2Model.Store.pUpdClassStudents" />
-          <FunctionImportMapping FunctionImportName="pInsStudents" FunctionName="DB_122058_test2Model.Store.pInsStudents" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

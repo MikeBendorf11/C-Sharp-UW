@@ -12,12 +12,9 @@ namespace Final.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class ClassStudent
     {
+        public int ClassId { get; set; }
         public int StudentId { get; set; }
-        public string StudentName { get; set; }
-        public string StudentEmail { get; set; }
-        public string StudentLogin { get; set; }
-        public string StudentPassword { get; set; }
     }
 }

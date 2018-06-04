@@ -23,8 +23,8 @@ namespace Final.Controllers
         {
             if (Session["User"] != null && Request.HttpMethod != "POST") //already logged in
             {
-                TempData["shortMessage"] = "You are already logged in";
-                return RedirectToAction("MyCourses", "User");
+                TempData["shortMessage"] = "You are already logged in. ";
+                return Redirect(Request.UrlReferrer.PathAndQuery);
             }
             else if (Session["User"] == null && Request.HttpMethod == "GET")//not logged in and 1st time loaded
             {

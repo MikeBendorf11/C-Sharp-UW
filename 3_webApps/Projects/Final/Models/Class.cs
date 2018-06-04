@@ -14,18 +14,9 @@ namespace Final.Models
     
     public partial class Class
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Class()
-        {
-            this.Students = new HashSet<Student>();
-        }
-    
         public int ClassId { get; set; }
         public string ClassName { get; set; }
         public System.DateTime ClassDate { get; set; }
         public string ClassDescription { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
     }
 }

@@ -1,33 +1,43 @@
 ﻿
+
 @model System.Data.Entity.Core.Objects.ObjectResult<Final.Models.pSelClassesByStudentID_Result>
+@* if Model is called twice it crashes, then enumerating it once then use myModel twice *@
+@{ var myModel = Model.ToList();}
 @{
     ViewBag.Title = "MyCourses";
+    var status = "";
+
     if (TempData["shortMessage"] == null)
     {
         TempData["shortMessage"] = "";
     }
+    if (myModel.Count() == 0)
+    {
+        status = " You are not registered in any courses.";
+    }
 }
 
 <h2>MyCourses</h2>
-<p><b>@TempData["shortMessage"].ToString()</b></p>
+<p><b>@TempData["shortMessage"].ToString()</b>@status</p>
 
 @using (Html.BeginForm("MyCourses", "User", FormMethod.Post))
 {
     <table class="table-condensed table-bordered">
         <tr>
-            <th>ClassName</th>
-            <th>ClassDate</th>
-            <th>ClassDescription</th>
-            <th>Action</th> 
+            <th>Course Name</th>
+            <th>Start Date</th>
+            <th>Description</th>
+            <th>Action</th>
         </tr>
-        @foreach (var item in Model)
+        @foreach (var item in myModel)
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.ClassName)</td>
                 <td>@Html.DisplayFor(modelItem => item.ClassDate)</td>
                 <td width="250px">@Html.DisplayFor(modelItem => item.ClassDescription)</td>
-                <td><input type="submit" @{<text>value="Drop Course @item.ClassId"</text>}  name="ClassId" /></td> 
+                @* Each button sends value to action *@
+                <td><input type="submit" @{ <text> value="Drop Course @item.ClassId" </text>   } name="ClassId" /></td>
             </tr>
-        }
+    }
     </table>
-}
+    }

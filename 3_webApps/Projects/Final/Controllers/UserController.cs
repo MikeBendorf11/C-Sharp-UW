@@ -11,8 +11,8 @@ namespace Final.Controllers
     public class UserController : Controller
     {
         StudentProcessor processor = new StudentProcessor();
-
-        public ActionResult Login(string Login, string Password)
+        
+        public ActionResult Login(string Login, string Password) 
         {
             if (Session["User"] == null && Request.HttpMethod != "POST") //not logged in
             { 
@@ -36,15 +36,15 @@ namespace Final.Controllers
             }
             else if (Session["User"] != null) 
             {
-                TempData["shortMessage"] = "You are already logged in";
-                return RedirectToAction("MyCourses");
+                TempData["shortMessage"] = "You are already logged in. ";
+                return Redirect(Request.UrlReferrer.PathAndQuery);
             }
-            ViewBag.Message = "Unknown Condition";
+            ViewBag.Message = "Unknown Condition"; 
             return View();
         }
         
         //string ClassID is the "value=" attribute of the summit button for every course row
-        public ActionResult MyCourses(string ClassID)
+        public ActionResult MyCourses(string ClassID)   
         {
             if (Session["User"] == null)
             {
@@ -66,25 +66,47 @@ namespace Final.Controllers
 
                 ObjectResult or = processor.db.pSelClassesByStudentID(stdID);
                 return View(or);
-            }
+            }  
             TempData["shortMessage"] = "Uknown condition";
             ViewBag.Message = "Uknown condition";
             return RedirectToAction("Login");
         }
-
-        private ActionResult View(Func<IEnumerator<pSelClassesByStudentID_Result>> getEnumerator)
+      
+        public ActionResult Register(string ClassID)
         {
-            throw new NotImplementedException();
-        }
-
-        public ActionResult Register()
-        {
-            if (Session["User"] != null)
+            if (Session["User"] != null && Request.HttpMethod != "POST")
             {
-                return View();
+                int stdID = int.Parse(Session["User"].ToString());
+                ObjectResult or = processor.db.pSelRemainingClassesByStudentID(stdID);
+                return View(or);
             }
-            TempData["shortMessage"] = "Please login first"; 
-            return RedirectToAction("Login");
+            else if (Session["User"] != null && Request.HttpMethod == "POST")
+            {
+                int stdID = int.Parse(Session["User"].ToString());
+                Match match = Regex.Match(ClassID, @"\d");
+                int classID = int.Parse(match.Value);
+                processor.db.pInsClassStudents(classID, stdID);
+
+                ObjectResult or = processor.db.pSelRemainingClassesByStudentID(stdID);
+                return View(or);
+            }
+                TempData["shortMessage"] = "Please login first"; 
+            return RedirectToAction("Login"); 
         }
-    }
+        public ActionResult Logout()
+        {
+            if (Session["User"] == null)
+            {
+                //TempData["ShortMessage"] = "Please Login First";
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                Session["User"] = null;
+                TempData["ShortMessage"] = "Logout Successful!";
+                return RedirectToAction("Courses", "Default");
+            }
+                
+        }
+    };
 };

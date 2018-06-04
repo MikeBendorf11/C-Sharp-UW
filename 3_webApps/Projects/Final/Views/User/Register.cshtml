@@ -1,11 +1,42 @@
-﻿
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<Final.Models.pSelRemainingClassesByStudentID_Result>
+@{ 
+    int stdID = int.Parse(Session["User"].ToString());
+    var myModel = Model.ToList();
+}
 @{
+    var status = "";
     ViewBag.Title = "Register";
     if (TempData["shortMessage"] == null)
     {
         TempData["shortMessage"] = "";
     }
+    if (myModel.Count() == 0)
+    {
+        status = " There are no more courses available for this term";
+    }
 }
 
 <h2>Register</h2>
-<p><b>@TempData["shortMessage"].ToString()</b></p>
+<p><b>@TempData["shortMessage"].ToString()</b>@status</p>
+
+@using (Html.BeginForm("Register", "User", FormMethod.Post))
+{
+    <table class="table-condensed table-bordered">
+        <tr>
+            <th>Course Name</th>
+            <th>Start Date</th> 
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in myModel)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ClassName)</td>
+                <td>@Html.DisplayFor(modelItem => item.ClassDate)</td>
+                <td width="250px">@Html.DisplayFor(modelItem => item.ClassDescription)</td>
+                @* Each button sends value to action *@
+                <td><input type="submit" @{ <text> value="Register Course @item.ClassId" </text>     } name="ClassId" /></td>
+            </tr>
+        }
+    </table>
+}

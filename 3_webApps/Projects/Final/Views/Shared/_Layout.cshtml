@@ -24,7 +24,7 @@
                     <li>@Html.ActionLink("My Courses", "MyCourses", "User")</li>
                     <li>@Html.ActionLink("Register", "Register", "User")</li>
                     <li>@Html.ActionLink("Login","Login","User")</li>
-                    <li>@Html.ActionLink("New Login","NewLogin","Default")</li>    
+                    <li>@Html.ActionLink("New Login","NewLogin","Default")</li> <li>@Html.ActionLink("Logout", "Logout", "User")</li>   
                 </ul>
             </div>
         </div>
@@ -32,9 +32,9 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <br />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - MB MVC Productions</p>
         </footer>
     </div>
 
