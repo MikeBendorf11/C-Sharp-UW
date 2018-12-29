@@ -32,11 +32,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
     <div class="templatemo-flex-row flex-content-row">
-        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom: 15px; padding-top: 15px">
-            <h1>Project 02</h1>
-        </div>
-    </div>
-    <div class="templatemo-flex-row flex-content-row">
         <div id="asg1" class="templatemo-content-widget white-bg col-1" style="height: fit-content">
             <i class="fa fa-times"></i>
             <div class="square-light"></div>
@@ -50,14 +45,8 @@
                 <li>The same idea stands for creating events</li>
                 <li>Notice I'm not using a designer page</li>
 
-            </ul>
-            <%--Github widget--%>
-            <p>&nbsp;</p>
-            <p></p>
-            <p align="right">
-                <iframe src="gh.html?sha=6823ec386882d062bdf0ed4edf3251c365f03b54"
-                allowtransparency="true" frameborder="0" scrolling="no" width="350px" height="130px"></iframe>
-            </p>           
+          
+          
             <asp:Label class="blink" ID="Label1" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
         </div>
         <div class="col-1">

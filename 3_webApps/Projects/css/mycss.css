@@ -1,0 +1,41 @@
+body, .templatemo-left-nav{
+  background: #3e4146;
+  font-size: 1.5em;
+  
+}
+
+.templatemo-left-nav a{
+  color: rgb(255, 255, 235);
+}
+
+
+li{
+  list-style-type: circle;
+  margin-left: 20px;
+}
+.avatText{
+    text-align: center;
+}
+.avatar-bg {
+  color: white;
+}
+#myModal{
+    background: transparent;
+}
+.modal-content {
+    background-color: #555555;
+    color: white;
+}
+.modal-dialog {
+    width: 800px;
+    margin-left: 25%;
+    padding-top: 160px;
+}
+.modal-backdrop {
+    z-index: initial;
+}
+
+nav li {
+   font-size: 0.8em;
+   margin: 0;
+}

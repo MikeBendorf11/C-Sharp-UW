@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\mycss.css" />
     <Content Include="css\screen.css" />
     <Content Include="gh.html" />
     <Content Include="images\avatar1.jpg" />
@@ -105,7 +106,12 @@
     <Content Include="images\checkbox-radio-sheet.png" />
     <Content Include="images\grey_bg.jpg" />
     <Content Include="images\profile-photo.jpg" />
+    <Content Include="js\bootstrap-filestyle.min.js" />
+    <Content Include="js\bootstrap.min.js" />
     <Content Include="js\githubWidget.js" />
+    <Content Include="js\jquery-1.11.2.min.js" />
+    <Content Include="js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="js\templatemo-script.js" />
     <Content Include="Project03.aspx" />
     <Content Include="Project02.aspx" />
     <Content Include="css\bootstrap.css" />
@@ -131,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Project01.aspx" />
-    <Content Include="Default.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Web.config" />

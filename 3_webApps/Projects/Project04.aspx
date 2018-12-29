@@ -17,17 +17,11 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="phProj4" runat="server">
-     <div class="templatemo-flex-row flex-content-row">
-        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom: 15px; padding-top: 15px">
-            <h1>Project 04</h1>
-        </div>
-    </div>
+
     <div class="templatemo-flex-row flex-content-row">
         <div class="col-1"></div>
         <div class="templatemo-content-widget blue-bg col-2" style="">
 
-               <iframe style="float:right" src="gh.html?sha=1238da42174a915d1acfcbafbdfaa07760b24fbc"
-                    allowtransparency="true" frameborder="0" scrolling="no" width="350px" height="130px"></iframe>
             <i class="fa fa-times"></i>
             <div class="square-dark"></div>
             <h2 class="templatemo-inline-block">User Activity</h2>

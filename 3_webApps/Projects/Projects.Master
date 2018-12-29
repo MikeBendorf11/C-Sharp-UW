@@ -12,8 +12,8 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
+    <link href="css/mycss.css" rel="stylesheet" />
 
-    <script src="scripts/jquery-3.3.1.js"></script>
     <%--<script src="js/Stopwatch2.js"></script>--%>
     <script runat="server">
 
@@ -122,73 +122,7 @@
     </script>
 
 
-    <%--    //Avatar animation
-    ###Looks like jquery runs first and then js function has to be called from within--%>
-    <script>
-        $(document).ready(function () {
-            $("img[id*='avatar']").click(
-                function (event) {
-                    animateAvatar(event.target.id);
-                    setCookie(event.target.id);
-                });
-        });
-
-
-        function animateAvatar(avatar) {
-            if (!avatar.includes("avatar")) return;
-
-            //animate Avatar
-            var activeAvatar = parseInt(avatar[6]); //number part of id
-            var avatarList = [];
-            var tdList = []
-            for (i = 1; i < 7; i++) { //list without activated avatar
-                if (i == activeAvatar) continue;
-                avatarList.push("avatar" + i);
-                tdList.push("tdAvat" + i);
-            }
-
-            var concatAvat = "";
-            var concatTd = "";
-            for (i = 0; ; i++) { //all avats and td ids in one sentence
-                concatAvat += "#" + avatarList[i];
-                concatTd += "#" + tdList[i];
-                if (i == 4) break;
-                concatAvat += ", ";
-                concatTd += ", ";
-            }
-
-            //$(concatAvat).fadeTo("3000", 0.0);
-            $(concatTd).hide();
-            $("#" + avatar).animate({
-                width: '60px',
-                height: '60px',
-            }, 2000, function () { location.reload(); });
-            $("#divAvatCont").css({ 'background-color': 'transparent' }).animate({
-                'top': '10%',
-                'left': '90%',
-            }, 2000);
-            $("#h3Welcome").each(function () {
-                var elem = $(this);
-                elem.html("WELCOME");
-                setInterval(function () {
-                    if (elem.css('visibility') == 'hidden') {
-                        elem.css('visibility', 'visible');
-                    } else {
-                        elem.css('visibility', 'hidden');
-                    }
-                }, 400);
-            });
-            $(".avatText").css('visibility', 'hidden');
-        }
-
-        //Create cookie
-        function setCookie(avatar) {
-            var d = new Date();
-            d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-            var expires = "expires=" + d.toUTCString();
-            document.cookie = "Avatar=" + avatar + ";" + expires + ";path=/";
-        }
-    </script>
+ 
 
     <asp:ContentPlaceHolder ID="phHead" runat="server">
     </asp:ContentPlaceHolder>
@@ -197,11 +131,44 @@
     <form runat="server">
         <%--Track cookies - show overlay--%>
         <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay">
+            <!-- Modal -->
+            
+                <div id="myModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">This presentation was made using:</h4>
+                      </div>
+                      <div class="modal-body">
+                       		<p>
+							 
+						</p>
+					
+						<ul>
+							<li>Web Controls, Data Binding</li>
+							<li>SQL Queries, Stored Procedures</li>
+							<li>Event handling, Javascript, Jquery</li>
+							<li>Collections, Exception Handling</li>
+						</ul>
+                      </div>
+                      <div class="modal-footer">
+                        <button id="startPresentation" type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
             <div class="templatemo-flex-row flex-content-row">
-                <div id="divAvatCont" class="templatemo-content-widget avatar-bg col-1 center" style="position: absolute;">
-                    <h3 class="avatText">Hi first time visitor!
+                <div id="divAvatCont" class="templatemo-content-widget avatar-bg col-1 center" style="position: absolute; visibility: hidden">
+                    <div class="avatText">
+
+					
                     <br />
-                        Please select your Avatar to proceed:&nbsp;&nbsp;</h3>
+                        <h4>Select any of the avatars to start a new session:</h4></div>
                     <br />
                     <table>
                         <tr>
@@ -227,11 +194,7 @@
                                 <img class="img-circular" id="avatar1" src="images/avatar1.jpg" />
                                 &nbsp; </td>
                         </tr>
-                        <tr>
-                            <td colspan="7" style="text-align: right;">
-                                <br />
-                                <span class="avatText">Images by <a href="https://dribbble.com/shots/2084099-%20%20%20Avatars-Atlassian">Andrew McKay ©</a> </span></td>
-                        </tr>
+                       
                     </table>
                 </div>
             </div>
@@ -240,10 +203,10 @@
             <div id="container" class="templatemo-sidebar">
                 <header class="templatemo-site-header">
                     <div class="square-light"></div>
-                    <h1>Portfolio</h1>
+                    <h1>C#</h1>
                 </header>
                 <div class="profile-photo-container">
-                    <img src="images/profile-photo.jpg" alt="Profile Photo" class="img-responsive">
+                    <img src="images/profile-photo.png" alt="Profile Photo" class="img-responsive">
                     <div class="profile-photo-overlay"></div>
                 </div>
                 <!-- Search box -->
@@ -257,17 +220,15 @@
                         ID is used to generate the href link, so has to be the same as the page name ex.Default.aspx --%>
                     <ul>
                         <li>
-                            <asp:LinkButton runat="server" ID="Default" OnClick="Links_Click"><i class="fa fa-home fa-fw"></i>Home</asp:LinkButton></li>
+                            <asp:LinkButton runat="server" ID="Final" OnClick="Links_Click"><i class="fa fa-university fa-fw"></i>.NET MVC</asp:LinkButton></li>                            
+                         <li>
+                            <asp:LinkButton runat="server" ID="Project04" OnClick="Links_Click"><i class="fa fa-line-chart fa-fw"></i>SESSION DATA</asp:LinkButton></li>
                         <li>
-                            <asp:LinkButton runat="server" ID="Project01" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>Project 01</asp:LinkButton></li>
+                            <asp:LinkButton runat="server" ID="Project03" OnClick="Links_Click"><i class="fa fa-server fa-fw"></i>MSSQL</asp:LinkButton></li>
                         <li>
-                            <asp:LinkButton runat="server" ID="Project02" OnClick="Links_Click"><i class="fa fa-save fa-fw"></i>Project 02</asp:LinkButton></li>
+                            <asp:LinkButton runat="server" ID="Project02" OnClick="Links_Click"><i class="fa fa-save fa-fw"></i>FILE SYSTEM</asp:LinkButton></li>
                         <li>
-                            <asp:LinkButton runat="server" ID="Project03" OnClick="Links_Click"><i class="fa fa-server fa-fw"></i>Project 03</asp:LinkButton></li>
-                        <li>
-                            <asp:LinkButton runat="server" ID="Project04" OnClick="Links_Click"><i class="fa fa-line-chart fa-fw"></i>Project 04</asp:LinkButton></li>
-                        <li>
-                            <asp:LinkButton runat="server" ID="Final" OnClick="Links_Click"><i class="fa fa-university fa-fw"></i>Final Project</asp:LinkButton></li>
+                            <asp:LinkButton runat="server" ID="Project01" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>REGEX XML</asp:LinkButton></li>          
                     </ul>
 
 
@@ -422,4 +383,83 @@
         <script type="text/javascript" src="js/templatemo-script.js"></script>
     </form>
 </body>
+        <script src="scripts/jquery-3.3.1.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+       <%--    //Avatar animation
+    ###Looks like jquery runs first and then js function has to be called from within--%>
+    <script>
+        $(document).ready(function () {
+            $('#myModal').modal('show');
+            console.log($('#startPresentation'))
+            $('#startPresentation').click(function (event) {
+                console.log('here');
+                var btn = document.querySelector('#divAvatCont');
+                console.log(btn)
+                btn.style.visibility = 'visible';
+            })
+
+            $("img[id*='avatar']").click(
+                function (event) {
+                    animateAvatar(event.target.id);
+                    setCookie(event.target.id);
+                });
+        });
+
+
+        function animateAvatar(avatar) {
+            if (!avatar.includes("avatar")) return;
+
+            //animate Avatar
+            var activeAvatar = parseInt(avatar[6]); //number part of id
+            var avatarList = [];
+            var tdList = []
+            for (i = 1; i < 7; i++) { //list without activated avatar
+                if (i == activeAvatar) continue;
+                avatarList.push("avatar" + i);
+                tdList.push("tdAvat" + i);
+            }
+
+            var concatAvat = "";
+            var concatTd = "";
+            for (i = 0; ; i++) { //all avats and td ids in one sentence
+                concatAvat += "#" + avatarList[i];
+                concatTd += "#" + tdList[i];
+                if (i == 4) break;
+                concatAvat += ", ";
+                concatTd += ", ";
+            }
+
+            //$(concatAvat).fadeTo("3000", 0.0); 
+            $(concatTd).hide();
+            $("#" + avatar).animate({
+                width: '60px',
+                height: '60px',
+            }, 2000, function () { location.reload(); });
+            $("#divAvatCont").css({ 'background-color': 'transparent' }).animate({
+                'top': '10%',
+                'left': '90%',
+            }, 2000);
+            $("#h3Welcome").each(function () {
+                var elem = $(this);
+                elem.html("WELCOME");
+                setInterval(function () {
+                    if (elem.css('visibility') == 'hidden') {
+                        elem.css('visibility', 'visible');
+                    } else {
+                        elem.css('visibility', 'hidden');
+                    }
+                }, 400);
+            });
+            $(".avatText").css('visibility', 'hidden');
+        }
+
+        //Create cookie
+        function setCookie(avatar) {
+            var d = new Date();
+            d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = "Avatar=" + avatar + ";" + expires + ";path=/";
+        }
+    </script>
 </html>

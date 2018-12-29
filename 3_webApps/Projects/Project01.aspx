@@ -59,11 +59,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
-     <div class="templatemo-flex-row flex-content-row">
-        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom:15px; padding-top: 15px">
-            <h1>PROJECT 01</h1>
-        </div>
-    </div>
+
     <div class="templatemo-flex-row flex-content-row">
     <div class="col-2">
         
@@ -97,11 +93,7 @@
             </ul><br />
             <textarea style="width:350px; height: 70px"><Transactions><Transaction><Id>1</Id><Date>11/23/2014</Date><Type>Deposit</Type><Description>Pay</Description><Category>Income</Category><Amount>1327</Amount></Transaction><Transaction><Id>2</Id><Date>11/24/2014</Date><Type>Check</Type><Description>Food</Description></textarea>
 
-            <%--Github widget--%>
-            <p>&nbsp;</p>
-            <p></p>
-            <iframe src="gh.html?sha=9c326a99342a7edf9fb48e542967249879e8efd7"
-                allowtransparency="true" frameborder="0" scrolling="no" width="350px" height="130px"></iframe>
+
         </div>
     </div>
 

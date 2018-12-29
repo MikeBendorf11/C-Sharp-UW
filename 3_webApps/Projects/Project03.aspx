@@ -137,11 +137,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
-    <div class="templatemo-flex-row flex-content-row">
-        <div class="templatemo-content-widget grey-bg col-1" style="padding-bottom: 15px; padding-top: 15px">
-            <h1>Project 03</h1>
-        </div>
-    </div>
+
     <div class="templatemo-flex-row flex-content-row">
         <div id="asg1" class="templatemo-content-widget white-bg col-1" style="height: fit-content">
             <i class="fa fa-times"></i>
@@ -154,12 +150,6 @@
                 <li>It prevents SQL injection attacks since it is not using SQL command strings</li>
 
             </ul>
-            <%--Github widget--%>
-            <p>&nbsp;</p>
-            <p align="right">
-                <iframe src="gh.html?sha=faa6987701533adb5fac7aac74b4b51a5284f75c"
-                    allowtransparency="true" frameborder="0" scrolling="no" width="350px" height="130px"></iframe>
-            </p>
 
         </div>
         <div class="templatemo-content-widget pink-bg col-1">
