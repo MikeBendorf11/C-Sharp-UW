@@ -1,5 +1,5 @@
 ﻿@model System.Data.Entity.Core.Objects.ObjectResult<Final.Models.pSelRemainingClassesByStudentID_Result>
-@{ 
+@{
     int stdID = int.Parse(Session["User"].ToString());
     var myModel = Model.ToList();
 }
@@ -12,19 +12,21 @@
     }
     if (myModel.Count() == 0)
     {
-        status = " There are no more courses available for this term";
+        status = " There are no more additional courses available for this term";
     }
 }
 
 <h2>Register</h2>
-<p><b>@TempData["shortMessage"].ToString()</b>@status</p>
+<p><b>@status</b></p>
 
 @using (Html.BeginForm("Register", "User", FormMethod.Post))
 {
-    <table class="table-condensed table-bordered">
+    <table style="visibility:hidden"
+           id="hometable"
+           class="table table-bordered table-striped table-hover">
         <tr>
             <th>Course Name</th>
-            <th>Start Date</th> 
+            <th>Start Date</th>
             <th>Description</th>
             <th>Action</th>
         </tr>
@@ -33,10 +35,48 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.ClassName)</td>
                 <td>@Html.DisplayFor(modelItem => item.ClassDate)</td>
-                <td width="250px">@Html.DisplayFor(modelItem => item.ClassDescription)</td>
+                <td>@Html.DisplayFor(modelItem => item.ClassDescription)</td>
                 @* Each button sends value to action *@
-                <td><input type="submit" @{ <text> value="Register Course @item.ClassId" </text>     } name="ClassId" /></td>
+                <td align="center">
+                    @Html.TextBox("CourseN", @item.ClassName, new { @style = "display:  none" })
+                    <button class="form-control"
+                            type="submit" @{ <text> value="Register @item.ClassId" </text>      } name="ClassId">
+                        Register
+                    </button>
+                </td>
             </tr>
-        }
+    }
     </table>
-}
+    }
+<div id="modalRegistered" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Success!</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @TempData["shortMessage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    let strStatus = '@status';
+    let table = document.getElementById("hometable");
+
+    if (strStatus == "") {
+        table.style.visibility = 'visible';
+    } else {
+        table.style.visibility = 'hidden';
+    }
+
+</script>

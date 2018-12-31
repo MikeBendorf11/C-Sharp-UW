@@ -1,14 +1,25 @@
-body, .templatemo-left-nav{
-  background: #3e4146;
+body{
+  background: unset;
   font-size: 1.5em;
-  
+  background-image: url(../images/bg_tile2.png); 
+  background-size: 40%;
+  overflow: hidden;
 }
 
+#container{
+  
+    
+}
 .templatemo-left-nav a{
   color: rgb(255, 255, 235);
 }
 
+.templatemo-content {
+    min-height: unset;
+}
+.light-gray-bg { 
 
+}
 li{
   list-style-type: circle;
   margin-left: 20px;
@@ -17,18 +28,26 @@ li{
     text-align: center;
 }
 .avatar-bg {
-  color: white;
+  background-color: white;
+  color: #333333;
+}
+.img-circular {
+    width: 80px;
+    height: 80px;
 }
 #myModal{
     background: transparent;
+    position: absolute;
+    margin: 0 auto 0 auto;
+    left: 0; top: 0;
 }
 .modal-content {
-    background-color: #555555;
-    color: white;
+    /*background-color: #555555;
+    color: white;*/
 }
 .modal-dialog {
     width: 800px;
-    margin-left: 25%;
+
     padding-top: 160px;
 }
 .modal-backdrop {
@@ -36,6 +55,18 @@ li{
 }
 
 nav li {
-   font-size: 0.8em;
+   font-size: 0.6em;
    margin: 0;
+}
+#divProject{
+    width: 100%;
+}
+iframe {
+    margin: 0 100px 0 0; 
+    box-sizing: border-box;
+    display: block; /* iframes are inline by default */
+    background: rgba(255, 255, 255, 0.00);
+    border: none; /* Reset default border */
+    height: 90vh; /* Viewport-relative units */
+    width: inherit;
 }

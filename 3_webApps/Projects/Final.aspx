@@ -2,16 +2,29 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="phHead" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="phContent1" runat="server">
-     <div class="templatemo-flex-row flex-content-row">
-    </div>
+
 
      <div class="templatemo-flex-row flex-content-row">
-         <div class="col-1"></div>
-         <div class="col-1" style="background-color: white;">
+         
+         <div class="col-1" 
+			  style=" width:100%; 
+				      background-color: #e2efef;
+					  background-image:url(images/loader.gif), url(images/bar.png);
+					  background-position: 50% 50%, 0% 0%;
+					  background-repeat: no-repeat, no-repeat;
+					  background-size: 70px, auto auto;
+					  ">
+					  
              <%-- Was just /Final/ --%>
-                  <iframe src="http://127.0.0.1:61452/" width="850px" height="630px"></iframe>    
-
+                  <iframe 
+					id="theiframe" 
+					
+					src="http://localhost:61452/"></iframe>    
+					<!-- http://localhost:61452/
+					style="visibility:hidden;" 
+					onload="this.style.visibility='visible';" 
+					-->
          </div>
-         <div class="col-1"></div> 
+         
      </div>
 </asp:Content>

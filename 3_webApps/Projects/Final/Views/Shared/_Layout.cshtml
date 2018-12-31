@@ -1,44 +1,103 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    string session = "";
+    session = (Session["User"] != null).ToString(); 
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Courses", "Courses", "Default", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Home", "Courses", "Default", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse navbar-">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("My Courses", "MyCourses", "User")</li>
-                    <li>@Html.ActionLink("Register", "Register", "User")</li>
-                    <li>@Html.ActionLink("Login","Login","User")</li>
-                    <li>@Html.ActionLink("New Login","NewLogin","Default")</li> <li>@Html.ActionLink("Logout", "Logout", "User")</li>   
+                    <li class="loggedIn" style="display: none">@Html.ActionLink("My Courses", "MyCourses", "User")</li>
+                    <li class="loggedIn"  style="display: none">@Html.ActionLink("Register", "Register", "User")</li>
+                    <li class="loggedOut"  style="display: none">@Html.ActionLink("Login","Login","User")</li>
+                    <li class="loggedOut"  style="display: none">@Html.ActionLink("Create Account","NewLogin","Default")</li> <li  class="loggedIn"  style="display: none">@Html.ActionLink("Logout", "Logout", "User")</li>   
                 </ul>
+                <span id="urlnav"  class="nav navbar-nav navbar-right"></span>
             </div>
-        </div>
     </div>
 
     <div class="container body-content">
         @RenderBody()
         <br />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - MB MVC Productions</p>
-        </footer>
+        <div class="footer navbar-fixed-bottom">
+            <p>This MVC site was built with Visual Studio 2015. &copy; @DateTime.Now.Year - A Company Name Here. All rights reserved.</p>
+            <p>
+                Privacy Statement | Terms of Use | Contact Us | Advertise with Us | Hosted on WinHost
+            </p>
+        </div>
     </div>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        //iframe url
+        let urlinput = document.createElement('input');
+        let label = document.createElement('span');
+        label.id = 'urllabel';
+        label.innerHTML = 'Frame URL: '
+        urlinput.classList.add('form-control')
+        urlinput.id = 'ainput';
+        urlinput.disabled = true;
+        urlinput.value = 'root' + window.location.pathname;
+        let anav = document.getElementById('urlnav');
+        let adiv = document.createElement('div');
+        adiv.id = 'urlcont'
+        adiv.appendChild(label);
+        adiv.appendChild(urlinput);
+        anav.appendChild(adiv);
+        
+        //hide/show links
+        var session = '@session';
+        var inElems = Array.from(document.getElementsByClassName('loggedIn'));
+        var outElems = Array.from(document.getElementsByClassName('loggedOut'));
+
+        if(session == 'False'){ 
+            inElems.forEach((v)=>{
+                v.style.display = 'none';
+            })
+            outElems.forEach((v) => {
+                v.style.display = 'initial';
+            })
+        } else if (session == 'True') {
+            inElems.forEach((v)=>{
+                v.style.display = 'initial';
+            })
+            outElems.forEach((v) => {
+                v.style.display = 'none';
+            })
+        } else {
+            console.log('unmet condition')
+        }
+        //runs if logged after dropping or registering for a course, modal needs jquery
+        if ('@TempData["shortMessage"]'.includes('Dropped')) {
+            $('#modalDropped').modal('show');
+        }
+        else if ('@TempData["shortMessage"]'.includes('Registered')) {
+            $('#modalRegistered').modal('show');
+        }
+        else {
+            console.log('@TempData["shortMessage"]')
+        }
+    </script>
 </body>
 </html>

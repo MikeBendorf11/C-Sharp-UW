@@ -8,21 +8,22 @@
         TempData["shortMessage"] = "";
     }
 }
-<h2>The Marketing Learning Portal</h2>
+<h2>MVC Registration System</h2>
+<p>This is the list of courses available for this term. Create an account or sign in to register for any course. <br /> Default credentials are <b>login: test, password: test</b></p>
 <p><b>@TempData["shortMessage"].ToString()</b><br /></p>
 
-<table class="table-condensed table-bordered">
+<table id="hometable" class="table table-bordered table-striped table-hover">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.ClassName)</th>
-        <th>@Html.DisplayNameFor(model => model.ClassDate)</th>
-        <th>@Html.DisplayNameFor(model => model.ClassDescription)</th>
+        <th>Course Name</th>
+        <th>Start Date</th>
+        <th>Description</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.ClassName)</td>
             <td>@Html.DisplayFor(modelItem => item.ClassDate)</td>
-            <td width="250">@Html.DisplayFor(modelItem => item.ClassDescription)</td>
+            <td>@Html.DisplayFor(modelItem => item.ClassDescription)</td>
         </tr>
     }
-</table>
+</table><br /><br /><br /><br />

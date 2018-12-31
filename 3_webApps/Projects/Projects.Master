@@ -4,9 +4,9 @@
 <%@ Import Namespace="System.Diagnostics" %>
 
 <!DOCTYPE html>
- 
+
 <html>
-<head runat="server">     
+<head>
     <title></title>
     <meta charset="utf-8" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -14,6 +14,10 @@
     <link href="css/templatemo-style.css" rel="stylesheet" />
     <link href="css/mycss.css" rel="stylesheet" />
 
+    <script src="scripts/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/templatemo-script.js"></script>
+     
     <%--<script src="js/Stopwatch2.js"></script>--%>
     <script runat="server">
 
@@ -78,6 +82,7 @@
 
             //set href of LinkButton to senderID + queryString
             //SenderID matches html destination name ex.Default, Project01, etc..
+
             string id = ((LinkButton)sender).ClientID;
             string url = id + ".aspx?prev=" + currentPage;
             Response.Redirect(url);
@@ -87,6 +92,8 @@
         {
             divProject.Visible = true;
             divAvatar.Visible = false;
+            divModal.Visible = false;
+            divContainer.Visible = true;
         }
         private bool IsCookieDisabled()
         {
@@ -122,53 +129,63 @@
     </script>
 
 
- 
+
 
     <asp:ContentPlaceHolder ID="phHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form runat="server">
-        <%--Track cookies - show overlay--%>
-        <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay">
-            <!-- Modal -->
-            
-                <div id="myModal" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
+     <!-- Modal -->
+    <asp:Panel runat="server" ID="divModal" Visible="True">
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
 
                     <!-- Modal content-->
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">This presentation was made using:</h4>
-                      </div>
-                      <div class="modal-body">
-                       		<p>
-							 
-						</p>
-					
-						<ul>
-							<li>Web Controls, Data Binding</li>
-							<li>SQL Queries, Stored Procedures</li>
-							<li>Event handling, Javascript, Jquery</li>
-							<li>Collections, Exception Handling</li>
-						</ul>
-                      </div>
-                      <div class="modal-footer">
-                        <button id="startPresentation" type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
-                      </div>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Welcome!</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>We will start this presentation with an embedded MVC Course Registration System:
+                            </h5>
+                            <ul>
+                                <li>For the MVC site, navigate with the <b>horizontal nav</b></li>
+                                <li>For the remaining projects, navigate with the <b>vertical nav</b></li>
+                            </ul><br />
+                            <h5>These are some of the programming concepts I used: </h5>
+                            <ul>
+                                <li>Web Controls, Data Binding</li>
+                                <li>SQL Queries, Stored Procedures</li>
+                                <li>Event handling, Javascript, Jquery</li>
+                                <li>Collections, Exception Handling</li>
+                            </ul>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button id="startPresentation" type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+                        </div>
                     </div>
 
-                  </div>
                 </div>
+            </div>
+    </asp:Panel>
+        
+    <form runat="server">
+        <%--Track cookies - show overlay--%>
+        <asp:Panel runat="server" ID="divAvatar" Visible="True" class="overlay">
+           
 
             <div class="templatemo-flex-row flex-content-row">
+                
+                
                 <div id="divAvatCont" class="templatemo-content-widget avatar-bg col-1 center" style="position: absolute; visibility: hidden">
                     <div class="avatText">
 
-					
-                    <br />
-                        <h4>Select any of the avatars to start a new session:</h4></div>
+
+                        <br />
+                        <h4>Select any Avatar to start an HTTP session:</h4>
+                    </div>
                     <br />
                     <table>
                         <tr>
@@ -194,13 +211,14 @@
                                 <img class="img-circular" id="avatar1" src="images/avatar1.jpg" />
                                 &nbsp; </td>
                         </tr>
-                       
+
                     </table>
                 </div>
             </div>
         </asp:Panel>
         <div class="templatemo-flex-row">
-            <div id="container" class="templatemo-sidebar">
+             <asp:Panel runat="server" ID="divContainer" Visible="false">
+                   <div id="container" class="templatemo-sidebar">
                 <header class="templatemo-site-header">
                     <div class="square-light"></div>
                     <h1>C#</h1>
@@ -220,20 +238,22 @@
                         ID is used to generate the href link, so has to be the same as the page name ex.Default.aspx --%>
                     <ul>
                         <li>
-                            <asp:LinkButton runat="server" ID="Final" OnClick="Links_Click"><i class="fa fa-university fa-fw"></i>.NET MVC</asp:LinkButton></li>                            
-                         <li>
+                            <asp:LinkButton runat="server" ID="Final" OnClick="Links_Click"><i class="fa fa-university fa-fw"></i>.NET MVC</asp:LinkButton></li>
+                        <li>
                             <asp:LinkButton runat="server" ID="Project04" OnClick="Links_Click"><i class="fa fa-line-chart fa-fw"></i>SESSION DATA</asp:LinkButton></li>
                         <li>
                             <asp:LinkButton runat="server" ID="Project03" OnClick="Links_Click"><i class="fa fa-server fa-fw"></i>MSSQL</asp:LinkButton></li>
                         <li>
                             <asp:LinkButton runat="server" ID="Project02" OnClick="Links_Click"><i class="fa fa-save fa-fw"></i>FILE SYSTEM</asp:LinkButton></li>
                         <li>
-                            <asp:LinkButton runat="server" ID="Project01" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>REGEX XML</asp:LinkButton></li>          
+                            <asp:LinkButton runat="server" ID="Project01" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>REGEX XML</asp:LinkButton></li>
                     </ul>
 
 
                 </nav>
             </div>
+             </asp:Panel>
+            
 
             <div class="templatemo-content col-1 light-gray-bg">
                 <%--Shows if user has avatar or cookies disabled--%>
@@ -244,7 +264,8 @@
                                 <div class="templatemo-flex-row flex-content-row">
                                     <div class="col-2">
                                         <br />
-                                        <b>Order Visited: &nbsp;</b><%= UserData.StrPrevPage(Request.QueryString["prev"]) %></div>
+                                        <b>Order Visited: &nbsp;</b><%= UserData.StrPrevPage(Request.QueryString["prev"]) %>
+                                    </div>
                                     <div class="col-1">
 
                                         <asp:ScriptManager ID="Scriptmanager2" runat="server"></asp:ScriptManager>
@@ -307,8 +328,8 @@
                     <asp:ContentPlaceHolder ID="phProj4" runat="server">
                     </asp:ContentPlaceHolder>
 
-                    <div  id="PanelProj4" class="templatemo-flex-row flex-content-row" style="display:none">
-                        <div id="DivProj4" class="templatemo-content-widget white-bg col-1" style="margin:-400px 0px 0px 550px">
+                    <div id="PanelProj4" class="templatemo-flex-row flex-content-row" style="display: none">
+                        <div id="DivProj4" class="templatemo-content-widget white-bg col-1" style="margin: -400px 0px 0px 550px">
                             <%--Project04 UserData, visible when in Project04.aspx--%>
                             <table class="table-assi4">
                                 <tr>
@@ -340,7 +361,7 @@
                                             <Triggers>
                                                 <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
                                             </Triggers>
-                                        </asp:UpdatePanel> 
+                                        </asp:UpdatePanel>
                                     </td>
                                     <td>Time spend in current page</td>
                                 </tr>
@@ -363,7 +384,8 @@
                                 <tr>
                                     <td><b>Cookies</b></td>
                                     <td><%=UserData.Avatar%></td>
-                                    <td> <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" /></td>
+                                    <td>
+                                        <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" /></td>
                                     <td>Your avatar choice will last for 30 days</td>
                                 </tr>
                             </table>
@@ -376,90 +398,86 @@
             </div>
         </div>
 
-        <script src="js/jquery-1.11.2.min.js"></script>
-        <!-- jQuery -->
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <!--  jQuery Migrate Plugin -->
-        <script type="text/javascript" src="js/templatemo-script.js"></script>
+        <script>
+            window.onload = function () {
+                console.log('myscripts loading...')
+                var str = window.location.pathname
+                //var filename = str.substring(str.lastIndexOf("/")
+                //    + 1, str.lastIndexOf("."));
+                //var link = document.getElementById(filename);
+                //link.style.cssText = "background: #555; border-left: 8px solid #13895F;"
+
+                $('#myModal').modal('show');
+                $('#startPresentation').click(function (event) {
+                    var btn = document.querySelector('#divAvatCont');
+                    btn.style.visibility = 'visible';
+                })
+
+                $("img[id*='avatar']").click(
+                    function (event) {
+                        animateAvatar(event.target.id);
+                        setCookie(event.target.id);
+                    });
+            }
+
+
+            function animateAvatar(avatar) {
+                if (!avatar.includes("avatar")) return;
+
+                //animate Avatar
+                var activeAvatar = parseInt(avatar[6]); //number part of id
+                var avatarList = [];
+                var tdList = []
+                for (i = 1; i < 7; i++) { //list without activated avatar
+                    if (i == activeAvatar) continue;
+                    avatarList.push("avatar" + i);
+                    tdList.push("tdAvat" + i);
+                }
+
+                var concatAvat = "";
+                var concatTd = "";
+                for (i = 0; ; i++) { //all avats and td ids in one sentence
+                    concatAvat += "#" + avatarList[i];
+                    concatTd += "#" + tdList[i];
+                    if (i == 4) break;
+                    concatAvat += ", ";
+                    concatTd += ", ";
+                }
+
+                //$(concatAvat).fadeTo("3000", 0.0); 
+                $(concatTd).hide();
+                $("#" + avatar).animate({
+                    width: '60px',
+                    height: '60px',
+                }, 2000, function () { location.reload(); });
+                $("#divAvatCont").css({ 'background-color': 'transparent' }).animate({
+                    'top': '10%',
+                    'left': '90%',
+                }, 2000);
+                $("#h3Welcome").each(function () {
+                    var elem = $(this);
+                    elem.html("WELCOME");
+                    setInterval(function () {
+                        if (elem.css('visibility') == 'hidden') {
+                            elem.css('visibility', 'visible');
+                        } else {
+                            elem.css('visibility', 'hidden');
+                        }
+                    }, 400);
+                });
+                $(".avatText").css('visibility', 'hidden');
+            }
+
+            //Create cookie
+            function setCookie(avatar) {
+                var d = new Date();
+                d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = "Avatar=" + avatar + ";" + expires + ";path=/";
+            }
+        </script>
+
     </form>
 </body>
-        <script src="scripts/jquery-3.3.1.js"></script>
 
-    <script src="js/bootstrap.min.js"></script>
-       <%--    //Avatar animation
-    ###Looks like jquery runs first and then js function has to be called from within--%>
-    <script>
-        $(document).ready(function () {
-            $('#myModal').modal('show');
-            console.log($('#startPresentation'))
-            $('#startPresentation').click(function (event) {
-                console.log('here');
-                var btn = document.querySelector('#divAvatCont');
-                console.log(btn)
-                btn.style.visibility = 'visible';
-            })
-
-            $("img[id*='avatar']").click(
-                function (event) {
-                    animateAvatar(event.target.id);
-                    setCookie(event.target.id);
-                });
-        });
-
-
-        function animateAvatar(avatar) {
-            if (!avatar.includes("avatar")) return;
-
-            //animate Avatar
-            var activeAvatar = parseInt(avatar[6]); //number part of id
-            var avatarList = [];
-            var tdList = []
-            for (i = 1; i < 7; i++) { //list without activated avatar
-                if (i == activeAvatar) continue;
-                avatarList.push("avatar" + i);
-                tdList.push("tdAvat" + i);
-            }
-
-            var concatAvat = "";
-            var concatTd = "";
-            for (i = 0; ; i++) { //all avats and td ids in one sentence
-                concatAvat += "#" + avatarList[i];
-                concatTd += "#" + tdList[i];
-                if (i == 4) break;
-                concatAvat += ", ";
-                concatTd += ", ";
-            }
-
-            //$(concatAvat).fadeTo("3000", 0.0); 
-            $(concatTd).hide();
-            $("#" + avatar).animate({
-                width: '60px',
-                height: '60px',
-            }, 2000, function () { location.reload(); });
-            $("#divAvatCont").css({ 'background-color': 'transparent' }).animate({
-                'top': '10%',
-                'left': '90%',
-            }, 2000);
-            $("#h3Welcome").each(function () {
-                var elem = $(this);
-                elem.html("WELCOME");
-                setInterval(function () {
-                    if (elem.css('visibility') == 'hidden') {
-                        elem.css('visibility', 'visible');
-                    } else {
-                        elem.css('visibility', 'hidden');
-                    }
-                }, 400);
-            });
-            $(".avatText").css('visibility', 'hidden');
-        }
-
-        //Create cookie
-        function setCookie(avatar) {
-            var d = new Date();
-            d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-            var expires = "expires=" + d.toUTCString();
-            document.cookie = "Avatar=" + avatar + ";" + expires + ";path=/";
-        }
-    </script>
 </html>

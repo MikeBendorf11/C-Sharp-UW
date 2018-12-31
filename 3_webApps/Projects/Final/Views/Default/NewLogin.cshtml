@@ -11,22 +11,26 @@
     <table class="table-condensed">
         <tr>
             <td>Name: </td>
-            <td>@Html.TextBox("Name", "")</td>
+            <td>@Html.TextBox("Name", "", new { @class = "form-control", @minlength="3", required = "required", @placeholder = "(min 3)" })</td>
         </tr>
         <tr>
             <td>Email: </td>
-            <td>@Html.TextBox("Email", "")</td>
+            <td>@Html.TextBox("Email", "", new { @class = "form-control", @type="email", required = "required", @placeholder = "myname@domain.com" })</td>
         </tr>
         <tr>
             <td>Login: </td>
-            <td>@Html.TextBox("Login", "")</td>
+            <td>@Html.TextBox("Login", "", new { @class = "form-control", @minlength = "5", required = "required", @placeholder = "(min 5)" })</td>
         </tr>
         <tr>
             <td>Password: </td>
-            <td>@Html.TextBox("Password", "")</td>
+            <td>@Html.TextBox("Password", "", new { @class = "form-control", @minlength = "5", required = "required", @placeholder = "(min 5)" })</td>
         </tr>
         <tr>
-            <td><input type="submit" id="createUser" class="createUser" /></td>
+            <td><input 
+                       type="submit" 
+                       id="createUser" 
+                       class="form-control"
+                       value="Submit " /></td>
             <td></td>
         </tr> 
     </table>

@@ -14,7 +14,7 @@ namespace Final.Controllers
         string strOledbConnection = ConfigurationManager.ConnectionStrings["RemoteServer"].ConnectionString;
 
         //GET: Default
-        public ActionResult Courses()
+        public ActionResult Courses() 
         {
             return View(processor.db.vClasses.ToList());
         }
@@ -28,14 +28,14 @@ namespace Final.Controllers
             }
             else if (Session["User"] == null && Request.HttpMethod == "GET")//not logged in and 1st time loaded
             {
-                ViewBag.Message = "Enter your personal info";
+                ViewBag.Message = "Please fill up this form.";
                 return View();
             }
             else if (Session["User"] == null && Request.HttpMethod == "POST")//summited form 
             {
                 if(Name=="" || Email=="" || Login=="" || Password == "")//validations??
                 {
-                    ViewBag.Message = "Please fill up the form"; 
+                    ViewBag.Message = "Please fill up this form"; 
                     return View();
                 }
                 processor.db.pInsStudents(Name, Email, Login, Password);

@@ -15,14 +15,14 @@
     <table class="table-condensed">
         <tr>
             <td>Login: </td>
-            <td>@Html.TextBox("Login", "")</td>
+            <td>@Html.TextBox("Login", "", new { @class="form-control"})</td>
         </tr>
         <tr>
             <td>Password: </td>
-            <td>@Html.TextBox("Password", "")</td>
+            <td>@Html.TextBox("Password", "", new { @class = "form-control", @type = "password" })</td>
         </tr>
         <tr>
-            <td><input type="submit" id="validate" class="validate" /></td>
+            <td><input class="form-control" type="submit" id="validate" value="Submit "/></td>
             <td></td>
         </tr>
     </table>

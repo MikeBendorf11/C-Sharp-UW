@@ -24,6 +24,7 @@ namespace Final.Controllers
                 int stdId = processor.getStdId(Login, Password);
                 if (stdId > 0)
                 {
+                    TempData["welcome"] = "Welcome!";
                     TempData["shortMessage"] = "Welcome!"; //return name from db
                     Session["User"] = stdId; 
                     return RedirectToAction("MyCourses");
@@ -44,7 +45,7 @@ namespace Final.Controllers
         }
         
         //string ClassID is the "value=" attribute of the summit button for every course row
-        public ActionResult MyCourses(string ClassID)   
+        public ActionResult MyCourses(string ClassID, string CourseN)   
         {
             if (Session["User"] == null)
             {
@@ -57,6 +58,7 @@ namespace Final.Controllers
                 ObjectResult or = processor.db.pSelClassesByStudentID(stdID);
                 return View(or);
             }
+            //dropped course
             else if(Session["User"] != null && Request.HttpMethod == "POST")
             {
                 int stdID = int.Parse(Session["User"].ToString());
@@ -65,14 +67,15 @@ namespace Final.Controllers
                 processor.db.pDelClassStudents(classID, stdID);
 
                 ObjectResult or = processor.db.pSelClassesByStudentID(stdID);
+                TempData["shortMessage"] = "Dropped " + CourseN;
                 return View(or);
             }  
-            TempData["shortMessage"] = "Uknown condition";
-            ViewBag.Message = "Uknown condition";
+            TempData["shortMessage"] = "Unknown condition";
+            ViewBag.Message = "Unknown condition";
             return RedirectToAction("Login");
         }
       
-        public ActionResult Register(string ClassID)
+        public ActionResult Register(string ClassID, string CourseN)
         {
             if (Session["User"] != null && Request.HttpMethod != "POST")
             {
@@ -80,6 +83,7 @@ namespace Final.Controllers
                 ObjectResult or = processor.db.pSelRemainingClassesByStudentID(stdID);
                 return View(or);
             }
+            //registered for course
             else if (Session["User"] != null && Request.HttpMethod == "POST")
             {
                 int stdID = int.Parse(Session["User"].ToString());
@@ -88,6 +92,7 @@ namespace Final.Controllers
                 processor.db.pInsClassStudents(classID, stdID);
 
                 ObjectResult or = processor.db.pSelRemainingClassesByStudentID(stdID);
+                TempData["shortMessage"] = "Registered for " + CourseN;
                 return View(or);
             }
                 TempData["shortMessage"] = "Please login first"; 

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Final.Models
+namespace Assignments.Final.Models
 {
     using System;
-    using System.Data.Entity; 
-    using System.Data.Entity.Infrastructure;  
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
