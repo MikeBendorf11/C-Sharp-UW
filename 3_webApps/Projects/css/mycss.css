@@ -1,72 +1,144 @@
-body{
-  background: unset;
-  font-size: 1.5em;
-  background-image: url(../images/bg_tile2.png); 
-  background-size: 40%;
-  overflow: hidden;
+html{
+    min-height:100%;/* make sure it is at least as tall as the viewport */
+    position:relative;
+}
+body {
+    background: unset;
+    font-size: 1.5em;
+    background-image: url(../images/bg_tile2.png);
+    background-size: 40%;
+    overflow: hidden;
+    height: 100%;
 }
 
-#container{
-  
-    
+#container {
+    height: 100vh;
 }
-.templatemo-left-nav a{
-  color: rgb(255, 255, 235);
+
+#divNav {
+    background-color: #1f2124;
+}
+.templatemo-site-header {
+    margin: 10px 0;
+    max-height: 7%;
+    text-align: center;
+}
+.templatemo-left-nav {
+    margin-top: 20%
+}
+.profile-photo-container{
+    height: 45%
+}
+.templatemo-sidebar{
+    height: 75%
+}
+.templatemo-left-nav a {
+    color: rgb(255, 255, 235);
 }
 
 .templatemo-content {
     min-height: unset;
 }
-.light-gray-bg { 
 
+.light-gray-bg {
 }
-li{
-  list-style-type: circle;
-  margin-left: 20px;
+
+li {
+    list-style-type: circle;
+    margin-left: 20px;
 }
-.avatText{
+
+.avatText {
     text-align: center;
 }
+
 .avatar-bg {
-  background-color: white;
-  color: #333333;
+    background-color: white;
+    color: #333333;
 }
+
 .img-circular {
     width: 80px;
     height: 80px;
 }
-#myModal{
+
+#myModal {
     background: transparent;
     position: absolute;
     margin: 0 auto 0 auto;
-    left: 0; top: 0;
+    left: 0;
+    top: 0;
 }
+
 .modal-content {
     /*background-color: #555555;
     color: white;*/
 }
+
 .modal-dialog {
     width: 800px;
-
     padding-top: 160px;
 }
+
 .modal-backdrop {
     z-index: initial;
 }
 
+#divAvatCont {
+    padding: 30px;
+    border-radius: 25px;
+    background-color: white;
+    position: absolute;
+    visibility: visible;  
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -170px 0 0 -300px;
+    min-width: 600px;
+    /*left: 90%;
+    top: 0*/
+}
+
 nav li {
-   font-size: 0.6em;
-   margin: 0;
+    font-size: 1em;
+    margin: 0;
 }
-#divProject{
+
+#divUserInfo {
+    box-sizing: border-box;
     width: 100%;
+    height: 7%;
+    background-image: linear-gradient(#FFF, rgba(255, 255, 255, 0.00));
+    
 }
+.textUserData{
+    
+    padding:1.2%;
+    
+}
+#profilePic{
+    text-align: right;
+    margin: 5px 15px 0 0;
+
+}
+
+#iframeCont {
+    width: 100%;
+    /*compliments with divUserInfo height*/
+    height: 93%;
+    background-color: #e2efef;
+    background-image: url(../images/loader.gif), url(../images/bar.png);
+    background-position: 50% 50%, 0% 0%;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 70px, auto auto;
+}
+
 iframe {
-    margin: 0 100px 0 0; 
+    margin: 0 100px 0 0;
     box-sizing: border-box;
     display: block; /* iframes are inline by default */
     background: rgba(255, 255, 255, 0.00);
     border: none; /* Reset default border */
-    height: 90vh; /* Viewport-relative units */
+    height: 100%; /* Viewport-relative units */
     width: inherit;
 }

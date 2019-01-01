@@ -21,7 +21,7 @@ textarea {
     margin: 0;
     background-color: rgba(255, 255, 255, 0.00);
     max-width: 100%;
-    min-height: 85vh; 
+    min-height: 100%; 
 }
 .container #hometable {
    width: 92%;
@@ -30,7 +30,7 @@ textarea {
 }
 
 .container #hometable td {
-    min-width: 200px;
+    min-width: 200px; 
     
     
 }
@@ -46,8 +46,8 @@ textarea {
     background-color: lightgray;
     padding: 10px 0 00px 0;
     /*border: 15px solid lightgray;*/
-    height: 80px;
-    text-align: center;
+    height: 60px;
+    text-align: center; 
 }
 .navbar-fixed-bottom p{
     color: dimgray;

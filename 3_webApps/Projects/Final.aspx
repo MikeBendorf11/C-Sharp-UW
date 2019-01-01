@@ -4,21 +4,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="phContent1" runat="server">
 
 
-     <div class="templatemo-flex-row flex-content-row">
+     
          
-         <div class="col-1" 
-			  style=" width:100%; 
-				      background-color: #e2efef;
-					  background-image:url(images/loader.gif), url(images/bar.png);
-					  background-position: 50% 50%, 0% 0%;
-					  background-repeat: no-repeat, no-repeat;
-					  background-size: 70px, auto auto;
+         <div id="iframeCont" class="col-1" 
+			  style=" 
 					  ">
 					  
              <%-- Was just /Final/ --%>
                   <iframe 
-					id="theiframe" 
-					
+					id="theiframe"
+					style="visibility:hidden;"
+                    onload="this.style.visibility='visible'"
 					src="http://localhost:61452/"></iframe>    
 					<!-- http://localhost:61452/
 					style="visibility:hidden;" 
@@ -26,5 +22,5 @@
 					-->
          </div>
          
-     </div>
+     
 </asp:Content>
