@@ -27,7 +27,7 @@
 
         protected void Page_Load(Object sender, EventArgs e)
         {
-            //used in timer and queryString
+            //used in timer and queryString 
             currentPage = Regex.Replace(Request.CurrentExecutionFilePath.Split('/')[1], @".aspx", "");
 
             //Track cookies - show overlay
@@ -191,22 +191,22 @@
                             <h3 id="h3Welcome"></h3>
                         </td>
                         <td id="tdAvat6">
-                            <img class="img-circular" id="avatar6" src="images/avatar6.jpg" />
+                            <img class="img-circular" id="avatar66" src="images/avatar66.png" />
                         </td>
                         <td id="tdAvat2">
-                            <img class="img-circular" id="avatar2" src="images/avatar2.jpg" />
+                            <img class="img-circular" id="avatar22" src="images/avatar22.png" />
                         </td>
                         <td id="tdAvat5">
-                            <img class="img-circular" id="avatar5" src="images/avatar5.jpg" />
+                            <img class="img-circular" id="avatar55" src="images/avatar55.png" />
                         </td>
                         <td id="tdAvat4">
-                            <img class="img-circular" id="avatar4" src="images/avatar4.jpg" />
+                            <img class="img-circular" id="avatar44" src="images/avatar44.png" />
                         </td>
                         <td id="tdAvat3">
-                            <img class="img-circular" id="avatar3" src="images/avatar3.jpg" />
+                            <img class="img-circular" id="avatar33" src="images/avatar33.png" />
                         </td>
                         <td id="tdAvat1">
-                            <img class="img-circular" id="avatar1" src="images/avatar1.jpg" />
+                            <img class="img-circular" id="avatar11" src="images/avatar11.png" />
                             &nbsp; </td>
                     </tr>
 
@@ -311,7 +311,7 @@
                     </div>
 
                     <div id="profilePic" class="col-2">
-                        <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" title="<%=UserData.Avatar%>" />
+                        <img class="img-circular-small" src="images/<%=UserData.Avatar + ".png"%>" title="<%=UserData.Avatar%>" />
                     </div>
                     <%-- ends divuserdata --%>
             </div>
@@ -443,7 +443,7 @@
                     concatAvat += "#" + avatarList[i];
                     concatTd += "#" + tdList[i];
                     if (i == 4) break;
-                    concatAvat += ", ";
+                    concatAvat += ", "; 
                     concatTd += ", ";
                 }
 
@@ -452,7 +452,7 @@
                 $("#" + avatar).animate({
                     width: '60px',
                     height: '60px',
-                }, 2000, function () { location.reload(); });
+                }, 1500, function () { location.reload(); });
                 $("#divAvatCont").css({
                     'background-color': 'transparent',
                     'margin-left': 0,
@@ -460,8 +460,8 @@
                 }).animate({
                     'top': '10%',
                     'left': '90%',
-                    'opacity': '0'
-                }, 2000)
+                    'opacity': '.1'
+                }, 1500)
                 $(".avatText").css('visibility', 'hidden');
             }
 
