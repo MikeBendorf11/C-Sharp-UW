@@ -114,8 +114,8 @@
     <Content Include="js\jquery-1.11.2.min.js" />
     <Content Include="js\jquery-migrate-1.2.1.min.js" />
     <Content Include="js\templatemo-script.js" />
-    <Content Include="Project03.aspx" />
-    <Content Include="Project02.aspx" />
+    <Content Include="MSSQL.aspx" />
+    <Content Include="FileSystem.aspx" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\font-awesome.min.css" />
@@ -125,8 +125,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Projects.Master" />
-    <Content Include="Project04.aspx" />
-    <Content Include="Final.aspx" />
+    <Content Include="SessionData.aspx" />
+    <Content Include="MVC.aspx" />
     <None Include="Properties\PublishProfiles\Winhost.pubxml" />
     <None Include="scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="scripts\jquery-3.3.1.js" />
@@ -138,7 +138,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Project01.aspx" />
+    <Content Include="RegexXml.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Web.config">
@@ -147,8 +147,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\UserData.cs" />
-    <Compile Include="Project02.aspx.cs">
-      <DependentUpon>Project02.aspx</DependentUpon>
+    <Compile Include="FileSystem.aspx.cs">
+      <DependentUpon>FileSystem.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Category.cs" />

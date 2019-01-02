@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Projects.Master" %>
+﻿<%@ Page Title="MSSQL" Language="C#" AutoEventWireup="true" MasterPageFile="~/Projects.Master" %>
 
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.OleDb" %>
@@ -124,6 +124,7 @@
     <script>
         var flag = true;
         $(document).ready(function () {
+            $('#phContent1_ItemsGrid2').fadeIn(1500);
             $(":text, #phContent1_TBReason").click(function () {
                 if (flag) {
                     $(":text, #phContent1_TBReason").val('');
@@ -138,63 +139,59 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phContent1" runat="server">
 
-    <div class="templatemo-flex-row flex-content-row">
-        <div id="asg1" class="templatemo-content-widget white-bg col-1" style="height: fit-content">
+    <div id="asg1"  class="templatemo-flex-row flex-content-row">
+        <div class="templatemo-content-widget white-bg col-2" >
             <i class="fa fa-times"></i>
             <div class="square-light"></div>
-            <h2 class="templatemo-inline-block">Databases</h2>
-            <h4>MSSQL and Stored Procedures</h4>
-            <p>The Database and procedures were created using SQL Server 2014 Management Studio. Test values were added to the table and the Primary key is hidden from the user display. </p>
-            <ul style="list-style-type: decimal; padding-left: 25px">
-                <li>Each button event triggers a corresponding Stored Procedure</li>
-                <li>It prevents SQL injection attacks since it is not using SQL command strings</li>
+            <h2 class="templatemo-inline-block">Contact Form and Database</h2><br /><br />
+            <p>Schema and Procedures are in place to warranty data integrity. Server version is Microsoft SQL 2014 Management Studio.</p>
+            <br />
+                <div class="">
+                    <asp:DataGrid class="" style="display: none" ID="ItemsGrid2" runat="server">
 
-            </ul>
+                        <HeaderStyle BackColor="#00aaaa"></HeaderStyle>
 
+                    </asp:DataGrid>
+                </div>
+            
         </div>
-        <div class="templatemo-content-widget pink-bg col-1">
+        <div id="contactForm" class="templatemo-content-widget blue-bg col-1">
             <i class="fa fa-times"></i>
-            <div class="templatemo-login-form">
-                <table style="margin: auto; width: 70%;">
+            <br />
+                <table class="table-condensed">
                     <tr>
-                        <td><span>Name: </span></td>
-                        <td>
-                            <asp:TextBox class="form-control" Width="200px" ID="TBName" Text="A name" runat="server"></asp:TextBox></td>
+                        <td>Name:</td>
+                        <td><asp:TextBox class="form-control" ID="TBName" Text="A name" runat="server"></asp:TextBox></td>
 
                     </tr>
                     <tr>
-                        <td><span>Email Address: </span></td>
-                        <td>
-                            <asp:TextBox class="form-control" Width="200px" ID="TBEmail" Text="name@domain.com" runat="server"></asp:TextBox></td>
-                        <td></td>
+                        <td >Email:</td>
+                        <td><asp:TextBox class="form-control" ID="TBEmail" Text="name@domain.com" runat="server"></asp:TextBox></td>
+                        
                     </tr>
                     <tr>
-                        <td><span>Login Name: </span></td>
-                        <td>
-                            <asp:TextBox class="form-control" Width="200px" ID="TBLogin" Text="Your initials" runat="server"></asp:TextBox></td>
+                        <td>Intials:</td>
+                        <td><asp:TextBox class="form-control" ID="TBLogin" Text="Your initials" runat="server"></asp:TextBox></td>
 
                     </tr>
                     <tr>
-                        <td colspan="2"><span>
-                            <br />
-                            Reason for Access?</span></td>
+                        <td>Comments:</td>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine">Click the boxes to clear the form or just use the buttons below to change the database</asp:TextBox><br>
+                            <asp:TextBox class="form-control" Width="100%" Height="100" ID="TBReason" runat="server" TextMode="MultiLine">Click send or click the boxes to clear the form</asp:TextBox><br>
                         </td>
                     </tr>
-                    <tr>
+  <%--                     <tr>
                         <td colspan="1">
-
-                            <asp:Button class="templatemo-white-button" ID="Button1" Width="150" runat="server" Text="Add Row" OnClick="Button1_Click" />
+                            
                         </td>
-                        <td>
-                            <asp:Button class="templatemo-white-button" ID="Button2" runat="server" Text="Delete Row" OnClick="Button2_Click" />
+                     <td>
+                            <asp:Button class="form-control" ID="Button2" runat="server" Text="Delete Row" OnClick="Button2_Click" />
                         </td>
-                    </tr>
+                    </tr--%>
                 </table>
-            </div>
+                <asp:Button class="form-control" ID="Button1" Width="150" runat="server" Text="Send" OnClick="Button1_Click" />
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </div>
     </div>
@@ -202,19 +199,7 @@
         <div class="col-1"></div>
         <div class="col-2">
 
-            <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden col-2">
-                <i class="fa fa-times"></i>
-                <div class="panel-heading templatemo-position-relative">
-                    <h2 class="text-uppercase">Login Table</h2>
-                </div>
-                <div class="table-responsive">
-                    <asp:DataGrid class="table table-striped table-bordered" ID="ItemsGrid2" runat="server">
-
-                        <HeaderStyle BackColor="#00aaaa"></HeaderStyle>
-
-                    </asp:DataGrid>
-                </div>
-            </div>
+           
 
         </div>
         <div class="col-1"></div>

@@ -15,11 +15,11 @@
     <table class="table-condensed">
         <tr>
             <td>Login: </td>
-            <td>@Html.TextBox("Login", "", new { @class="form-control"})</td>
+            <td>@Html.TextBox("Login", "", new { @class="form-control", @placeholder="test"})</td>
         </tr>
         <tr>
             <td>Password: </td>
-            <td>@Html.TextBox("Password", "", new { @class = "form-control", @type = "password" })</td>
+            <td>@Html.TextBox("Password", "", new { @class = "form-control", @type = "password", @placeholder="test" })</td>
         </tr>
         <tr>
             <td><input class="form-control" type="submit" id="validate" value="Submit "/></td>

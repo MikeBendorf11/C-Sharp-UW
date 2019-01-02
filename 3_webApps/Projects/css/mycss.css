@@ -3,20 +3,33 @@ html{
     position:relative;
 }
 body {
+    /*display: none;*/
     background: unset;
     font-size: 1.5em;
-    background-image: url(../images/bg_tile2.png);
-    background-size: 40%;
+    /*background-image: url(../images/bg_tile2.png);
+    background-size: 40%;*/
+    
     overflow: hidden;
     height: 100%;
 }
-
+#cubebg{
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    background: url(../images/bg_tile2.png) 0 0 repeat;
+    filter: brightness(1.12);
+    transform: rotate(15deg);
+}
 #container {
     height: 100vh;
 }
 
 #divNav {
-    background-color: #1f2124;
+    background-color: rgba(31, 33, 36, 0.87);
 }
 .templatemo-site-header {
     margin: 10px 0;
@@ -26,9 +39,7 @@ body {
 .templatemo-left-nav {
     margin-top: 20%
 }
-.profile-photo-container{
-    height: 45%
-}
+
 .templatemo-sidebar{
     height: 75%
 }
@@ -105,10 +116,16 @@ nav li {
 }
 
 #divUserInfo {
+    
     box-sizing: border-box;
     width: 100%;
     height: 7%;
-    background-image: linear-gradient(#FFF, rgba(255, 255, 255, 0.00));
+    background-color: rgba(255, 255, 255, .8);
+    border-bottom: 2px solid #97b972;
+    box-shadow: 0px 10px 30px #b2b2b2;
+}
+#sessionData{
+    margin-top: 5%;
     
 }
 .textUserData{
@@ -119,9 +136,11 @@ nav li {
 #profilePic{
     text-align: right;
     margin: 5px 15px 0 0;
-
+    
 }
-
+#profilePic .img-circular-small{
+    width: 35px; height: 35px;
+}
 #iframeCont {
     width: 100%;
     /*compliments with divUserInfo height*/
@@ -141,4 +160,60 @@ iframe {
     border: none; /* Reset default border */
     height: 100%; /* Viewport-relative units */
     width: inherit;
+}
+
+
+.table-assi4 td {
+    /*border: 1px solid #ddd;
+    padding: 8px;*/
+    min-width: 200px;
+    
+}
+.table-assi4 th{
+    background-color: rgba(19, 137, 95, 0.80);
+    color: white;
+}
+
+.table-assi1 td{
+    min-width: 120px;
+}
+.table-assi1 th{
+    background-color: rgba(19, 137, 95, 0.80);
+    color: white;
+}
+#contactForm{
+    max-height: 400px
+}
+
+#phContent1_ItemsGrid2 td{
+    min-width: 100px;
+}
+#asg1{
+    margin-top: 5%;
+}
+
+@media screen and (max-width: 768px) {
+    #mob1 {
+        height: 100%;
+    }
+
+    #mobHeader {
+        text-align: left;
+        
+    }
+    #divNav{
+        height: 60px;
+        padding: 5px;
+    }
+    #divUserInfo{
+        display: flex;
+        height :10%;
+        font-size: .9em;
+    }
+    #divUserInfo div {
+        border-right: 1px solid black;
+    }
+    #profilePic{
+        text-align: center
+    }
 }

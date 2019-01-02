@@ -1,4 +1,4 @@
 Name: A name
 Email: name@domain.com
 Login: Initials
-Reason: Click the boxes to clear the form or just click send to write the file
+Reason: Click send to write a file to the server pr click the boxes to clear the form and edit

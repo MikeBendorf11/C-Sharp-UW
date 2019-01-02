@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace Projects
 {
-    public class Project02 : System.Web.UI.Page
+    public class FileSystem : System.Web.UI.Page
     {
         protected global::System.Web.UI.WebControls.Button Button1;
         protected global::System.Web.UI.WebControls.Label Label1;

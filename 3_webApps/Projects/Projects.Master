@@ -81,7 +81,7 @@
             Session[currentPage] = tsPage;
 
             //set href of LinkButton to senderID + queryString
-            //SenderID matches html destination name ex.Default, Project01, etc..
+            //SenderID matches html destination name ex.Default, RegexXml, etc..
 
             string id = ((LinkButton)sender).ClientID;
             string url = id + ".aspx?prev=" + currentPage;
@@ -135,6 +135,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+    <div id="cubebg"></div> 
     <!-- Modal -->
     <asp:Panel runat="server" ID="divModal" Visible="True">
         <div id="myModal" class="modal fade" role="dialog">
@@ -147,11 +148,13 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <h5>We will start this presentation with an embedded MVC Course Registration System:
+                        <div class="square-light"></div>
+                        <h2 class="templatemo-inline-block">C# Presentation</h2>
+                        <h5>We will start with an embedded MVC Registration System:
                         </h5>
                         <ul>
-                            <li>For the MVC site, navigate with the <b>horizontal nav</b></li>
-                            <li>For the remaining projects, navigate with the <b>vertical nav</b></li>
+                            <li>For the MVC site, use the <b>horizontal nav</b></li>
+                            <li>For the remaining projects, use the <b>vertical nav</b></li>
                         </ul>
                         <br />
                         <h5>These are some of the programming concepts I used: </h5>
@@ -217,7 +220,7 @@
         <div id="container" class="templatemo-flex-row">
             <asp:Panel runat="server" ID="divNav" Visible="false">
                 <div class="templatemo-sidebar">
-                    <header class="templatemo-site-header">
+                    <header id="mobHeader" class="templatemo-site-header">
                         <div class="square-light"></div>
                         <h1>C#</h1>
                     </header>
@@ -236,15 +239,17 @@
                         ID is used to generate the href link, so has to be the same as the page name ex.Default.aspx --%>
                         <ul>
                             <li>
-                                <asp:LinkButton runat="server" ID="Final" OnClick="Links_Click"><i class="fa fa-university fa-fw"></i>.NET MVC</asp:LinkButton></li>
+                                <asp:LinkButton runat="server" ID="MVC" OnClick="Links_Click"><i class="fa fa-university fa-fw"></i>.NET MVC</asp:LinkButton></li>
                             <li>
-                                <asp:LinkButton runat="server" ID="Project04" OnClick="Links_Click"><i class="fa fa-line-chart fa-fw"></i>SESSION DATA</asp:LinkButton></li>
+                                <asp:LinkButton runat="server" ID="SessionData" OnClick="Links_Click"><i class="fa fa-line-chart fa-fw"></i>SESSION DATA</asp:LinkButton></li>
                             <li>
-                                <asp:LinkButton runat="server" ID="Project03" OnClick="Links_Click"><i class="fa fa-server fa-fw"></i>MSSQL</asp:LinkButton></li>
+                                <asp:LinkButton runat="server" ID="RegexXml" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>REGEX XML</asp:LinkButton></li>
                             <li>
-                                <asp:LinkButton runat="server" ID="Project02" OnClick="Links_Click"><i class="fa fa-save fa-fw"></i>FILE SYSTEM</asp:LinkButton></li>
+                                <asp:LinkButton runat="server" ID="MSSQL" OnClick="Links_Click"><i class="fa fa-server fa-fw"></i>MSSQL</asp:LinkButton></li>
+
+
                             <li>
-                                <asp:LinkButton runat="server" ID="Project01" OnClick="Links_Click"><i class="fa fa-bar-chart fa-fw"></i>REGEX XML</asp:LinkButton></li>
+                                <asp:LinkButton runat="server" ID="FileSystem" OnClick="Links_Click"><i class="fa fa-save fa-fw"></i>FILES</asp:LinkButton></li>
                         </ul>
 
 
@@ -253,13 +258,13 @@
             </asp:Panel>
 
 
-            <div class="templatemo-content col-1 light-gray-bg">
+            <div id="mob1" class="templatemo-content col-1 light-gray-bg">
                 <%--Shows if user has avatar or cookies disabled--%>
                 <asp:Panel ID="divUserInfo" class="templatemo-flex-row flex-content-row" Visible="false" runat="server">
                     <div class="col-1 textUserData">
-                        
+
                         <span>
-                               <b>Last Visited: &nbsp;</b><span id="visited"></span>
+                            <b>Last Visited: &nbsp;</b><span id="visited"></span>
                             <script>
                                 
 
@@ -285,7 +290,7 @@
 
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                             <ContentTemplate>
-                                
+
                                 <span><b>Page State: </b>&nbsp;&nbsp;&nbsp;</span>
                                 <asp:Label runat="server" ID="LblTime1" Text=""></asp:Label>
                                 <asp:Timer ID="Timer1" Interval="1000" runat="server" OnTick="tmSession_Tick" />
@@ -299,7 +304,7 @@
                     <div class="col-1 textUserData">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
-                                
+
                                 <span><b>Session State: </b></span>
                                 <asp:Label runat="server" ID="LblTime2" Text=""></asp:Label>
                                 <asp:Timer ID="tm1" Interval="1000" runat="server" OnTick="tmSession_Tick" />
@@ -310,7 +315,7 @@
                         </asp:UpdatePanel>
                     </div>
 
-                    <div id="profilePic" class="col-2">
+                    <div id="profilePic" class="col-1">
                         <img class="img-circular-small" src="images/<%=UserData.Avatar + ".png"%>" title="<%=UserData.Avatar%>" />
                     </div>
                     <%-- ends divuserdata --%>
@@ -321,12 +326,14 @@
             </asp:ContentPlaceHolder>
 
             <div id="PanelProj4" class="templatemo-flex-row flex-content-row" style="display: none">
-                <div id="DivProj4" class="templatemo-content-widget white-bg col-1" style="margin: -400px 0px 0px 550px">
-                    <%--Project04 UserData, visible when in Project04.aspx--%>
-                    <table class="table-assi4">
+                <div class="col-1"></div>
+                <div id="DivProj4" class="templatemo-content-widget white-bg col-1">
+
+                    <%--UserData, visible when in Project04.aspx--%>
+                    <table class="table-assi4 table-condensed table-bordered">
                         <tr>
                             <th>
-                                <h3>Technology</h3>
+                                <h3>Method</h3>
                             </th>
                             <th colspan="2">
                                 <h3>Results</h3>
@@ -337,12 +344,12 @@
                         </tr>
 
                         <tr>
-                            <td><b>Query String</b></td>
+                            <td><b>QueryString</b></td>
                             <td colspan="2"><%= UserData.StrPrevPage(Request.QueryString["prev"])%></td>
                             <td>Last 4 pages visited </td>
                         </tr>
                         <tr>
-                            <td><b>Session State</b></td>
+                            <td><b>SessionState</b></td>
                             <td>hh:mm:ss</td>
                             <td>
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -355,10 +362,10 @@
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </td>
-                            <td>Time spend in current page</td>
+                            <td>Time spent - current page</td>
                         </tr>
                         <tr>
-                            <td><b>Session State (total)</b></td>
+                            <td><b>SessionState (total)</b></td>
                             <td>hh:mm:ss</td>
                             <td>
                                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
@@ -371,14 +378,14 @@
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </td>
-                            <td>Time spend in this website</td>
+                            <td>Time spent - website</td>
                         </tr>
                         <tr>
-                            <td><b>Cookies</b></td>
+                            <td><b>HTTPCookies</b></td>
                             <td><%=UserData.Avatar%></td>
                             <td>
-                                <img class="img-circular-small" src="images/<%=UserData.Avatar + ".jpg"%>" /></td>
-                            <td>Your avatar choice will last for 30 days</td>
+                                <img class="img-circular-small" src="images/<%=UserData.Avatar + ".png"%>" style="width: 31px; height: 31px" /></td>
+                            <td>Expires in 30 days</td>
                         </tr>
                     </table>
 
@@ -392,7 +399,7 @@
 
         <script>
             window.onload = function () {
-                
+
                 var str = window.location.pathname
 
 
@@ -409,20 +416,20 @@
                     });
             }
 
-            
-                var str = window.location.pathname;
-                var visitedSpan = document.getElementById("visited");
-                const urlParams = new URLSearchParams(window.location.search);
-                const myParam = urlParams.get('prev');
-                visitedSpan.innerHTML = myParam;
 
-                //Highlight left nav visited link
-                var filename = str.substring(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
-                var link = document.getElementById(filename);
-                link.style.cssText = "background: #428bca8c; border-left: 8px solid #13895F;"
-            
+            var str = window.location.pathname;
+            var visitedSpan = document.getElementById("visited");
+            const urlParams = new URLSearchParams(window.location.search);
+            const myParam = urlParams.get('prev');
+            visitedSpan.innerHTML = myParam;
 
-           
+            //Highlight left nav visited link
+            var filename = str.substring(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
+            var link = document.getElementById(filename);
+            link.style.cssText = "background:rgba(67, 151, 243, 0.52);"
+
+
+
 
             function animateAvatar(avatar) {
                 if (!avatar.includes("avatar")) return;
@@ -443,7 +450,7 @@
                     concatAvat += "#" + avatarList[i];
                     concatTd += "#" + tdList[i];
                     if (i == 4) break;
-                    concatAvat += ", "; 
+                    concatAvat += ", ";
                     concatTd += ", ";
                 }
 

@@ -1,13 +1,12 @@
-﻿<%@ Page Title="Project04" Language="C#" MasterPageFile="~/Projects.Master" %>
+﻿<%@ Page Title="SessionData" Language="C#" MasterPageFile="~/Projects.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phHead" runat="server">
     <script>
         $(document).ready(function () {
-            $("#PanelProj4").show();
-            $("#DivProj4").animate({
-                'margin':'0 20px 0 20px'
-            }, 2000);
-            $(".table-assi4").show(2000);
+            console.log('session data')
+            $("#PanelProj4").fadeIn(1500);
+            //$("#DivProj4").fadeIn();
+            //$(".table-assi4").show(1000);
 
         });
     </script>
@@ -20,16 +19,17 @@
 
     <div class="templatemo-flex-row flex-content-row">
         <div class="col-1"></div>
-        <div class="templatemo-content-widget blue-bg col-2" style="">
+        <div id="sessionData" class="templatemo-content-widget blue-bg col-2" style="">
 
             <i class="fa fa-times"></i>
             <div class="square-dark"></div>
             <h2 class="templatemo-inline-block">User Activity</h2>
             <h4>Managing State Data:</h4>
             <p>
-                A combination of methods where used to track data and personalize settings for the user. 
+                While visiting different links the server tracks down the time and the order of pages visited.  
             </p>
-            <p>The Session is tracked using the TimeSpan and StopWatch C# classes and the information collected is transferred directly to a UserData class</p>
+            <p>The Session is managed using the C# TimeSpan and StopWatch classes. This information is stored in a class called UserData</p>
         </div>
+        <div class="col-1"></div>
     </div>
 </asp:Content>
