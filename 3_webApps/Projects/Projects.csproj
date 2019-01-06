@@ -108,6 +108,7 @@
     <Content Include="images\checkbox-radio-sheet.png" />
     <Content Include="images\grey_bg.jpg" />
     <Content Include="images\profile-photo.jpg" />
+    <Content Include="default.aspx" />
     <Content Include="js\bootstrap-filestyle.min.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\githubWidget.js" />
